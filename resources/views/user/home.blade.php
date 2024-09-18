@@ -53,57 +53,60 @@
             </section>
 
             <section id="form">
-                <!-- Complaint Form -->
-                <div class="text-center py-8">
-                    <h2 class="text-3xl font-bold text-gray-800">Forms Pengaduan DPMPTSP</h2>
-                </div>
-                <div class="mt-16 max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-10">
-                    <h3 class="text-2xl font-semibold text-gray-800 mb-8">Pengaduan</h3>
-                    <form action="" method="POST">
-                        @csrf
-                        <div class="mb-6">
-                            <label for="judul_pengaduan" class="block text-gray-700 font-medium mb-3">Judul
-                                Pengaduan</label>
-                            <input type="text" name="judul_pengaduan"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                required>
-                        </div>
+                <form action="{{ route('pengaduan.store') }}" method="POST">
+                    @csrf
+                    <!-- Complaint Form -->
+                    <div class="text-center py-8">
+                        <h2 class="text-3xl font-bold text-gray-800">Forms Pengaduan DPMPTSP</h2>
+                    </div>
+                    <div class="mt-16 max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-10">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-8">Pengaduan</h3>
+                        <form action="" method="POST">
+                            @csrf
+                            <div class="mb-6">
+                                <label for="judul_pengaduan" class="block text-gray-700 font-medium mb-3">Judul
+                                    Pengaduan</label>
+                                <input type="text" name="judul_pengaduan"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                    required>
+                            </div>
 
-                        <div class="mb-6">
-                            <label for="tanggal_pengaduan" class="block text-gray-700 font-medium mb-3">Tanggal
-                                Pengaduan</label>
-                            <input type="date" name="tanggal_pengaduan"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                required>
-                        </div>
+                            <div class="mb-6">
+                                <label for="tanggal_pengaduan" class="block text-gray-700 font-medium mb-3">Tanggal
+                                    Pengaduan</label>
+                                <input type="date" name="tanggal_pengaduan"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                    required>
+                            </div>
 
-                        <div class="mb-6">
-                            <label for="lokasi_kejadian" class="block text-gray-700 font-medium mb-3">Lokasi
-                                Kejadian</label>
-                            <input type="text" name="lokasi_kejadian"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                required>
-                        </div>
+                            <div class="mb-6">
+                                <label for="lokasi_kejadian" class="block text-gray-700 font-medium mb-3">Lokasi
+                                    Kejadian</label>
+                                <input type="text" name="lokasi_kejadian"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                    required>
+                            </div>
 
-                        <div class="mb-6">
-                            <label for="alamat" class="block text-gray-700 font-medium mb-3">Alamat</label>
-                            <input type="text" name="alamat"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                required>
-                        </div>
+                            <div class="mb-6">
+                                <label for="alamat" class="block text-gray-700 font-medium mb-3">Alamat</label>
+                                <input type="text" name="alamat"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                    required>
+                            </div>
 
-                        <div class="mb-8">
-                            <label for="isi_pengaduan" class="block text-gray-700 font-medium mb-3">Isi
-                                Pengaduan</label>
-                            <textarea name="isi_pengaduan" rows="5"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                required></textarea>
-                        </div>
+                            <div class="mb-8">
+                                <label for="isi_pengaduan" class="block text-gray-700 font-medium mb-3">Isi
+                                    Pengaduan</label>
+                                <textarea name="isi_pengaduan" rows="5"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                    required></textarea>
+                            </div>
 
-                        <button type="submit"
-                            class="w-full bg-blue-500 text-white font-semibold py-3 px-6 rounded-md hover:bg-blue-600">Adukan</button>
-                    </form>
-                </div>
+                            <button type="submit"
+                                class="w-full bg-blue-500 text-white font-semibold py-3 px-6 rounded-md hover:bg-blue-600">Adukan</button>
+                        </form>
+                    </div>
+                </form>
             </section>
         </div>
         <!-- Button Help and Popup -->

@@ -2,7 +2,7 @@
     <aside class="w-64 bg-gray-900 text-white shadow-lg">
         <div class="p-6 text-xl font-bold border-b border-gray-700">Admin Dashboard</div>
         <nav class="mt-6">
-            <a href="/admin"
+            <a href="/dasboard"
                 class="flex items-center py-3 px-4 rounded-md hover:bg-gray-700 transition ease-in-out duration-150">
                 <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
