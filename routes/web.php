@@ -35,6 +35,8 @@ Route::get('/home', function () {
 Route::get('/pengaduan', [PengaduanController::class, 'index'])->name('admin.pengaduan')->middleware('auth');
 Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store')->middleware('auth');
 Route::get('/pengaduan/{id}/tindak-lanjut', [PengaduanController::class, 'showTindakLanjut'])->name('admin.pengaduan.tindak-lanjut')->middleware('auth');
+Route::get('/form-pengaduan', [PengaduanController::class, 'create'])->name('pengaduan.form');
+Route::post('/store-pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
 // Rute untuk menangani pembaruan tindak lanjut pengaduan
 Route::put('/pengaduan/{id}', [PengaduanController::class, 'update'])->name('admin.pengaduan.update')->middleware('auth');
 
@@ -55,3 +57,26 @@ Route::get('/kontak', function () {
 Route::get('/sop', function () {
     return view('admin.sop');
 })->name('admin.sop');
+
+
+// route superadmin
+Route::get('/dasboardsuper', function () {
+    return view('superadmin.dasboard');
+})->name('superadmin.dasboard');
+
+Route::get('/usersuper', function () {
+    return view('superadmin.user');
+})->name('superadmin.user');
+
+Route::get('/kontaksuper', function () {
+    return view('superadmin.kontak');
+})->name('superadmin.kontak');
+
+Route::get('/sopsuper', function () {
+    return view('superadmin.sop');
+})->name('superadmin.sop');
+Route::get('/pengaduansuper', function () {
+    return view('superadmin.pengaduan');
+})->name('superadmin.pengaduan');
+Route::get('/pengaduansuper', [PengaduanController::class, 'superAdminIndex'])->name('superadmin.pengaduan')->middleware('auth');
+Route::get('/pengaduansuper/{id}/tindak-lanjut', [PengaduanController::class, 'showTindakLanjut'])->name('superadmin.tindak-lanjut')->middleware('auth');

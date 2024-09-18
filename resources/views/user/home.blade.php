@@ -7,7 +7,34 @@
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer>
+        function confirmSubmission(event) {
+            event.preventDefault(); // Prevent form from submitting
+
+            const form = event.target;
+
+            // Collect form data
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            // Display confirmation message
+            if (confirm(
+                    `Apakah Anda yakin ingin mengirimkan pengaduan ini?\n\n` +
+                    `Judul Pengaduan: ${data.judul_pengaduan}\n` +
+                    `Tanggal Pengaduan: ${data.tanggal_pengaduan}\n` +
+                    `Lokasi Kejadian: ${data.lokasi_kejadian}\n` +
+                    `Alamat: ${data.alamat}\n` +
+                    `Isi Pengaduan: ${data.isi_pengaduan}`
+                )) {
+                form.submit(); // Submit the form if confirmed
+            }
+        }
+    </script>
     <title>Document</title>
+
 </head>
 
 <body>
@@ -16,7 +43,7 @@
     <body class="bg-gray-50">
         <div class="container mx-auto px-4 py-16">
             <!-- Page Title -->
-            <section id ="stat">
+            <section id="stat">
                 <div class="text-center py-8">
                     <h2 class="text-3xl font-bold text-gray-800">Statistik Pengaduan DPMPTSP</h2>
                 </div>
@@ -53,16 +80,16 @@
             </section>
 
             <section id="form">
-                <form action="{{ route('pengaduan.store') }}" method="POST">
-                    @csrf
-                    <!-- Complaint Form -->
-                    <div class="text-center py-8">
-                        <h2 class="text-3xl font-bold text-gray-800">Forms Pengaduan DPMPTSP</h2>
-                    </div>
-                    <div class="mt-16 max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-10">
-                        <h3 class="text-2xl font-semibold text-gray-800 mb-8">Pengaduan</h3>
-                        <form action="" method="POST">
-                            @csrf
+
+                <section id="form">
+                    <form action="{{ route('pengaduan.store') }}" method="POST" onsubmit="confirmSubmission(event)">
+                        @csrf
+                        <!-- Complaint Form -->
+                        <div class="text-center py-8">
+                            <h2 class="text-3xl font-bold text-gray-800">Forms Pengaduan DPMPTSP</h2>
+                        </div>
+                        <div class="mt-16 max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-10">
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-8">Pengaduan</h3>
                             <div class="mb-6">
                                 <label for="judul_pengaduan" class="block text-gray-700 font-medium mb-3">Judul
                                     Pengaduan</label>
@@ -104,10 +131,25 @@
 
                             <button type="submit"
                                 class="w-full bg-blue-500 text-white font-semibold py-3 px-6 rounded-md hover:bg-blue-600">Adukan</button>
-                        </form>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- Success Modal -->
+                <div x-data="{ open: @if (session('success')) true @else false @endif }" x-show="open" @click.away="open = false"
+                    class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+                    <div class="bg-white rounded-lg shadow-lg p-6 max-w-sm mx-auto">
+                        <h3 class="text-lg font-semibold text-gray-800">Pemberitahuan</h3>
+                        <p class="mt-2 text-gray-600">Pengaduan berhasil dikirim!</p>
+                        <div class="mt-4 text-right">
+                            <button @click="open = false"
+                                class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600">Tutup</button>
+                        </div>
                     </div>
-                </form>
-            </section>
+                </div>
+        </div>
+
+        </section>
         </div>
         <!-- Button Help and Popup -->
         <div class="fixed bottom-4 right-4" x-data="{ open: false }">
@@ -147,8 +189,6 @@
             </div>
         </div>
         <section id="kontak">
-
-
             <x-user.footer></x-user.footer>
         </section>
     </body>

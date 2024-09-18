@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Superadmin Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .card {
@@ -25,13 +25,14 @@
 <body class="bg-gray-100">
 
     <!-- Sidebar -->
-    <x-admin.navadmin></x-admin.navadmin>
+    <x-superadmin.navsuper></x-superadmin.navsuper>
     <!-- Main Content -->
-    <x-admin.headadmin></x-admin.headadmin>
+    <x-superadmin.headsuper></x-superadmin.headsuper>
+
     <div class="container mx-auto px-4 py-6">
         <!-- Pencarian -->
         <div class="mb-4">
-            <form method="GET" action="{{ route('admin.pengaduan') }}" class="flex items-center space-x-2">
+            <form method="GET" action="{{ route('superadmin.pengaduan') }}" class="flex items-center space-x-2">
                 <input type="text" name="search" placeholder="Cari..." value="{{ request('search') }}"
                     class="border border-gray-300 rounded-lg px-4 py-2 w-full sm:w-1/2 lg:w-1/3">
                 <button type="submit"
@@ -39,7 +40,6 @@
             </form>
         </div>
 
-        <!-- Tabel Pengaduan -->
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
             <table class="min-w-full bg-white divide-y divide-gray-200">
                 <thead class="bg-blue-500 text-white">
@@ -95,7 +95,7 @@
                                 @endif
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                <a href="{{ route('admin.pengaduan.tindak-lanjut', $pengaduan->id) }}"
+                                <a href="{{ route('superadmin.tindak-lanjut', $pengaduan->id) }}"
                                     class="text-blue-500 hover:text-blue-700">Tindak Lanjut</a>
                             </td>
                         </tr>
@@ -109,8 +109,9 @@
             </table>
         </div>
 
+        <!-- Pagination -->
         <div class="mt-4">
-            {{ $pengaduans->links() }}
+            {{ $pengaduans->links() }} <!-- Tailwind pagination -->
         </div>
     </div>
 
