@@ -63,21 +63,29 @@
             <section id="sop" style="padding-top: 200px">
                 <!-- Image Section -->
                 <div class="flex justify-center mb-16">
-                    <img src="/image/alur.png" alt="Alur Pengaduan" class="max-w-full h-auto rounded-lg shadow-lg">
+                    @php
+                        $sop = App\Models\Sop::first();
+                    @endphp
+                    @if ($sop && $sop->image_url)
+                        <img src="{{ asset('storage/' . $sop->image_url) }}" alt="Alur Pengaduan"
+                            class="max-w-full h-auto rounded-lg shadow-lg">
+                    @else
+                        <p class="text-gray-500">Tidak ada SOP yang diunggah.</p>
+                    @endif
                 </div>
 
                 <!-- Button Section -->
                 <div class="text-center mb-16">
-                    <a href="#"
-                        class="inline-block bg-blue-500 text-white font-semibold py-3 px-6 rounded-md hover:bg-blue-600">Unduh</a>
+                    @if ($sop && $sop->image_url)
+                        <a href="{{ asset('storage/' . $sop->image_url) }}" download
+                            class="inline-block bg-blue-500 text-white font-semibold py-3 px-6 rounded-md hover:bg-blue-600">Unduh</a>
+                    @else
+                        <p class="text-gray-500">Tidak ada SOP yang dapat diunduh.</p>
+                    @endif
                 </div>
-                {{-- @php
-                    $image = App\Models\Image::first(); // Ambil gambar pertama dari database
-                @endphp --}}
-
-                {{-- <img src="{{ $image->url }}" alt="Alur Pengaduan" class="max-w-full h-auto rounded-lg shadow-lg"> --}}
-
             </section>
+
+
 
             <section id="form">
 

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SopController;
 
 // Halaman utama: Menampilkan halaman login sebagai default
 Route::get('/', function () {
@@ -75,8 +76,24 @@ Route::get('/kontaksuper', function () {
 Route::get('/sopsuper', function () {
     return view('superadmin.sop');
 })->name('superadmin.sop');
+
 Route::get('/pengaduansuper', function () {
     return view('superadmin.pengaduan');
 })->name('superadmin.pengaduan');
+
 Route::get('/pengaduansuper', [PengaduanController::class, 'superAdminIndex'])->name('superadmin.pengaduan')->middleware('auth');
 Route::get('/pengaduansuper/{id}/tindak-lanjut', [PengaduanController::class, 'showTindakLanjut'])->name('superadmin.tindak-lanjut')->middleware('auth');
+
+// Admin routes for SOP management
+Route::get('/sop', [SopController::class, 'index'])->name('admin.sop.index');
+Route::post('/sop', [SopController::class, 'store'])->name('admin.sop.store');
+Route::get('/sop/{id}/edit', [SopController::class, 'edit'])->name('admin.sop.edit');
+Route::put('/sop/{id}', [SopController::class, 'update'])->name('admin.sop.update');
+Route::delete('/sop/{id}', [SopController::class, 'destroy'])->name('admin.sop.destroy');
+
+// Superadmin routes for SOP management
+Route::get('/sopsuper', [SopController::class, 'SuperAdminindex'])->name('superadmin.sop.SuperAdminindex');
+Route::post('/sopsuper', [SopController::class, 'store'])->name('superadmin.sop.store')->middleware('auth');
+Route::get('/sopsuper/{id}/edit', [SopController::class, 'edit'])->name('superadmin.sop.edit')->middleware('auth');
+Route::put('/sopsuper/{id}', [SopController::class, 'update'])->name('superadmin.sop.update')->middleware('auth');
+Route::delete('/sopsuper/{id}', [SopController::class, 'destroy'])->name('superadmin.sop.destroy')->middleware('auth');

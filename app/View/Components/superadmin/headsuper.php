@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class superadmin.headsuper extends Component
+class headsuper extends Component
 {
     /**
      * Create a new component instance.
