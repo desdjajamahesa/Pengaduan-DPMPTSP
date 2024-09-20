@@ -59,7 +59,7 @@ class SopController extends Controller
         ]);
 
         // Redirection berdasarkan peran pengguna
-        $route = Auth::user()->is_superadmin ? 'superadmin.sop.index' : 'admin.sop.index';
+        $route = Auth::user()->is_superadmin ? 'superadmin.sop.SuperAdminindex' : 'admin.sop.index';
         return redirect()->route($route)->with('success', 'SOP berhasil ditambahkan!');
     }
 

@@ -94,6 +94,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 flex space-x-4">
                                     <!-- Edit Button -->
                                     <button
+                                        onclick="openModal('{{ $sop->id }}', '{{ asset('storage/' . $sop->image_url) }}')"
                                         class="text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 transition duration-300 ease-in-out shadow-md transform hover:scale-105">
                                         Edit
                                     </button>
@@ -135,7 +136,8 @@
                 <button type="submit"
                     class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">Update
                     SOP</button>
-                <button type="button" class="ml-2 text-red-500 hover:underline transition duration-300"
+                <button type="button"
+                    class="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 transition duration-300 ease-in-out shadow-md transform hover:scale-105"
                     onclick="closeModal()">Batal</button>
             </form>
         </div>

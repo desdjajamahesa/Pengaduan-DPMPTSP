@@ -46,6 +46,15 @@
                 </svg>
                 KONTAK
             </a>
+            <a href="/adminsuper"
+                class="flex items-center py-3 px-4 rounded-md hover:bg-gray-700 transition ease-in-out duration-150">
+                <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 10h4v10H3zM7 4h4v16H7zM11 2h4v20h-4zM15 6h4v14h-4z"></path>
+                </svg>
+                ADMIN
+            </a>
             <a href="/login"
                 class="flex items-center py-3 px-4 rounded-md hover:bg-gray-700 transition ease-in-out duration-150">
                 <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"

@@ -5,7 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SopController;
-
+use App\Http\Controllers\ContactOptionController;
 // Halaman utama: Menampilkan halaman login sebagai default
 Route::get('/', function () {
     return view('login');
@@ -59,7 +59,11 @@ Route::get('/sop', function () {
     return view('admin.sop');
 })->name('admin.sop');
 
+Route::get('/kontak', [ContactOptionController::class, 'index'])->name('contacts.index');
+Route::post('/kontak', [ContactOptionController::class, 'update'])->name('contacts.update');
 
+Route::get('/kontaksuper', [ContactOptionController::class, 'SuperAdminindex'])->name('superadmin.contacts.SuperAdminindex')->middleware('auth');
+Route::post('/kontaksuper', [ContactOptionController::class, 'update'])->name('superadmin.contacts.update')->middleware('auth');
 // route superadmin
 Route::get('/dasboardsuper', function () {
     return view('superadmin.dasboard');
@@ -93,7 +97,7 @@ Route::delete('/sop/{id}', [SopController::class, 'destroy'])->name('admin.sop.d
 
 // Superadmin routes for SOP management
 Route::get('/sopsuper', [SopController::class, 'SuperAdminindex'])->name('superadmin.sop.SuperAdminindex');
-Route::post('/sopsuper', [SopController::class, 'store'])->name('superadmin.sop.store')->middleware('auth');
+Route::post('/sopsuper', [SopController::class, 'store'])->name('superadmin.sop.store');
 Route::get('/sopsuper/{id}/edit', [SopController::class, 'edit'])->name('superadmin.sop.edit')->middleware('auth');
 Route::put('/sopsuper/{id}', [SopController::class, 'update'])->name('superadmin.sop.update')->middleware('auth');
 Route::delete('/sopsuper/{id}', [SopController::class, 'destroy'])->name('superadmin.sop.destroy')->middleware('auth');
