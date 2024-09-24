@@ -41,6 +41,6 @@ class RegisterController extends Controller
         Auth::login($user);
 
         // Redirect ke halaman yang diinginkan
-        return redirect()->intended('home');
+        return redirect()->intended('login');
     }
 }

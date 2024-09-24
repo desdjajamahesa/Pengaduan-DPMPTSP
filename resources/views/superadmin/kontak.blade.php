@@ -4,47 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Superadmin Dashboard</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com"></script>
+    <title>SuperAdmin Manage Contact Options</title>
+
     <script>
         function enableEditMode() {
             document.getElementById('contact-view').classList.add('hidden');
             document.getElementById('contact-edit').classList.remove('hidden');
         }
     </script>
-    <style>
-        .card {
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .table-header {
-            background: linear-gradient(90deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%);
-        }
-    </style>
 </head>
 
 <body class="bg-gray-100">
-
-
     <!-- Sidebar -->
     <x-superadmin.navsuper></x-superadmin.navsuper>
+
     <!-- Main Content -->
+
     <x-superadmin.headsuper></x-superadmin.headsuper>
 
-
     <div class="container mx-auto p-8 max-w-lg">
-        <h1 class="text-2xl font-bold text-center mb-8 text-gray-800">Superadmin - Manage Contact Options</h1>
+        <h1 class="text-2xl font-bold text-center mb-8 text-gray-800">SuperAdmin Manage Contact Options</h1>
 
         @if (session('success'))
             <div class="bg-green-100 text-green-800 p-4 rounded-md mb-6">
                 {{ session('success') }}
             </div>
         @endif
+
         <!-- View Mode (static display) -->
         <div id="contact-view" class="bg-white p-6 rounded-lg shadow-md">
             <div class="mb-5">
@@ -118,6 +106,7 @@
             </form>
         </div>
     </div>
+
 </body>
 
 </html>

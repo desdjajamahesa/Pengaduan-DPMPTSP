@@ -10,15 +10,16 @@ class ContactOptionController extends Controller
 {
     public function index()
     {
-
-        $contacts = ContactOption::all();
+        $contacts = ContactOption::all(); // Fetch contacts from the database
         return view('admin.kontak', compact('contacts'));
     }
+
     public function SuperAdminindex()
     {
-        $contacts = ContactOption::all();
-        return view('superadmin.kontak', compact('contacts'));
+        $contacts = ContactOption::all(); // Fetch contacts for superadmin
+        return view('superadmin.kontak', compact('contacts')); // Pass $contacts to the view
     }
+
     public function update(Request $request)
     {
         $request->validate([
@@ -29,7 +30,7 @@ class ContactOptionController extends Controller
         foreach ($request->contacts as $contact) {
             ContactOption::updateOrCreate(['type' => $contact['type']], ['value' => $contact['value']]);
         }
-        $route = Auth::user()->is_superadmin ? 'superadmin.kontak.index' : 'admin.kontak.index';
+
         return redirect()->back()->with('success', 'Contacts updated successfully!');
     }
 }
