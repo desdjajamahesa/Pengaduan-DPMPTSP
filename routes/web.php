@@ -74,7 +74,7 @@ Route::delete('/sop/{id}', [SopController::class, 'destroy'])->name('admin.sop.d
 // Halaman kontak management admin
 Route::get('/kontak', [ContactOptionController::class, 'index'])->name('contacts.index');
 Route::post('/kontak', [ContactOptionController::class, 'update'])->name('contacts.update');
-
+Route::get('/user.footer', [ContactOptionController::class, 'index'])->name('contacts.index');
 // -----------------------------
 // Superadmin Routes
 // -----------------------------
