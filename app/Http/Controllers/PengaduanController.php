@@ -142,6 +142,7 @@ class PengaduanController extends Controller
             'lokasi_kejadian' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
             'isi_pengaduan' => 'required|string',
+            
             // 'file_pendukung' => 'nullable|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048', // validasi file
         ]);
         // $request->validate([
