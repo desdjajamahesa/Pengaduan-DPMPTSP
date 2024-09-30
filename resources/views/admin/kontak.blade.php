@@ -48,8 +48,8 @@
                 <p class="text-gray-900">{{ optional($contacts->where('type', 'phone')->first())->value }}</p>
             </div>
             <div class="mb-5">
-                <label class="block text-gray-700 font-medium mb-2">Meeting Link</label>
-                <p class="text-gray-900">{{ optional($contacts->where('type', 'meeting')->first())->value }}</p>
+                <label class="block text-gray-700 font-medium mb-2">Instagram</label>
+                <p class="text-gray-900">{{ optional($contacts->where('type', 'instagram')->first())->value }}</p>
             </div>
 
             <!-- Button to enable editing -->
@@ -91,12 +91,12 @@
                 </div>
 
                 <div class="mb-5">
-                    <label for="meeting" class="block text-gray-700 font-medium mb-2">Meeting Link</label>
+                    <label for="instagram" class="block text-gray-700 font-medium mb-2">Instagram</label>
                     <input type="text" name="contacts[3][value]"
-                        value="{{ optional($contacts->where('type', 'meeting')->first())->value }}"
+                        value="{{ optional($contacts->where('type', 'instagram')->first())->value }}"
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         required>
-                    <input type="hidden" name="contacts[3][type]" value="meeting">
+                    <input type="hidden" name="contacts[3][type]" value="instagram">
                 </div>
 
                 <button type="submit"

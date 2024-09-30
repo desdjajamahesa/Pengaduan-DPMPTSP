@@ -20,6 +20,8 @@ class Pengaduan extends Model
         'alamat',
         'isi_pengaduan',
         'status',  // Tambahkan status di sini
+        'file_pendukung',
+        'tindaklanjut',
     ];
 
     // Relasi ke tabel users (relasi many-to-one)

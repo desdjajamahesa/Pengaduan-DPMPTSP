@@ -20,6 +20,10 @@
         .table-header {
             background: linear-gradient(90deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%);
         }
+
+        .table-row:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
     </style>
 </head>
 
@@ -61,7 +65,7 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     @forelse ($pengaduans as $pengaduan)
-                        <tr>
+                        <tr class="table-row transition-colors duration-200">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                 {{ $loop->iteration }}
                             </td>
@@ -84,15 +88,51 @@
                                 {{ $pengaduan->lokasi_kejadian }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                @if ($pengaduan->status == 'proses')
-                                    <span
-                                        class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">Proses</span>
-                                @elseif($pengaduan->status == 'dilanjutkan')
-                                    <span
-                                        class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">Lanjut</span>
-                                @elseif($pengaduan->status == 'selesai')
-                                    <span
-                                        class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">Selesai</span>
+                                @if ($pengaduan->status == 'dibatalkan')
+                                    <span class="flex items-center">
+                                        <svg class="h-4 w-4 text-red-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                            <path
+                                                d="M10 1a9 9 0 100 18 9 9 0 000-18zM10 0a10 10 0 100 20A10 10 0 0010 0zm1 13h-2V7h2v6zm0 2h-2v-2h2v2z" />
+                                        </svg>
+                                        <span class="px-2 py-1 bg-red-100 text-red-700 rounded-full">Di Batalkan</span>
+                                    </span>
+                                @elseif ($pengaduan->status == 'belum_proses')
+                                    <span class="flex items-center">
+                                        <svg class="h-4 w-4 text-yellow-500 mr-1" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path
+                                                d="M10 1a9 9 0 100 18 9 9 0 000-18zM10 0a10 10 0 100 20A10 10 0 0010 0zm1 13h-2V7h2v6zm0 2h-2v-2h2v2z" />
+                                        </svg>
+                                        <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full">Belum
+                                            Diproses</span>
+                                    </span>
+                                @elseif ($pengaduan->status == 'proses')
+                                    <span class="flex items-center">
+                                        <svg class="h-4 w-4 text-yellow-500 mr-1" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path
+                                                d="M10 1a9 9 0 100 18 9 9 0 000-18zM10 0a10 10 0 100 20A10 10 0 0010 0zm1 13h-2V7h2v6zm0 2h-2v-2h2v2z" />
+                                        </svg>
+                                        <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full">Proses</span>
+                                    </span>
+                                @elseif ($pengaduan->status == 'selesai')
+                                    <span class="flex items-center">
+                                        <svg class="h-4 w-4 text-green-500 mr-1" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path
+                                                d="M10 1a9 9 0 100 18 9 9 0 000-18zM10 0a10 10 0 100 20A10 10 0 0010 0zm1 13h-2V7h2v6zm0 2h-2v-2h2v2z" />
+                                        </svg>
+                                        <span class="px-2 py-1 bg-green-100 text-green-700 rounded-full">Selesai</span>
+                                    </span>
+                                @elseif ($pengaduan->status == 'dilanjutkan')
+                                    <span class="flex items-center">
+                                        <svg class="h-4 w-4 text-blue-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                            <path
+                                                d="M10 1a9 9 0 100 18 9 9 0 000-18zM10 0a10 10 0 100 20A10 10 0 0010 0zm1 13h-2V7h2v6zm0 2h-2v-2h2v2z" />
+                                        </svg>
+                                        <span
+                                            class="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">Dilanjutkan</span>
+                                    </span>
                                 @endif
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">

@@ -141,7 +141,7 @@
     <script>
         function openModal(sopId, imageUrl) {
             document.getElementById('sop_id').value = sopId;
-            document.getElementById('editForm').action = '/superadmin/sop/' + sopId; // Set form action
+            document.getElementById('editForm').action = '/sopsuper/' + sopId; // Set form action
             document.getElementById('editModal').classList.remove('hidden');
         }
 
