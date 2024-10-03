@@ -70,12 +70,10 @@ Route::get('/dasboard', function () {
 
 // Menampilkan jumlah data user
 Route::get('/dasboard', [DashboardAdminController::class, 'jumlah'])->name('admin.dasboard');
-
+Route::get('/dasboardsuper', [DashboardAdminController::class, 'jumlah'])->name('superadmin.dasboard');
 // Halaman user management admin
-Route::get('/user', function () {
-    return view('admin.user');
-})->name('admin.user');
 
+Route::get('/user', [DashboardAdminController::class, 'users'])->name('admin.user');
 // Halaman SOP management admin
 Route::get('/sop', [SopController::class, 'index'])->name('admin.sop.index');
 Route::post('/sop', [SopController::class, 'store'])->name('admin.sop.store');
@@ -120,3 +118,7 @@ Route::put('/pengaduansuper/{id}', [PengaduanController::class, 'update'])->name
 // Halaman kontak management superadmin
 Route::get('/kontaksuper', [ContactOptionController::class, 'SuperAdminindex'])->name('contacts.SuperAdminindex');
 Route::post('/kontaksuper', [ContactOptionController::class, 'update'])->name('contacts.update');
+// Halaman Data Admin superadmin
+
+
+Route::get('/adminsuper', [DashboardAdminController::class, 'admin'])->name('superadmin.admin');

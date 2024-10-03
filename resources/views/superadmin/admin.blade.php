@@ -26,17 +26,17 @@
 <body class="bg-gray-100">
 
     <!-- Sidebar -->
-    <x-admin.navadmin> </x-admin.navadmin>
+    <x-superadmin.navsuper> </x-superadmin.navsuper>
     <!-- Main Content -->
-    <x-admin.headadmin> </x-admin.headadmin>
+    <x-superadmin.headsuper> </x-superadmin.headsuper>
 
     <!-- Search Bar -->
     <main class="flex-1 p-6 bg-gray-100">
         <div class="mb-4">
-            <form method="GET" action="{{ route('admin.user') }}" class="flex items-center space-x-2">
+            <form method="GET" action="{{ route('superadmin.admin') }}" class="flex items-center space-x-2">
                 <input type="text" name="search" placeholder="Cari..." value="{{ request('search') }}"
                     class="border border-gray-300 rounded-lg px-4 py-2 w-full sm:w-1/2 lg:w-1/3">
-                <button type="submit"
+                <button type="submit"y
                     class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Cari</button>
             </form>
         </div>
@@ -50,46 +50,49 @@
                         <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Nama</th>
                         <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Email</th>
                         <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Telephone</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Tanggal Akun</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Tanggal Akun
+                        </th>
                         <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Role</th>
                         <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Status</th>
                         <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Aksi</th>
                     </tr>
                 <tbody class="bg-white divide-y divide-gray-200">
-
-                    @forelse ($users as $user)
+                    @forelse ($admins as $admin)
                         <tr class="table-row transition-colors duration-200">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                 {{ $loop->iteration }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $user->name }}
+                                {{ $admin->name }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $user->email }}
+                                {{ $admin->email }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $user->telephone }}
+                                {{ $admin->telephone ?? '-' }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $user->created_at }}
+                                {{ $admin->created_at->format('d M Y') }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $user->role }}
+                                {{ $admin->role }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                Status
+                                Aktif
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                Action
+                                <a href="#" class="text-blue-500 hover:underline">Edit</a>
+                                <a href="#" class="ml-4 text-red-500 hover:underline">Delete</a>
                             </td>
-                        @empty
+                        </tr>
+                    @empty
                         <tr>
-                            <td colspan="9" class="px-6 py-4 text-center text-gray-500">Tidak ada data yang
+                            <td colspan="8" class="px-6 py-4 text-center text-gray-500">Tidak ada data admin yang
                                 ditemukan.</td>
                         </tr>
                     @endforelse
                 </tbody>
+
             </table>
             </thead>
     </main>

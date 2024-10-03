@@ -26,14 +26,14 @@
 <body class="bg-gray-100">
 
     <!-- Sidebar -->
-    <x-admin.navadmin> </x-admin.navadmin>
+    <x-superadmin.navsuper> </x-superadmin.navsuper>
     <!-- Main Content -->
-    <x-admin.headadmin> </x-admin.headadmin>
+    <x-superadmin.headsuper> </x-superadmin.headsuper>
 
     <!-- Search Bar -->
     <main class="flex-1 p-6 bg-gray-100">
         <div class="mb-4">
-            <form method="GET" action="{{ route('admin.user') }}" class="flex items-center space-x-2">
+            <form method="GET" action="{{ route('superadmin.user') }}" class="flex items-center space-x-2">
                 <input type="text" name="search" placeholder="Cari..." value="{{ request('search') }}"
                     class="border border-gray-300 rounded-lg px-4 py-2 w-full sm:w-1/2 lg:w-1/3">
                 <button type="submit"
@@ -56,7 +56,9 @@
                         <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Aksi</th>
                     </tr>
                 <tbody class="bg-white divide-y divide-gray-200">
-
+                    @php
+                        $users = App\Models\User::all();
+                    @endphp
                     @forelse ($users as $user)
                         <tr class="table-row transition-colors duration-200">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
