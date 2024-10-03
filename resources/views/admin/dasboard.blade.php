@@ -37,7 +37,9 @@
             <!-- Stats Card 1 -->
             <div class="card bg-white p-6 shadow-md rounded-lg">
                 <h2 class="text-xl font-semibold text-gray-800">Total Users</h2>
-                <p class="mt-2 text-gray-600 text-2xl">1,234</p>
+                <p class="mt-2 text-gray-600 text-2xl">
+                    {{ $userCount }}
+                </p>
             </div>
 
             <!-- Stats Card 2 -->

@@ -6,6 +6,7 @@ use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SopController;
 use App\Http\Controllers\ContactOptionController;
+use App\Http\Controllers\DashboardAdminController;
 
 // -----------------------------
 // Auth Routes
@@ -67,6 +68,9 @@ Route::get('/dasboard', function () {
     return view('admin.dasboard');
 })->name('admin.dasboard');
 
+// Menampilkan jumlah data user
+Route::get('/dasboard', [DashboardAdminController::class, 'jumlah'])->name('admin.dasboard');
+
 // Halaman user management admin
 Route::get('/user', function () {
     return view('admin.user');
@@ -85,6 +89,9 @@ Route::get('/home', function () {
 Route::get('/kontak', [ContactOptionController::class, 'index'])->name('contacts.index');
 Route::post('/kontak', [ContactOptionController::class, 'update'])->name('contacts.update');
 Route::get('/user.footer', [ContactOptionController::class, 'index'])->name('contacts.index');
+
+
+
 // -----------------------------
 // Superadmin Routes
 // -----------------------------

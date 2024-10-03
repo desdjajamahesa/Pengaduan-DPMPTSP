@@ -12,7 +12,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('pengaduan', function (Blueprint $table) {
-            $table->string('status')->default('proses'); // Atur default sesuai kebutuhan
+            $table->string('status')->default('belum_proses'); // Atur default sesuai kebutuhan
         });
     }
 
