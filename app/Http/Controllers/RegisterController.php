@@ -24,6 +24,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'telephone' => ['required', 'string', 'regex:/^[0-9]{10,13}$/'],
         ]);
 
         if ($validator->fails()) {
@@ -35,6 +36,7 @@ class RegisterController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'telephone' => $request->telephone,
         ]);
 
         // Login pengguna baru

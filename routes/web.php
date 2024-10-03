@@ -107,7 +107,7 @@ Route::get('/usersuper', function () {
 })->name('superadmin.user');
 
 // Halaman SOP management superadmin
-Route::get('/sopsuper', [SopController::class, 'SuperAdminindex'])->name('superadmin.sop.SuperAdminindex');
+Route::get('/sopsuper', [SopController::class, 'index'])->name('superadmin.sop.index');
 Route::post('/sopsuper', [SopController::class, 'store'])->name('superadmin.sop.store');
 Route::get('/sopsuper/{id}/edit', [SopController::class, 'edit'])->name('superadmin.sop.edit');
 Route::put('/sopsuper/{id}', [SopController::class, 'update'])->name('superadmin.sop.update');

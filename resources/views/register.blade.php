@@ -67,7 +67,16 @@
                         @enderror
                     </div>
                 </div>
-
+                <div>
+                    <label for="telephone" class="block text-sm font-medium leading-6 text-gray-900">Telephone</label>
+                    <div class="mt-2">
+                        <input id="telephone" name="telephone" type="telephone" value="{{ old('telephone') }}" required
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        @error('telephone')
+                            <span class="text-red-600 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
                 <div>
                     <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
                     <div class="mt-2 relative">
