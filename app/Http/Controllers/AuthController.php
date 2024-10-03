@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Mail\UserEmail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redis;
 
 class AuthController extends Controller
 {
@@ -15,13 +16,32 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return Redirect::intended('home'); // Redirect to your dashboard or intended route
+            $user = Auth::user();
+
+            switch ($user->role)
+            {
+                case 'super_admin':
+                    return Redirect::intended('dasboardsuper');
+                case 'admin' :
+                    return Redirect::intended('dasboard');
+                default :
+                    return Redirect::intended('home');
+            }
         }
 
         return Redirect::back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return Redirect::to('/');
+    }
+
     public function sendEmail()
     {
         $details = [
