@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardAdminController extends Controller
 {
@@ -14,20 +15,43 @@ class DashboardAdminController extends Controller
   }
   public function users(Request $request)
   {
-    // Mengambil pengguna dengan role 'admin'
-    $users = User::where('role', 'end_user')->get();
+    // Cek role pengguna saat ini
+    if (Auth::user()->role === 'super_admin') {
+      // Jika role adalah superadmin, ambil pengguna dengan role end_user atau admin
+      $users = User::whereIn('role', ['end_user'])->get();
 
-    // Jika ada pencarian, filter berdasarkan nama atau email
-    if ($request->has('search')) {
-      $users = User::where('role', 'end_user')
-        ->where(function ($query) use ($request) {
-          $query->where('name', 'like', '%' . $request->search . '%')
-            ->orWhere('email', 'like', '%' . $request->search . '%');
-        })->get();
+      // Jika ada pencarian, filter berdasarkan nama atau email
+      if ($request->has('search')) {
+        $users = User::whereIn('role', ['end_user'])
+          ->where(function ($query) use ($request) {
+            $query->where('name', 'like', '%' . $request->search . '%')
+              ->orWhere('email', 'like', '%' . $request->search . '%');
+          })->get();
+      }
+
+      // Render view untuk superadmin
+      return view('superadmin.user', compact('users'));
+    } elseif (Auth::user()->role === 'admin') {
+      // Jika role adalah admin, ambil pengguna dengan role end_user saja
+      $users = User::where('role', 'end_user')->get();
+
+      // Jika ada pencarian, filter berdasarkan nama atau email
+      if ($request->has('search')) {
+        $users = User::where('role', 'end_user')
+          ->where(function ($query) use ($request) {
+            $query->where('name', 'like', '%' . $request->search . '%')
+              ->orWhere('email', 'like', '%' . $request->search . '%');
+          })->get();
+      }
+
+      // Render view untuk admin
+      return view('admin.user', compact('users'));
+    } else {
+      // Jika role tidak diketahui atau bukan admin/superadmin, bisa diarahkan ke halaman error
+      abort(403, 'Unauthorized action.');
     }
-
-    return view('admin.user', compact('users'));
   }
+
   public function admin(Request $request)
   {
     // Mengambil pengguna dengan role 'admin'

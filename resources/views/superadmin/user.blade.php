@@ -56,9 +56,7 @@
                         <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Aksi</th>
                     </tr>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    @php
-                        $users = App\Models\User::all();
-                    @endphp
+
                     @forelse ($users as $user)
                         <tr class="table-row transition-colors duration-200">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">

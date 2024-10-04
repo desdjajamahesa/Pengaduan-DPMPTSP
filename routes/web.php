@@ -122,3 +122,4 @@ Route::post('/kontaksuper', [ContactOptionController::class, 'update'])->name('c
 
 
 Route::get('/adminsuper', [DashboardAdminController::class, 'admin'])->name('superadmin.admin');
+Route::get('/usersuper', [DashboardAdminController::class, 'users'])->name('superadmin.user');
