@@ -7,10 +7,11 @@
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <title>S!Padu</title>
+    <title>Masuk - S!Padu</title>
     <style>
         body{
             background-image: url('bg-textured.png');
+            background-repeat: no-repeat;
         }
     </style>
 </head>
@@ -25,7 +26,7 @@
 
     <div class="w-full max-w-md p-8 bg-blue-200 rounded-lg shadow-xl">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img class="mx-auto h-14 w-auto" src="sipadu.png" alt="SiPadu DPMPTSP Kota Cimahi">
+            <img class="mx-auto h-14 w-auto" src="sipadu.png" alt="S!Padu DPMPTSP Kota Cimahi">
             <h2 class="mt-7 text-center text-2xl font-bold leading-9 tracking-tight text-slate-600">Masukkan Akun</h2>
         </div>
 
@@ -36,7 +37,7 @@
                     <label for="email" class="block text-sm px-1 font-semibold leading-6 text-slate-700">Email</label>
                     <div class="mt-2">
                         <input id="email" name="email" type="email" autocomplete="email" required
-                            class="block w-full h-10 rounded-xl shadow-md border-0 px-3.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-orange-300 sm:text-md sm:leading-6">
+                            class="block w-full h-10 rounded-xl shadow-md border-0 px-3.5 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-orange-300 sm:text-md sm:leading-6">
                     </div>
                 </div>
 
