@@ -1,23 +1,18 @@
-<?php
+<?php 
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\ContactOption;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class ContactOptionController extends Controller
+class ContactController extends Controller
 {
-    public function index()
+  public function index()
     {
-        $contacts = ContactOption::all(); // Fetch contacts from the database
+        $contacts = ContactOption::all(); // Memanggil Kontak
         return view('admin.kontak', compact('contacts'));
-    }
-
-    public function SuperAdminindex()
-    {
-        $contacts = ContactOption::all(); // Fetch contacts for superadmin
-        return view('superadmin.kontak', compact('contacts')); // Pass $contacts to the view
     }
 
     public function update(Request $request)

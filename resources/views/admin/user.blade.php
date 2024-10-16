@@ -4,23 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Users S!Padu - Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     @vite('resources/css/app.css')
-    <style>
-        .card {
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .table-header {
-            background: linear-gradient(90deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%);
-        }
-    </style>
 </head>
 
 <body class="bg-gray-100">
@@ -56,7 +42,6 @@
                         <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Aksi</th>
                     </tr>
                 <tbody class="bg-white divide-y divide-gray-200">
-
                     @forelse ($users as $user)
                         <tr class="table-row transition-colors duration-200">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Dashboard S!Padu - Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     @vite('resources/css/app.css')
     <style>
@@ -32,26 +32,28 @@
 
     <!-- Dashboard Content -->
     <main class="flex-1 p-6 bg-gray-100">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
 
             <!-- Stats Card 1 -->
             <div class="card bg-white p-6 shadow-md rounded-lg">
-                <h2 class="text-xl font-semibold text-gray-800">Total Users</h2>
+                <h2 class="text-xl font-semibold text-gray-800">Total Pengaduan</h2>
                 <p class="mt-2 text-gray-600 text-2xl">
-                    {{ $userCount }}
                 </p>
             </div>
 
             <!-- Stats Card 2 -->
             <div class="card bg-white p-6 shadow-md rounded-lg">
-                <h2 class="text-xl font-semibold text-gray-800">Total Sales</h2>
-                <p class="mt-2 text-gray-600 text-2xl">$56,789</p>
+                <h2 class="text-xl font-semibold text-gray-800">Jumlah Pengaduan Hari Ini</h2>
+                <p class="mt-2 text-gray-600 text-2xl">
+                </p>
             </div>
 
             <!-- Stats Card 3 -->
             <div class="card bg-white p-6 shadow-md rounded-lg">
-                <h2 class="text-xl font-semibold text-gray-800">New Orders</h2>
-                <p class="mt-2 text-gray-600 text-2xl">45</p>
+                <h2 class="text-xl font-semibold text-gray-800">Jumlah Akun Terdaftar</h2>
+                <p class="mt-2 text-gray-600 text-2xl">
+                    {{ $endUserCount ?? 0 }}
+                </p>
             </div>
 
         </div>

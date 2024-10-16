@@ -113,7 +113,7 @@
                             Pendukung</label>
                         <input type="file" name="file_pendukung" id="file_pendukung"
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
-                            accept=".pdf,.jpg,.jpeg,.png,.docx,.xlsx" required>
+                            accept=".pdf,.jpg,.jpeg,.png,.docx,.xlsx">
                     </div>
                     <div class="flex items-center justify-end">
                         <button type="submit"

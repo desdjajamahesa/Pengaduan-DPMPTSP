@@ -5,8 +5,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SopController;
-use App\Http\Controllers\ContactOptionController;
-use App\Http\Controllers\DashboardAdminController;
 
 // -----------------------------
 // Auth Routes
@@ -41,53 +39,20 @@ Route::get('/home', function () {
     return view('user.home');
 })->name('home')->middleware('auth');
 
+Route::get('/home', function () {
+    return view('user.home');
+})->name('sop.index')->middleware('auth');
+
 
 Route::get('/detail', function () {
     return view('user.detail');
 })->name('detail')->middleware('auth');
 
-// Rute untuk pengaduan (hanya bisa diakses oleh user yang sudah login)
-Route::get('/pengaduan', [PengaduanController::class, 'index'])->name('admin.pengaduan')->middleware('auth');
-Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store')->middleware('auth');
-Route::get('/pengaduan/{id}/tindak-lanjut', [PengaduanController::class, 'showTindakLanjut'])->name('admin.pengaduan.tindak-lanjut')->middleware('auth');
-Route::put('/pengaduan/{id}', [PengaduanController::class, 'update'])->name('admin.pengaduan.update')->middleware('auth');
-Route::post('/home', [PengaduanController::class, 'home'])->name('pengaduan.home')->middleware('auth');
-Route::patch('/pengaduan/{id}/batalkan', [PengaduanController::class, 'batalkan'])->name('pengaduan.batalkan');
+// View User
 Route::get('/pengaduan/{id}', [PengaduanController::class, 'show'])->name('pengaduan.show');
 
 // Form pengaduan (tanpa middleware)
 Route::patch('/home', [PengaduanController::class, 'create'])->name('pengaduan.form');
-
-
-// -----------------------------
-// Admin Routes
-// -----------------------------
-
-// Halaman dashboard admin
-Route::get('/dasboard', function () {
-    return view('admin.dasboard');
-})->name('admin.dasboard');
-
-// Menampilkan jumlah data user
-Route::get('/dasboard', [DashboardAdminController::class, 'jumlah'])->name('admin.dasboard');
-Route::get('/dasboardsuper', [DashboardAdminController::class, 'jumlah'])->name('superadmin.dasboard');
-// Halaman user management admin
-
-Route::get('/user', [DashboardAdminController::class, 'users'])->name('admin.user');
-// Halaman SOP management admin
-Route::get('/sop', [SopController::class, 'index'])->name('admin.sop.index');
-Route::post('/sop', [SopController::class, 'store'])->name('admin.sop.store');
-Route::get('/sop/{id}/edit', [SopController::class, 'edit'])->name('admin.sop.edit');
-Route::put('/sop/{id}', [SopController::class, 'update'])->name('admin.sop.update');
-Route::delete('/sop/{id}', [SopController::class, 'destroy'])->name('admin.sop.destroy');
-Route::get('/home', function () {
-    return view('user.home');
-})->name('sop.index');
-// Halaman kontak management admin
-Route::get('/kontak', [ContactOptionController::class, 'index'])->name('contacts.index');
-Route::post('/kontak', [ContactOptionController::class, 'update'])->name('contacts.update');
-Route::get('/user.footer', [ContactOptionController::class, 'index'])->name('contacts.index');
-
 
 
 // -----------------------------
@@ -116,10 +81,14 @@ Route::get('/pengaduansuper', [PengaduanController::class, 'superAdminIndex'])->
 Route::get('/pengaduansuper/{id}/tindak-lanjut', [PengaduanController::class, 'showTindakLanjutsuper'])->name('superadmin.tindak-lanjut');
 Route::put('/pengaduansuper/{id}', [PengaduanController::class, 'update'])->name('superadmin.pengaduan.update')->middleware('auth');
 // Halaman kontak management superadmin
-Route::get('/kontaksuper', [ContactOptionController::class, 'SuperAdminindex'])->name('contacts.SuperAdminindex');
-Route::post('/kontaksuper', [ContactOptionController::class, 'update'])->name('contacts.update');
+// Route::get('/kontaksuper', [ContactOptionController::class, 'SuperAdminindex'])->name('contacts.SuperAdminindex');
+// Route::post('/kontaksuper', [ContactOptionController::class, 'update'])->name('contacts.update');
 // Halaman Data Admin superadmin
 
 
-Route::get('/adminsuper', [DashboardAdminController::class, 'admin'])->name('superadmin.admin');
-Route::get('/usersuper', [DashboardAdminController::class, 'users'])->name('superadmin.user');
+// Route::get('/adminsuper', [DashboardAdminController::class, 'admin'])->name('superadmin.admin');
+// Route::get('/usersuper', [DashboardAdminController::class, 'users'])->name('superadmin.user');
+
+
+require __DIR__.'/admin.php';
+require __DIR__.'/superadmin.php';
