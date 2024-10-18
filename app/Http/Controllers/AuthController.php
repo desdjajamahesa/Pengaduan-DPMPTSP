@@ -18,13 +18,12 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
 
-            switch ($user->role)
-            {
+            switch ($user->role) {
                 case 'super_admin':
-                    return Redirect::intended('dasboardsuper');
-                case 'admin' :
-                    return Redirect::intended('dasboard');
-                default :
+                    return Redirect::intended('super-dashboard');
+                case 'admin':
+                    return Redirect::intended('dashboard');
+                default:
                     return Redirect::intended('home');
             }
         }
