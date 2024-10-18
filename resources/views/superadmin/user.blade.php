@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Super Admin Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     @vite('resources/css/app.css')
     <style>
@@ -80,8 +80,35 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 Status
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                Action
+                            <td class="border-dashed border-t border-gray-200 px-6 py-4">
+                                <div class="flex items-center space-x-2">
+                                    <a href="{{ route('superadmin.user.edit', $user->id) }}"
+                                        class="text-blue-600 hover:text-blue-900 transition duration-150 ease-in-out">
+                                        <svg class="h-5 w-5" fill="none" stroke-linecap="round"
+                                            stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path
+                                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                                            </path>
+                                        </svg>
+                                    </a>
+                                    <form action="{{ route('superadmin.user.destroy', $user->id) }}" method="POST"
+                                        class="inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="text-red-600 hover:text-red-900 transition duration-150 ease-in-out"
+                                            onclick="return confirm('Are you sure you want to delete this user?')">
+                                            <svg class="h-5 w-5" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                                                stroke="currentColor">
+                                                <path
+                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         @empty
                         <tr>

@@ -24,6 +24,9 @@ class Pengaduan extends Model
         'tindaklanjut',
     ];
 
+    protected $casts = [
+        'tanggal_pengaduan' => 'datetime',
+    ];
     // Relasi ke tabel users (relasi many-to-one)
     public function user()
     {

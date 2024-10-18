@@ -25,7 +25,7 @@
                     <div class="bg-green-500 text-white p-4 rounded-md mb-4">
                         {{ session('success') }}
                     </div>
-                @endif
+                @endif  
 
                 @if ($errors->any())
                     <div class="bg-red-500 text-white p-4 rounded-md mb-4">

@@ -13,6 +13,9 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.das
 
 // Route Management Users Pada Admin
 Route::get('/users', [UsersController::class, 'showUser'])->name('admin.user');
+Route::get('/users/{id}/edit', [UsersController::class, 'edit'])->name('admin.users.edit');
+Route::put('/users/{id}', [UsersController::class, 'update'])->name('admin.users.update');
+Route::delete('/users/{id}', [UsersController::class, 'destroy'])->name('admin.users.destroy');
 
 // Route Management Pengaduan Pada Admin
 Route::get('/pengaduan', [PengaduanController::class, 'index'])->name('admin.pengaduan');

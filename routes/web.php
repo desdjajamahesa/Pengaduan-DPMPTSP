@@ -81,13 +81,13 @@ Route::get('/pengaduansuper', [PengaduanController::class, 'superAdminIndex'])->
 Route::get('/pengaduansuper/{id}/tindak-lanjut', [PengaduanController::class, 'showTindakLanjutsuper'])->name('superadmin.tindak-lanjut');
 Route::put('/pengaduansuper/{id}', [PengaduanController::class, 'update'])->name('superadmin.pengaduan.update')->middleware('auth');
 // Halaman kontak management superadmin
+
+// Halaman Data Admin superadmin
 // Route::get('/kontaksuper', [ContactOptionController::class, 'SuperAdminindex'])->name('contacts.SuperAdminindex');
 // Route::post('/kontaksuper', [ContactOptionController::class, 'update'])->name('contacts.update');
-// Halaman Data Admin superadmin
 
-
-// Route::get('/adminsuper', [DashboardAdminController::class, 'admin'])->name('superadmin.admin');
-// Route::get('/usersuper', [DashboardAdminController::class, 'users'])->name('superadmin.user');
+// Route::get('/adminsuper', [DashboardController::class, 'admin'])->name('superadmin.admin');
+// Route::get('/usersuper', [DashboardAController::class, 'users'])->name('superadmin.user');
 
 
 require __DIR__.'/admin.php';
