@@ -26,92 +26,119 @@
 
     <!-- Sidebar -->
     <x-superadmin.navsuper></x-superadmin.navsuper>
+
     <!-- Main Content -->
     <x-superadmin.headsuper></x-superadmin.headsuper>
 
-    <div class="container mx-auto px-4 py-6">
-        <!-- Pencarian -->
-        <div class="mb-4">
-            <form method="GET" action="{{ route('superadmin.pengaduan') }}" class="flex items-center space-x-2">
-                <input type="text" name="search" placeholder="Cari..." value="{{ request('search') }}"
-                    class="border border-gray-300 rounded-lg px-4 py-2 w-full sm:w-1/2 lg:w-1/3">
-                <button type="submit"
-                    class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Cari</button>
-            </form>
-        </div>
+    <div class="py-12 bg-gray-100">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white shadow-xl rounded-lg">
+                <div class="p-6 sm:p-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Pengaduan Management</h2>
 
-        <div class="bg-white shadow-md rounded-lg overflow-hidden">
-            <table class="min-w-full bg-white divide-y divide-gray-200">
-                <thead class="bg-blue-500 text-white">
-                    <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">No</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Nama</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Email</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Judul Pengaduan
-                        </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Isi Pengaduan</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Tanggal Pengaduan
-                        </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Lokasi Pengaduan
-                        </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    @forelse ($pengaduans as $pengaduan)
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                {{ $loop->iteration }}
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $pengaduan->user->name }}
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $pengaduan->user->email }}
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $pengaduan->judul_pengaduan }}
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $pengaduan->isi_pengaduan }}
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $pengaduan->tanggal_pengaduan }}
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $pengaduan->lokasi_kejadian }}
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                @if ($pengaduan->status == 'proses')
-                                    <span
-                                        class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">Proses</span>
-                                @elseif($pengaduan->status == 'dilanjutkan')
-                                    <span
-                                        class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">Lanjut</span>
-                                @elseif($pengaduan->status == 'selesai')
-                                    <span
-                                        class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">Selesai</span>
-                                @endif
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                <a href="{{ route('superadmin.tindak-lanjut', $pengaduan->id) }}"
-                                    class="text-blue-500 hover:text-blue-700">Tindak Lanjut</a>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="9" class="px-6 py-4 text-center text-gray-500">Tidak ada pengaduan yang
-                                ditemukan.</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
+                    <!-- Search Bar -->
+                    <div class="mb-8">
+                        <form method="GET" action="{{ route('superadmin.pengaduan') }}"
+                            class="flex items-center space-x-4">
+                            <div class="relative flex-grow">
+                                <input type="text" name="search" placeholder="Cari pengaduan..."
+                                    value="{{ request('search') }}"
+                                    class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <button type="submit"
+                                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 transition">
+                                Cari
+                            </button>
+                        </form>
+                    </div>
 
-        <!-- Pagination -->
-        <div class="mt-4">
-            {{ $pengaduans->links() }} <!-- Tailwind pagination -->
+                    <!-- Table -->
+                    <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                        <table class="min-w-full bg-white divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">No</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nama
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Judul
+                                        Pengaduan</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Isi
+                                        Pengaduan</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tanggal
+                                        Pengaduan</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Lokasi
+                                        Pengaduan</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Aksi
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                @forelse ($pengaduans as $pengaduan)
+                                    <tr>
+                                        <td class="px-6 py-4 text-sm font-medium text-gray-900">{{ $loop->iteration }}
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">{{ $pengaduan->user->name }}</td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">{{ $pengaduan->user->email }}</td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">{{ $pengaduan->judul_pengaduan }}
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">{{ $pengaduan->isi_pengaduan }}</td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">{{ $pengaduan->tanggal_pengaduan }}
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">{{ $pengaduan->lokasi_kejadian }}
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">
+                                            @if ($pengaduan->status == 'proses')
+                                                <span
+                                                    class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">Proses</span>
+                                            @elseif($pengaduan->status == 'dilanjutkan')
+                                                <span
+                                                    class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">Lanjut</span>
+                                            @elseif($pengaduan->status == 'selesai')
+                                                <span
+                                                    class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">Selesai</span>
+                                            @endif
+                                        </td>
+                                        <td class="px-6 py-4 text-sm font-medium">
+                                            <a href="{{ route('superadmin.tindak-lanjut', $pengaduan->id) }}"
+                                                class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:ring-2 focus:ring-green-500 transition transform hover:-translate-y-1 hover:shadow-lg">
+                                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122">
+                                                    </path>
+                                                </svg>
+                                                Tindak Lanjut
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="9" class="px-6 py-4 text-center text-gray-500">Tidak ada
+                                            pengaduan yang ditemukan.</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="mt-4">
+                        {{ $pengaduans->links() }}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
