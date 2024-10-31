@@ -27,7 +27,6 @@ Route::patch('/pengaduan/{id}/batalkan', [PengaduanController::class, 'batalkan'
 Route::get('/pengaduan/{id}/download', [PengaduanController::class, 'download'])->name('pengaduan.download');
 
 
-
 // Route Management SOP Pada Admin
 Route::get('/sop', [SopController::class, 'index'])->name('admin.sop.index');
 Route::post('/sop', [SopController::class, 'store'])->name('admin.sop.store');

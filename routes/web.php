@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PengaduanController;
+use App\Http\Controllers\PelaporanController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SopController;
 
 // -----------------------------
@@ -89,6 +90,9 @@ Route::put('/pengaduansuper/{id}', [PengaduanController::class, 'update'])->name
 // Route::get('/adminsuper', [DashboardController::class, 'admin'])->name('superadmin.admin');
 // Route::get('/usersuper', [DashboardAController::class, 'users'])->name('superadmin.user');
 
+
+// Route Pelaporan Admin dan Super Admin
+Route::get('/pelaporan', [PelaporanController::class, 'index'])->name('pelaporan');
 
 require __DIR__ . '/admin.php';
 require __DIR__ . '/superadmin.php';

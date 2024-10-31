@@ -137,6 +137,10 @@
                     <div class="mt-4">
                         {{ $pengaduans->links() }}
                     </div>
+                    <a href="{{ route('pelaporan') }}"
+                    class="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">
+                        Pelaporan
+                    </a>
                 </div>
             </div>
         </div>
