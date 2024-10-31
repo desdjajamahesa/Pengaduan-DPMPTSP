@@ -21,6 +21,7 @@ class Pengaduan extends Model
         'isi_pengaduan',
         'status',  // Tambahkan status di sini
         'file_pendukung',
+        'file_balasan',
         'tindaklanjut',
     ];
 

@@ -24,6 +24,9 @@ Route::get('/pengaduan/{id}/tindak-lanjut', [PengaduanController::class, 'showTi
 Route::put('/pengaduan/{id}', [PengaduanController::class, 'update'])->name('admin.pengaduan.update');
 Route::post('/home', [PengaduanController::class, 'home'])->name('pengaduan.home');
 Route::patch('/pengaduan/{id}/batalkan', [PengaduanController::class, 'batalkan'])->name('pengaduan.batalkan');
+Route::get('/pengaduan/{id}/download', [PengaduanController::class, 'download'])->name('pengaduan.download');
+
+
 
 // Route Management SOP Pada Admin
 Route::get('/sop', [SopController::class, 'index'])->name('admin.sop.index');

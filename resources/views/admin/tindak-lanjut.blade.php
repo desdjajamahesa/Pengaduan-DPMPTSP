@@ -7,10 +7,11 @@
     <title>Tindak Lanjut Pengaduan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     @vite('resources/css/app.css')
+    <!-- Tambahkan Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body class="bg-gray-100">
-
     <!-- Sidebar -->
     <x-admin.navadmin></x-admin.navadmin>
     <!-- Main Content -->
@@ -25,7 +26,7 @@
                     <div class="bg-green-500 text-white p-4 rounded-md mb-4">
                         {{ session('success') }}
                     </div>
-                @endif  
+                @endif
 
                 @if ($errors->any())
                     <div class="bg-red-500 text-white p-4 rounded-md mb-4">
@@ -41,6 +42,9 @@
                 <div class="mb-6">
                     <h3 class="text-lg font-medium text-gray-700">Detail Pengaduan</h3>
                     <div class="mt-2 bg-gray-50 border border-gray-300 rounded-md p-4">
+                        <!-- ... kode detail pengaduan lainnya tetap sama ... -->
+
+
                         <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-600">Judul Pengaduan</label>
                             <p class="mt-1">{{ $pengaduan->judul_pengaduan }}</p>
@@ -65,6 +69,39 @@
                             <label class="block text-sm font-medium text-gray-600">Isi Pengaduan</label>
                             <p class="mt-1">{{ $pengaduan->isi_pengaduan }}</p>
                         </div>
+
+                        <!-- Tambahkan bagian untuk menampilkan file pendukung yang ada -->
+                        @if ($pengaduan->file_pendukung)
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-600">File Pendukung Saat
+                                    Ini</label>
+                                <div class="mt-2 flex items-center space-x-4">
+                                    <span class="text-sm text-gray-500">
+                                        @php
+                                            $fileName = basename($pengaduan->file_pendukung);
+                                            $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+
+                                            // Menentukan ikon berdasarkan ekstensi file
+                                            $iconClass = match (strtolower($extension)) {
+                                                'pdf' => 'fas fa-file-pdf text-red-500',
+                                                'doc', 'docx' => 'fas fa-file-word text-blue-500',
+                                                'xls', 'xlsx' => 'fas fa-file-excel text-green-500',
+                                                'jpg', 'jpeg', 'png' => 'fas fa-file-image text-purple-500',
+                                                default => 'fas fa-file text-gray-500',
+                                            };
+                                        @endphp
+                                        <i class="{{ $iconClass }} mr-2"></i>
+                                        {{ $fileName }}
+                                    </span>
+
+                                    <a href="{{ route('pengaduan.download', $pengaduan->id) }}"
+                                        class="inline-flex items-center px-3 py-1 border border-transparent text-sm leading-5 font-medium rounded-full text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        <i class="fas fa-download mr-1"></i>
+                                        Unduh
+                                    </a>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
 
@@ -72,12 +109,14 @@
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+
                     <div class="mb-6">
                         <h3 class="text-lg font-medium text-gray-700">Status Pengaduan</h3>
                         <div class="mt-2">
                             <td>
                                 @if ($pengaduan->status == 'belum_proses')
-                                    <span class="px-2 py-1 bg-red-100 text-red-700 rounded-full">Belum Diproses</span>
+                                    <span class="px-2 py-1 bg-red-100 text-red-700 rounded-full">Belum
+                                        Diproses</span>
                                 @elseif ($pengaduan->status == 'proses')
                                     <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full">Proses</span>
                                 @elseif ($pengaduan->status == 'selesai')
@@ -88,6 +127,7 @@
                             </td>
                         </div>
                     </div>
+
                     <div class="mb-4">
                         <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
                         <select id="status" name="status"
@@ -102,28 +142,36 @@
                                 Dilanjutkan</option>
                         </select>
                     </div>
+
                     <div class="mb-4">
                         <label for="tindaklanjut" class="block text-sm font-medium text-gray-700">Hasil Tindak
                             Lanjut</label>
                         <textarea id="tindaklanjut" name="tindaklanjut" rows="4"
                             class="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">{{ old('tindaklanjut', $pengaduan->tindaklanjut ?? '') }}</textarea>
                     </div>
-                    <div>
-                        <label for="file_pendukung" class="block text-gray-700 font-medium mb-2">Unggah File
-                            Pendukung</label>
-                        <input type="file" name="file_pendukung" id="file_pendukung"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+
+                    <div class="mb-6">
+                        <label for="file_balasan" class="block text-sm font-medium text-gray-700">
+                            Upload File Balasan
+                            <span class="text-xs text-gray-500"></span>
+                        </label>
+                        <input type="file" name="file_balasan" id="balasan"
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                             accept=".pdf,.jpg,.jpeg,.png,.docx,.xlsx">
+                        <p class="mt-1 text-sm text-gray-500">
+                            Format yang didukung: PDF, JPG, JPEG, PNG, DOCX, XLSX (Max. 2MB)
+                        </p>
                     </div>
+
                     <div class="flex items-center justify-end">
-                        <button type="submit"
-                            class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Simpan</button>
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                            Simpan Perubahan
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
 </body>
 
 </html>

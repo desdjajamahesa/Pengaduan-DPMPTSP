@@ -53,8 +53,8 @@ Route::get('/pengaduan/{id}', [PengaduanController::class, 'show'])->name('penga
 
 // Form pengaduan (tanpa middleware)
 Route::patch('/home', [PengaduanController::class, 'create'])->name('pengaduan.form');
-
-
+Route::put('/pengaduan/{id}', [PengaduanController::class, 'update'])->name('pengaduan.update');
+Route::patch('/home', [PengaduanController::class, 'create'])->name('pengaduan.index');
 // -----------------------------
 // Superadmin Routes
 // -----------------------------
@@ -90,5 +90,5 @@ Route::put('/pengaduansuper/{id}', [PengaduanController::class, 'update'])->name
 // Route::get('/usersuper', [DashboardAController::class, 'users'])->name('superadmin.user');
 
 
-require __DIR__.'/admin.php';
-require __DIR__.'/superadmin.php';
+require __DIR__ . '/admin.php';
+require __DIR__ . '/superadmin.php';

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers\Admin;
 
@@ -14,110 +14,160 @@ class PengaduanController extends Controller
   {
     $query = Pengaduan::query();
 
-    if($request->has('search') && $request->search != '')
-    {
+    if ($request->has('search') && $request->search != '') {
       $search = $request->search;
       $query->where(function ($q) use ($search) {
         $q->where('judul_pengaduan', 'like', "%{$search}%")
-            ->orWhere('isi_pengaduan', 'like', "%{$search}%")
-            ->orWhereHas('user', function ($q) use ($search) {
-              $q->where('name', 'like', "%{$search}%")
+          ->orWhere('isi_pengaduan', 'like', "%{$search}%")
+          ->orWhereHas('user', function ($q) use ($search) {
+            $q->where('name', 'like', "%{$search}%")
               ->orWhere('email', 'like', "%{$search}%");
-            });
+          });
       });
     }
 
     $pengaduans = $query->with('user')->paginate(5);
-    
+
     return view('admin.pengaduan', compact('pengaduans'));
   }
 
   public function store(Request $request)
-    {
-        // Validasi request
-        $request->validate([
-            'judul_pengaduan' => 'required|string|max:255',
-            'tanggal_pengaduan' => 'required|date',
-            'lokasi_kejadian' => 'required|string|max:255',
-            'alamat' => 'required|string|max:255',
-            'isi_pengaduan' => 'required|string',
-            
-            // 'file_pendukung' => 'nullable|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048', // validasi file
-        ]);
-        // $request->validate([
-        //     'file_pendukung' => 'nullable|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048',
+  {
+    // Validasi data yang di-submit
+    $validated = $request->validate([
+      'judul_pengaduan' => 'required|string|max:255',
+      'isi_pengaduan' => 'required|string',
+      'tanggal_pengaduan' => 'required|date',
+      'lokasi_kejadian' => 'required|string|max:255',
+      'alamat' => 'required|string|max:255',
+      'file_pendukung' => 'required|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048',
+      'file_balasan' => 'nullable|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048' // Mengubah menjadi nullable
+    ]);
 
-        // ]);
-        // Simpan data pengaduan tanpa file terlebih dahulu
-        $pengaduan = Pengaduan::create([
-            'user_id' => Auth::id(), // Pastikan user_id disertakan
-            'judul_pengaduan' => $request->judul_pengaduan,
-            'tanggal_pengaduan' => $request->tanggal_pengaduan,
-            'lokasi_kejadian' => $request->lokasi_kejadian,
-            'alamat' => $request->alamat,
-            'isi_pengaduan' => $request->isi_pengaduan,
-            'tindaklanjut' =>  $request->tindakLanjut ?? null, // Optional jika tidak ada tindak lanjut
-        ]);
+    try {
+      // Handle file upload for file_pendukung
+      if ($request->hasFile('file_pendukung')) {
+        $filePendukung = $request->file('file_pendukung');
+        $fileNamePendukung = time() . '_pendukung_' . $filePendukung->getClientOriginalName();
+        $filePathPendukung = $filePendukung->storeAs('public/file_pendukung', $fileNamePendukung);
+        $filePathPendukungForDB = str_replace('public/', '', $filePathPendukung);
+      }
 
-        // Proses upload file pendukung
-        if ($request->hasFile('file_pendukung')) {
-            // Dapatkan file yang diupload
-            $file = $request->file('file_pendukung');
+      // Handle file upload for file_balasan
+      if ($request->hasFile('file_balasan')) {
+        $fileBalasan = $request->file('file_balasan');
+        $fileNameBalasan = time() . '_balasan_' . $fileBalasan->getClientOriginalName();
+        $filePathBalasan = $fileBalasan->storeAs('public/file_balasan', $fileNameBalasan);
+        $filePathBalasanForDB = str_replace('public/', '', $filePathBalasan);
+      }
 
-            // Buat nama file yang unik berdasarkan timestamp
-            $fileName = time() . '_' . $file->getClientOriginalName();
+      // Create new pengaduan with all data
+      $pengaduan = Pengaduan::create([
+        'user_id' => Auth::id(),
+        'judul_pengaduan' => $validated['judul_pengaduan'],
+        'isi_pengaduan' => $validated['isi_pengaduan'],
+        'tanggal_pengaduan' => $validated['tanggal_pengaduan'],
+        'lokasi_kejadian' => $validated['lokasi_kejadian'],
+        'alamat' => $validated['alamat'],
+        'file_pendukung' => $filePathPendukungForDB ?? null,
+        'file_balasan' => $filePathBalasanForDB ?? null,
+        'status' => 'belum_proses'
+      ]);
 
-            // Simpan file di storage public
-            $filePath = $file->storeAs('file_pendukung', $fileName, 'public');
+      return redirect()->route('pengaduan.index')
+        ->with('success', 'Pengaduan berhasil dikirim');
+    } catch (\Exception $e) {
+      // Hapus file jika terjadi kesalahan
+      if (isset($filePathPendukung) && Storage::exists($filePathPendukung)) {
+        Storage::delete($filePathPendukung);
+      }
+      if (isset($filePathBalasan) && Storage::exists($filePathBalasan)) {
+        Storage::delete($filePathBalasan);
+      }
 
-            // Simpan path file ke dalam database
-            $pengaduan->file_pendukung = $filePath;
-            $pengaduan->save(); // Simpan kembali dengan path file
-        }
-
-        // Redirect ke halaman form pengaduan dengan pesan sukses
-        return redirect()->route('pengaduan.form')->with('success', 'Pengaduan berhasil disimpan!');
+      return redirect()->back()
+        ->with('error', 'Terjadi kesalahan: ' . $e->getMessage())
+        ->withInput();
     }
+  }
+
+  // Add new download method
+  public function download($id)
+  {
+    $pengaduan = Pengaduan::findOrFail($id);
+
+    if ($pengaduan->file_pendukung) {
+      $filePath = 'public/' . $pengaduan->file_pendukung;
+
+      if (Storage::exists($filePath)) {
+        return Storage::download($filePath);
+      }
+    }
+    if ($pengaduan->file_balasan) {
+      $filePath = 'public/' . $pengaduan->file_balasan;
+
+      if (Storage::exists($filePath)) {
+        return Storage::download($filePath);
+      }
+    }
+    return redirect()->back()->with('error', 'File tidak ditemukan');
+  }
 
   public function showTindakLanjut($id)
-    {
-        $pengaduan = Pengaduan::findOrFail($id); // Ambil pengaduan berdasarkan id pengaduan
-        return view('admin.tindak-lanjut', compact('pengaduan'));
-    }
+  {
+    $pengaduan = Pengaduan::findOrFail($id); // Ambil pengaduan berdasarkan id pengaduan
+    return view('admin.tindak-lanjut', compact('pengaduan'));
+  }
 
   public function update(Request $request, $id)
-    {
-        $pengaduan = Pengaduan::findOrFail($id);
+  {
+    $pengaduan = Pengaduan::findOrFail($id);
 
-        $request->validate([
-            'status' => 'required|in:belum_proses,proses,selesai,dilanjutkan',
-            'tindaklanjut' => 'required|string|max:500',
-        ]);
+    $request->validate([
+      'status' => 'required|in:belum_proses,proses,selesai,dilanjutkan',
+      'tindaklanjut' => 'required|string|max:500',
+      'file_balasan' => 'nullable|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048'
+    ]);
 
-        $pengaduan->update([
-            'status' => $request->status,
-            'tindaklanjut' => $request->tindaklanjut,
-        ]);
+    $fileBalasanPathForDB = $pengaduan->file_balasan;
 
-        return redirect()->route('admin.pengaduan')->with('success', 'Pengaduan berhasil ditindak lanjuti!');
+    // Handle upload file_balasan jika ada file yang diunggah
+    if ($request->hasFile('file_balasan')) {
+      $fileBalasan = $request->file('file_balasan');
+      $fileBalasanName = time() . '_balasan_' . $fileBalasan->getClientOriginalName();
+      $fileBalasanPath = $fileBalasan->storeAs('public/file_balasan', $fileBalasanName);
+      $fileBalasanPathForDB = str_replace('public/', '', $fileBalasanPath);
+
+      // Hapus file lama jika ada
+      if ($pengaduan->file_balasan && Storage::exists('public/' . $pengaduan->file_balasan)) {
+        Storage::delete('public/' . $pengaduan->file_balasan);
+      }
     }
+
+    $pengaduan->update([
+      'status' => $request->status,
+      'tindaklanjut' => $request->tindaklanjut,
+      'file_balasan' => $fileBalasanPathForDB
+    ]);
+
+    return redirect()->route('admin.pengaduan')->with('success', 'Pengaduan berhasil ditindak lanjuti!');
+  }
 
   public function batalkan($id)
-    {
-        // Temukan pengaduan berdasarkan ID
-        $pengaduan = Pengaduan::findOrFail($id);
+  {
+    // Temukan pengaduan berdasarkan ID
+    $pengaduan = Pengaduan::findOrFail($id);
 
-        // Pastikan hanya pengaduan yang belum selesai yang dapat dibatalkan
-        if ($pengaduan->status == 'selesai') {
-            return redirect()->back()->with('error', 'Pengaduan yang sudah selesai tidak dapat dibatalkan.');
-        }
-
-        // Update status pengaduan menjadi "dibatalkan"
-        $pengaduan->update([
-            'status' => 'dibatalkan',
-        ]);
-
-        return redirect()->back()->with('success', 'Pengaduan berhasil dibatalkan.');
+    // Pastikan hanya pengaduan yang belum selesai yang dapat dibatalkan
+    if ($pengaduan->status == 'selesai') {
+      return redirect()->back()->with('error', 'Pengaduan yang sudah selesai tidak dapat dibatalkan.');
     }
 
+    // Update status pengaduan menjadi "dibatalkan"
+    $pengaduan->update([
+      'status' => 'dibatalkan',
+    ]);
+
+    return redirect()->back()->with('success', 'Pengaduan berhasil dibatalkan.');
+  }
 }

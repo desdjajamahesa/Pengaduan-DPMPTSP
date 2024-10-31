@@ -173,279 +173,276 @@
     </div>
     <!-- Mode Tabs: Pengaduan & Konsultasi -->
     <div class="container mx-auto px-4 pb-[300px]" id="form">
-        <form action="{{ route('pengaduan.store') }}" method="POST" onsubmit="confirmSubmission(event)"
-            class="space-y-6 mt-20 mb-10">
-            @csrf
-            <div x-data="{ mode: 'pengaduan' }">
-                <div class="flex justify-center mb-8">
-                    <button @click="mode = 'pengaduan'" type="button"
-                        :class="mode === 'pengaduan' ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-700'"
-                        class="px-4 py-2 rounded-l-lg focus:outline-none hover:bg-red-600">Pengaduan</button>
-                    <button @click="mode = 'History_Pengaduan'" type="button"
-                        :class="mode === 'History_Pengaduan' ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-700'"
-                        class="px-4 py-2  focus:outline-none hover:bg-red-600">History
-                        Pengaduan</button>
-                    <button @click="mode = 'konsultasi'" type="button"
-                        :class="mode === 'konsultasi' ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-700'"
-                        class="px-4 py-2 rounded-r-lg focus:outline-none hover:bg-red-600">Konsultasi</button>
+
+        @csrf
+        <div x-data="{ mode: 'pengaduan' }">
+            <div class="flex justify-center mb-8">
+                <button @click="mode = 'pengaduan'" type="button"
+                    :class="mode === 'pengaduan' ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-700'"
+                    class="px-4 py-2 rounded-l-lg focus:outline-none hover:bg-red-600">Pengaduan</button>
+                <button @click="mode = 'History_Pengaduan'" type="button"
+                    :class="mode === 'History_Pengaduan' ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-700'"
+                    class="px-4 py-2  focus:outline-none hover:bg-red-600">History
+                    Pengaduan</button>
+                <button @click="mode = 'konsultasi'" type="button"
+                    :class="mode === 'konsultasi' ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-700'"
+                    class="px-4 py-2 rounded-r-lg focus:outline-none hover:bg-red-600">Konsultasi</button>
+            </div>
+
+            <!-- Pengaduan Form Section -->
+            <section x-show="mode === 'pengaduan'"
+                class="max-w-4xl mx-auto bg-white shadow-2xl rounded-lg overflow-hidden">
+                <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-6 text-white">
+                    <h2 class="text-3xl font-bold text-center">Sampaikan Laporan Anda</h2>
+                    <p class="text-center mt-2 text-blue-100">Kami siap mendengar dan menindaklanjuti laporan
+                        Anda
+                    </p>
                 </div>
 
-                <!-- Pengaduan Form Section -->
-                <section x-show="mode === 'pengaduan'"
-                    class="max-w-4xl mx-auto bg-white shadow-2xl rounded-lg overflow-hidden">
-                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-6 text-white">
-                        <h2 class="text-3xl font-bold text-center">Sampaikan Laporan Anda</h2>
-                        <p class="text-center mt-2 text-blue-100">Kami siap mendengar dan menindaklanjuti laporan
-                            Anda
-                        </p>
+                <div class="p-8">
+                    <form action="{{ route('pengaduan.store') }}" method="POST" enctype="multipart/form-data"
+                        onsubmit="return confirmSubmission(event)" class="space-y-6">
+                        @csrf
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <label class="block text-sm font-medium text-gray-700">Nama Pengguna</label>
+                                <p class="mt-1 text-lg font-semibold text-gray-900">{{ Auth::user()->name }}</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <label class="block text-sm font-medium text-gray-700">Nomor Telepon</label>
+                                <p class="mt-1 text-lg font-semibold text-gray-900">
+                                    {{ Auth::user()->telephone }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="judul_pengaduan" class="block text-sm font-medium text-gray-700">Judul
+                                Pengaduan</label>
+                            <input type="text" name="judul_pengaduan" id="judul_pengaduan" required
+                                class="mt-2 block w-full h-8 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 text-lg">
+                        </div>
+
+                        <div>
+                            <label for="isi_pengaduan" class="block text-sm font-medium text-gray-700">Isi
+                                Pengaduan</label>
+                            <textarea name="isi_pengaduan" id="isi_pengaduan" rows="4" required
+                                class="mt-2 block w-full rounded-md-10 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 text-lg"></textarea>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="tanggal_pengaduan" class="block text-sm font-medium text-gray-700">Tanggal
+                                    Pengaduan</label>
+                                <input type="date" name="tanggal_pengaduan" id="tanggal_pengaduan" required
+                                    class="h-8 mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                            <div>
+                                <label for="lokasi_kejadian" class="block text-sm font-medium text-gray-700">Lokasi
+                                    Kejadian</label>
+                                <input type="text" name="lokasi_kejadian" id="lokasi_kejadian" required
+                                    class="h-8 mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="alamat" class="block text-sm font-medium text-gray-700">Alamat</label>
+                            <input type="text" name="alamat" id="alamat" required
+                                class="mt-2 h-8 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                        </div>
+
+                        <div>
+                            <label for="file_pendukung" class="block text-sm font-medium text-gray-700">Unggah
+                                File
+                                Pendukung</label>
+                            <input type="file" name="file_pendukung" id="file_pendukung" required
+                                accept=".pdf,.jpg,.jpeg,.png,.docx,.xlsx"
+                                class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit"
+                                class="inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-lg font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+                                Kirim Pengaduan
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Konsultasi Section -->
+            <section x-show="mode === 'konsultasi'"
+                class="max-w-4xl mx-auto bg-white shadow-2xl rounded-lg overflow-hidden mb-8">
+                <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-6 text-white">
+                    <h2 class="text-3xl font-bold text-center">Konsultasi dengan Kami</h2>
+                    <p class="text-center mt-2 text-blue-100">Hubungi kami melalui salah satu cara di bawah ini
+                    </p>
+                </div>
+
+                <div class="p-8">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        @php
+                            $contacts = App\Models\ContactOption::all();
+                        @endphp
+                        @foreach ($contacts as $contact)
+                            @switch($contact->type)
+                                @case('whatsapp')
+                                    <a href="https://wa.me/{{ $contact->value }}"
+                                        class="flex items-center justify-center p-4 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300 shadow-md">
+                                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                                            </path>
+                                        </svg>
+                                        WhatsApp
+                                    </a>
+                                @break
+
+                                @case('email')
+                                    <a href="mailto:{{ $contact->value }}"
+                                        class="flex items-center justify-center p-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300 shadow-md">
+                                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                            </path>
+                                        </svg>
+                                        Email
+                                    </a>
+                                @break
+
+                                @case('phone')
+                                    <a href="tel:{{ $contact->value }}"
+                                        class="flex items-center justify-center p-4 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition duration-300 shadow-md">
+                                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                                            </path>
+                                        </svg>
+                                        Telepon
+                                    </a>
+                                @break
+
+                                @case('instagram')
+                                    <a href="https://www.instagram.com/{{ $contact->value }}"
+                                        class="flex items-center justify-center p-4 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition duration-300 shadow-md">
+                                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                                        </svg>
+                                        Instagram
+                                    </a>
+                                @break
+                            @endswitch
+                        @endforeach
                     </div>
+                </div>
+            </section>
 
-                    <div class="p-8">
-                        <form action="{{ route('pengaduan.store') }}" method="POST" enctype="multipart/form-data"
-                            onsubmit="return confirmSubmission(event)" class="space-y-6">
-                            @csrf
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div class="bg-gray-50 p-4 rounded-lg">
-                                    <label class="block text-sm font-medium text-gray-700">Nama Pengguna</label>
-                                    <p class="mt-1 text-lg font-semibold text-gray-900">{{ Auth::user()->name }}</p>
-                                </div>
-                                <div class="bg-gray-50 p-4 rounded-lg">
-                                    <label class="block text-sm font-medium text-gray-700">Nomor Telepon</label>
-                                    <p class="mt-1 text-lg font-semibold text-gray-900">
-                                        {{ Auth::user()->telephone }}
-                                    </p>
-                                </div>
-                            </div>
+            <!-- History Pengaduan Section -->
+            <section x-show="mode === 'History_Pengaduan'"
+                class="max-w-4xl mx-auto bg-white shadow-2xl rounded-lg overflow-hidden">
+                <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-6 text-white">
+                    <h2 class="text-3xl font-bold text-center">Riwayat Pengaduan</h2>
+                    <p class="text-center mt-2 text-blue-100">Lihat status dan detail pengaduan Anda</p>
+                </div>
 
-                            <div>
-                                <label for="judul_pengaduan" class="block text-sm font-medium text-gray-700">Judul
-                                    Pengaduan</label>
-                                <input type="text" name="judul_pengaduan" id="judul_pengaduan" required
-                                    class="mt-2 block w-full h-8 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 text-lg">
-                            </div>
+                <div class="p-8">
+                    @php
+                        $pengaduans = App\Models\Pengaduan::where('user_id', auth()->user()->id)->paginate(5);
+                    @endphp
 
-                            <div>
-                                <label for="isi_pengaduan" class="block text-sm font-medium text-gray-700">Isi
-                                    Pengaduan</label>
-                                <textarea name="isi_pengaduan" id="isi_pengaduan" rows="4" required
-                                    class="mt-2 block w-full rounded-md-10 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 text-lg"></textarea>
-                            </div>
+                    <!-- Search Bar -->
 
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label for="tanggal_pengaduan"
-                                        class="block text-sm font-medium text-gray-700">Tanggal Pengaduan</label>
-                                    <input type="date" name="tanggal_pengaduan" id="tanggal_pengaduan" required
-                                        class="h-8 mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-                                </div>
-                                <div>
-                                    <label for="lokasi_kejadian"
-                                        class="block text-sm font-medium text-gray-700">Lokasi
-                                        Kejadian</label>
-                                    <input type="text" name="lokasi_kejadian" id="lokasi_kejadian" required
-                                        class="h-8 mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-                                </div>
-                            </div>
-
-                            <div>
-                                <label for="alamat" class="block text-sm font-medium text-gray-700">Alamat</label>
-                                <input type="text" name="alamat" id="alamat" required
-                                    class="mt-2 h-8 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-                            </div>
-
-                            <div>
-                                <label for="file_pendukung" class="block text-sm font-medium text-gray-700">Unggah
-                                    File
-                                    Pendukung</label>
-                                <input type="file" name="file_pendukung" id="file_pendukung" required
-                                    accept=".pdf,.jpg,.jpeg,.png,.docx,.xlsx"
-                                    class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-                            </div>
-
-                            <div class="text-center">
-                                <button type="submit"
-                                    class="inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-lg font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out">
-                                    Kirim Pengaduan
-                                </button>
-                            </div>
+                    <div class="mb-4">
+                        <form method="GET" action="{{ route('pengaduan.home') }}"
+                            class="flex items-center space-x-2">
+                            <input type="text" name="search" placeholder="Cari..."
+                                value="{{ request('search') }}"
+                                class="border border-gray-300 rounded-lg px-4 py-2 w-full sm:w-1/2 lg:w-1/3">
+                            <button type="submit"
+                                class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Cari</button>
                         </form>
                     </div>
-                </section>
-
-                <!-- Konsultasi Section -->
-                <section x-show="mode === 'konsultasi'"
-                    class="max-w-4xl mx-auto bg-white shadow-2xl rounded-lg overflow-hidden mb-8">
-                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-6 text-white">
-                        <h2 class="text-3xl font-bold text-center">Konsultasi dengan Kami</h2>
-                        <p class="text-center mt-2 text-blue-100">Hubungi kami melalui salah satu cara di bawah ini
-                        </p>
-                    </div>
-
-                    <div class="p-8">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                            @php
-                                $contacts = App\Models\ContactOption::all();
-                            @endphp
-                            @foreach ($contacts as $contact)
-                                @switch($contact->type)
-                                    @case('whatsapp')
-                                        <a href="https://wa.me/{{ $contact->value }}"
-                                            class="flex items-center justify-center p-4 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300 shadow-md">
-                                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
-                                                </path>
-                                            </svg>
-                                            WhatsApp
-                                        </a>
-                                    @break
-
-                                    @case('email')
-                                        <a href="mailto:{{ $contact->value }}"
-                                            class="flex items-center justify-center p-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300 shadow-md">
-                                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                                                </path>
-                                            </svg>
-                                            Email
-                                        </a>
-                                    @break
-
-                                    @case('phone')
-                                        <a href="tel:{{ $contact->value }}"
-                                            class="flex items-center justify-center p-4 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition duration-300 shadow-md">
-                                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
-                                                </path>
-                                            </svg>
-                                            Telepon
-                                        </a>
-                                    @break
-
-                                    @case('instagram')
-                                        <a href="https://www.instagram.com/{{ $contact->value }}"
-                                            class="flex items-center justify-center p-4 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition duration-300 shadow-md">
-                                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
-                                            </svg>
-                                            Instagram
-                                        </a>
-                                    @break
-                                @endswitch
-                            @endforeach
-                        </div>
-                    </div>
-                </section>
-
-                <!-- History Pengaduan Section -->
-                <section x-show="mode === 'History_Pengaduan'"
-                    class="max-w-4xl mx-auto bg-white shadow-2xl rounded-lg overflow-hidden">
-                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-6 text-white">
-                        <h2 class="text-3xl font-bold text-center">Riwayat Pengaduan</h2>
-                        <p class="text-center mt-2 text-blue-100">Lihat status dan detail pengaduan Anda</p>
-                    </div>
-
-                    <div class="p-8">
-                        @php
-                            $pengaduans = App\Models\Pengaduan::where('user_id', auth()->user()->id)->paginate(5);
-                        @endphp
-
-                        <!-- Search Bar -->
-
-                        <div class="mb-4">
-                            <form method="GET" action="{{ route('pengaduan.home') }}"
-                                class="flex items-center space-x-2">
-                                <input type="text" name="search" placeholder="Cari..."
-                                    value="{{ request('search') }}"
-                                    class="border border-gray-300 rounded-lg px-4 py-2 w-full sm:w-1/2 lg:w-1/3">
-                                <button type="submit"
-                                    class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Cari</button>
-                            </form>
-                        </div>
 
 
-                        <!-- Pengaduan List -->
-                        <div class="space-y-4">
-                            @forelse ($pengaduans as $pengaduan)
-                                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
-                                    <div class="flex justify-between items-start">
-                                        <h3 class="font-semibold text-lg text-blue-600">
-                                            {{ $pengaduan->judul_pengaduan }}</h3>
-                                        <span
-                                            class="text-xs font-semibold px-3 py-1 rounded-full
+                    <!-- Pengaduan List -->
+                    <div class="space-y-4">
+                        @forelse ($pengaduans as $pengaduan)
+                            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-semibold text-lg text-blue-600">
+                                        {{ $pengaduan->judul_pengaduan }}</h3>
+                                    <span
+                                        class="text-xs font-semibold px-3 py-1 rounded-full
                                                 @if ($pengaduan->status == 'belum_proses') bg-red-100 text-red-700
                                                 @elseif ($pengaduan->status == 'proses') bg-yellow-100 text-yellow-700
                                                 @elseif ($pengaduan->status == 'selesai') bg-green-100 text-green-700
                                                 @elseif ($pengaduan->status == 'dilanjutkan') bg-blue-100 text-blue-700
                                                 @elseif ($pengaduan->status == 'dibatalkan') bg-gray-100 text-gray-700 @endif">
-                                            {{ ucfirst(str_replace('_', ' ', $pengaduan->status)) }}
-                                        </span>
-                                    </div>
-                                    <p class="text-gray-600 text-sm mt-2">
-                                        <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
-                                            </path>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                        </svg>
-                                        {{ $pengaduan->lokasi_kejadian }}
-                                    </p>
-                                    <p class="text-gray-500 text-sm mt-1">
-                                        <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                            </path>
-                                        </svg>
-                                        {{ $pengaduan->tanggal_pengaduan }}
-                                    </p>
+                                        {{ ucfirst(str_replace('_', ' ', $pengaduan->status)) }}
+                                    </span>
                                 </div>
-
-                                <!-- Buttons for "Batalkan" and "Lihat Detail" -->
-                                <div class="mt-4 flex space-x-4">
-                                    <!-- Button Lihat Detail -->
-                                    <a href="{{ route('pengaduan.show', $pengaduan->id) }}"
-                                        class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
-                                        Lihat Detail
-                                    </a>
-
-                                    <!-- Button Batalkan -->
-                                    @if ($pengaduan->status != 'dibatalkan')
-                                        <form method="POST"
-                                            action="{{ route('pengaduan.batalkan', $pengaduan->id) }}">
-                                            @csrf
-                                            @method('PATCH')
-                                            <button type="submit"
-                                                class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
-                                                Batalkan
-                                            </button>
-                                        </form>
-                                    @endif
-                                </div>
-                            @empty
-                                <p class="text-center text-gray-500 py-4">Belum ada pengaduan.</p>
-                            @endforelse
-
-                            <!-- Pagination Links -->
-                            <div class="mt-6">
-                                {{ $pengaduans->links() }}
+                                <p class="text-gray-600 text-sm mt-2">
+                                    <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                        </path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                    {{ $pengaduan->lokasi_kejadian }}
+                                </p>
+                                <p class="text-gray-500 text-sm mt-1">
+                                    <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                        </path>
+                                    </svg>
+                                    {{ $pengaduan->tanggal_pengaduan }}
+                                </p>
                             </div>
+
+                            <!-- Buttons for "Batalkan" and "Lihat Detail" -->
+                            <div class="mt-4 flex space-x-4">
+                                <!-- Button Lihat Detail -->
+                                <a href="{{ route('pengaduan.show', $pengaduan->id) }}"
+                                    class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+                                    Lihat Detail
+                                </a>
+
+                                <!-- Button Batalkan -->
+                                @if ($pengaduan->status != 'dibatalkan')
+                                    <form method="POST" action="{{ route('pengaduan.batalkan', $pengaduan->id) }}">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit"
+                                            class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
+                                            Batalkan
+                                        </button>
+                                    </form>
+                                @endif
+                            </div>
+                        @empty
+                            <p class="text-center text-gray-500 py-4">Belum ada pengaduan.</p>
+                        @endforelse
+
+                        <!-- Pagination Links -->
+                        <div class="mt-6">
+                            {{ $pengaduans->links() }}
                         </div>
-
-
-
                     </div>
-                </section>
-            </div>
+
+
+
+                </div>
+            </section>
+        </div>
         </form>
     </div>
 

@@ -64,9 +64,16 @@
                 @if ($pengaduan->file_pendukung)
                     <div class="bg-gray-50 p-4 rounded-lg shadow">
                         <h2 class="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">File Pendukung</h2>
-                        <a href="{{ asset('storage/' . $pengaduan->file_pendukung) }}" target="_blank"
-                            class="inline-flex items-center px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
-                            <i class="fas fa-file-download mr-2"></i> Unduh File
+
+                        <a href="{{ route('pengaduan.download', $pengaduan->id) }}"
+                            class="inline-flex items-center px-6 py-3 bg-green-600 text-white font-semibold rounded-full hover:bg-green-700 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4">
+                                </path>
+                            </svg>
+                            Unduh File Pendukung
                         </a>
                     </div>
                 @endif
