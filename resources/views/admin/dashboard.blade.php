@@ -37,14 +37,14 @@
             <!-- Stats Card 1 -->
             <div class="card bg-white p-6 shadow-md rounded-lg">
                 <h2 class="text-xl font-semibold text-gray-800">Total Pengaduan</h2>
-                <p class="mt-2 text-gray-600 text-2xl">
+                <p class="mt-2 text-gray-600 text-2xl">{{ $totalPengaduan ?? 0 }}
                 </p>
             </div>
 
             <!-- Stats Card 2 -->
             <div class="card bg-white p-6 shadow-md rounded-lg">
                 <h2 class="text-xl font-semibold text-gray-800">Jumlah Pengaduan Hari Ini</h2>
-                <p class="mt-2 text-gray-600 text-2xl">
+                <p class="mt-2 text-gray-600 text-2xl">{{ $pengaduanToday ?? 0 }}
                 </p>
             </div>
 
