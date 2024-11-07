@@ -119,7 +119,7 @@
                                         </td>
                                         <td class="border-dashed border-t border-gray-200 px-6 py-4">
                                             <div class="flex items-center space-x-2">
-                                                <a href="{{ route('admin.users.edit', $user->id) }}"
+                                                <a href="{{ route('superadmin.users.edit', $user->id) }}"
                                                     class="text-blue-600 hover:text-blue-900 transition duration-150 ease-in-out">
                                                     <svg class="h-5 w-5" fill="none" stroke-linecap="round"
                                                         stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"

@@ -280,7 +280,7 @@
                 </div>
 
                 <div class="p-8">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-4">
                         @php
                             $contacts = App\Models\ContactOption::all();
                         @endphp
@@ -309,19 +309,6 @@
                                             </path>
                                         </svg>
                                         Email
-                                    </a>
-                                @break
-
-                                @case('phone')
-                                    <a href="tel:{{ $contact->value }}"
-                                        class="flex items-center justify-center p-4 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition duration-300 shadow-md">
-                                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
-                                            </path>
-                                        </svg>
-                                        Telepon
                                     </a>
                                 @break
 

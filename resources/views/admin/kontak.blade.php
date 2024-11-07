@@ -48,11 +48,6 @@
                             </p>
                         </div>
                         <div class="mb-5">
-                            <label class="block text-gray-700 font-medium mb-2">Phone</label>
-                            <p class="text-gray-900">{{ optional($contacts->where('type', 'phone')->first())->value }}
-                            </p>
-                        </div>
-                        <div class="mb-5">
                             <label class="block text-gray-700 font-medium mb-2">Instagram</label>
                             <p class="text-gray-900">
                                 {{ optional($contacts->where('type', 'instagram')->first())->value }}</p>
@@ -87,14 +82,6 @@
                                 <input type="hidden" name="contacts[1][type]" value="email">
                             </div>
 
-                            <div class="mb-5">
-                                <label for="phone" class="block text-gray-700 font-medium mb-2">Phone</label>
-                                <input type="text" name="contacts[2][value]"
-                                    value="{{ optional($contacts->where('type', 'phone')->first())->value }}"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    required>
-                                <input type="hidden" name="contacts[2][type]" value="phone">
-                            </div>
 
                             <div class="mb-5">
                                 <label for="instagram" class="block text-gray-700 font-medium mb-2">Instagram</label>

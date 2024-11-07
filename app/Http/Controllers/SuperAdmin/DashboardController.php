@@ -20,4 +20,11 @@ class DashboardController extends Controller
     return view('superadmin.dashboard', compact('totalPengaduan', 'pengaduanToday', 'endUserCount'));
     $endUserCount = User::where('role', 'end_user')->count();
   }
+
+  public function dashboard()
+{
+    $recentPengaduans = Pengaduan::with('user')->latest()->take(5)->get(); // Get the latest 5 pengaduan
+
+    return view('superadmin.dashboard', compact('recentPengaduans'));
+}
 }

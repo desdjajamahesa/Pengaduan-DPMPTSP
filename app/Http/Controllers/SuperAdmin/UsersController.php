@@ -20,8 +20,8 @@ class UsersController extends Controller
     // Fungsi untuk menampilkan form edit
     public function edit($id)
     {
-        $user = User::findOrFail($id); // Cari user berdasarkan ID
-        return view('superadmin.edit_user', compact('user'));
+      $user = User::findOrFail($id); // Cari user berdasarkan ID
+      return view('superadmin.edit_user', compact('user'));
     }
 
     // Fungsi untuk memperbarui data pengguna

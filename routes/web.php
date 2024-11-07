@@ -12,24 +12,21 @@ use App\Http\Controllers\SopController;
 // -----------------------------
 
 // Halaman utama: Menampilkan halaman login sebagai default
-Route::get('/', function () {
-    return view('login');
-})->name('login');
 
 // Halaman login dan proses login
 Route::get('login', function () {
     return view('login');
 })->name('login');
-Route::post('login', [AuthController::class, 'login'])->name('login.submit');
+Route::post('login', [AuthController::class, 'login'])->name('login.submit')->middleware('auth');;
 
 // Halaman register dan proses register
-Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-Route::post('register', [RegisterController::class, 'register']);
+Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register')->middleware('auth');;
+Route::post('register', [RegisterController::class, 'register'])->middleware('auth');;
 
 // Halaman reset password
 Route::get('password/reset', function () {
     return view('auth.passwords.email');
-})->name('password.request');
+})->name('password.request')->middleware('auth');;
 
 // -----------------------------
 // User Routes (Authenticated)
@@ -50,37 +47,21 @@ Route::get('/detail', function () {
 })->name('detail')->middleware('auth');
 
 // View User
-Route::get('/pengaduan/{id}', [PengaduanController::class, 'show'])->name('pengaduan.show');
+Route::get('/pengaduan/{id}', [PengaduanController::class, 'show'])->name('pengaduan.show')->middleware('auth');;
 
 // Form pengaduan (tanpa middleware)
-Route::patch('/home', [PengaduanController::class, 'create'])->name('pengaduan.form');
-Route::put('/pengaduan/{id}', [PengaduanController::class, 'update'])->name('pengaduan.update');
-Route::patch('/home', [PengaduanController::class, 'create'])->name('pengaduan.index');
+Route::patch('/home', [PengaduanController::class, 'create'])->name('pengaduan.form')->middleware('auth');;
+Route::put('/pengaduan/{id}', [PengaduanController::class, 'update'])->name('pengaduan.update')->middleware('auth');
+Route::patch('/home', [PengaduanController::class, 'create'])->name('pengaduan.index')->middleware('auth');;
 // -----------------------------
 // Superadmin Routes
 // -----------------------------
 
-// Halaman dashboard superadmin
-Route::get('/dasboardsuper', function () {
-    return view('superadmin.dasboard');
-})->name('superadmin.dasboard');
 
-// Halaman user management superadmin
-Route::get('/usersuper', function () {
-    return view('superadmin.user');
-})->name('superadmin.user');
 
-// Halaman SOP management superadmin
-Route::get('/sopsuper', [SopController::class, 'index'])->name('superadmin.sop.index');
-Route::post('/sopsuper', [SopController::class, 'store'])->name('superadmin.sop.store');
-Route::get('/sopsuper/{id}/edit', [SopController::class, 'edit'])->name('superadmin.sop.edit');
-Route::put('/sopsuper/{id}', [SopController::class, 'update'])->name('superadmin.sop.update');
-Route::delete('/sopsuper/{id}', [SopController::class, 'destroy'])->name('superadmin.sop.destroy');
 
 // Halaman pengaduan superadmin
-Route::get('/pengaduansuper', [PengaduanController::class, 'superAdminIndex'])->name('superadmin.pengaduan');
-Route::get('/pengaduansuper/{id}/tindak-lanjut', [PengaduanController::class, 'showTindakLanjutsuper'])->name('superadmin.tindak-lanjut');
-Route::put('/pengaduansuper/{id}', [PengaduanController::class, 'update'])->name('superadmin.pengaduan.update')->middleware('auth');
+
 // Halaman kontak management superadmin
 
 // Halaman Data Admin superadmin

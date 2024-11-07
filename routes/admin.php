@@ -8,34 +8,34 @@ use App\Http\Controllers\Admin\SopController;
 use Illuminate\Support\Facades\Route;
 
 // Route Management Dashboard Pada Admin
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard')->middleware('auth')    ;
 
 
 // Route Management Users Pada Admin
-Route::get('/users', [UsersController::class, 'showUser'])->name('admin.user');
-Route::get('/users/{id}/edit', [UsersController::class, 'edit'])->name('admin.users.edit');
-Route::put('/users/{id}', [UsersController::class, 'update'])->name('admin.users.update');
-Route::delete('/users/{id}', [UsersController::class, 'destroy'])->name('admin.users.destroy');
+Route::get('/users', [UsersController::class, 'showUser'])->name('admin.user')->middleware('auth');
+Route::get('/users/{id}/edit', [UsersController::class, 'edit'])->name('admin.users.edit')->middleware('auth');
+Route::put('/users/{id}', [UsersController::class, 'update'])->name('admin.users.update')->middleware('auth');
+Route::delete('/users/{id}', [UsersController::class, 'destroy'])->name('admin.users.destroy')->middleware('auth');
 
 // Route Management Pengaduan Pada Admin
-Route::get('/pengaduan', [PengaduanController::class, 'index'])->name('admin.pengaduan');
-Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
-Route::get('/pengaduan/{id}/tindak-lanjut', [PengaduanController::class, 'showTindakLanjut'])->name('admin.pengaduan.tindak-lanjut');
-Route::put('/pengaduan/{id}', [PengaduanController::class, 'update'])->name('admin.pengaduan.update');
-Route::post('/home', [PengaduanController::class, 'home'])->name('pengaduan.home');
-Route::patch('/pengaduan/{id}/batalkan', [PengaduanController::class, 'batalkan'])->name('pengaduan.batalkan');
-Route::get('/pengaduan/{id}/download', [PengaduanController::class, 'download'])->name('pengaduan.download');
+Route::get('/pengaduan', [PengaduanController::class, 'index'])->name('admin.pengaduan')->middleware('auth');
+Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store')->middleware('auth');
+Route::get('/pengaduan/{id}/tindak-lanjut', [PengaduanController::class, 'showTindakLanjut'])->name('admin.pengaduan.tindak-lanjut')->middleware('auth');
+Route::put('/pengaduan/{id}', [PengaduanController::class, 'update'])->name('admin.pengaduan.update')->middleware('auth');
+Route::post('/home', [PengaduanController::class, 'home'])->name('pengaduan.home')->middleware('auth');
+Route::patch('/pengaduan/{id}/batalkan', [PengaduanController::class, 'batalkan'])->name('pengaduan.batalkan')->middleware('auth');
+Route::get('/pengaduan/{id}/download', [PengaduanController::class, 'download'])->name('pengaduan.download')->middleware('auth');
 
 
 // Route Management SOP Pada Admin
-Route::get('/sop', [SopController::class, 'index'])->name('admin.sop.index');
-Route::post('/sop', [SopController::class, 'store'])->name('admin.sop.store');
-Route::get('/sop/{id}/edit', [SopController::class, 'edit'])->name('admin.sop.edit');
-Route::put('/sop/{id}', [SopController::class, 'update'])->name('admin.sop.update');
-Route::delete('/sop/{id}', [SopController::class, 'destroy'])->name('admin.sop.destroy');
+Route::get('/sop', [SopController::class, 'index'])->name('admin.sop.index')->middleware('auth');
+Route::post('/sop', [SopController::class, 'store'])->name('admin.sop.store')->middleware('auth');
+Route::get('/sop/{id}/edit', [SopController::class, 'edit'])->name('admin.sop.edit')->middleware('auth');
+Route::put('/sop/{id}', [SopController::class, 'update'])->name('admin.sop.update')->middleware('auth');
+Route::delete('/sop/{id}', [SopController::class, 'destroy'])->name('admin.sop.destroy')->middleware('auth');
 
 
 // Route Management Kontak Pada Admin
-Route::get('/kontak', [ContactController::class, 'index'])->name('contacts.index');
-Route::post('/kontak', [ContactController::class, 'update'])->name('contacts.update');
-Route::get('/user.footer', [ContactController::class, 'index'])->name('contacts.index');
+Route::get('/kontak', [ContactController::class, 'index'])->name('contacts.index')->middleware('auth');;
+Route::post('/kontak', [ContactController::class, 'update'])->name('contacts.update')->middleware('auth');;
+Route::get('/user.footer', [ContactController::class, 'index'])->name('contacts.index')->middleware('auth');;
