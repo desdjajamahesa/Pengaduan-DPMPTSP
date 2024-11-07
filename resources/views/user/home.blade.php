@@ -37,14 +37,14 @@
     <title>Document</title>
 </head>
 
-<body class="bg-white">
-    <x-user.navbar></x-user.navbar>
+<body class="" style="background-color: rgb(255, 255, 255);">
 
-    <div class="mb-32" style="background-image: url('/storage/wave-haikei.svg'); background-size: cover;">
+    <x-user.navbar></x-user.navbar>
+    <div class="" style="background-image: url('/storage/wave.svg'); background-size: cover; ">
         <!-- Page Title -->
         <section id="stat" class="text-center py-16 mb-32 relative overflow-hidden">
             <!-- Overlay -->
-
+            <div class="absolute inset-0"></div> <!-- Add overlay here -->
 
             <!-- Content -->
             <div class="relative z-10 container mx-auto px-4">
@@ -58,18 +58,18 @@
                         class="bg-white rounded-xl shadow-lg p-8 text-center transform hover:scale-105 hover:shadow-2xl transition duration-300 ease-in-out">
                         <h4 class="text-2xl font-semibold text-gray-800">Pelapor</h4>
                         <p class="text-gray-500 mt-4">Jumlah pengaduan yang diajukan oleh masyarakat.</p>
-                        <h3 class="text-3xl font-bold text-gray-800 mt-4">150</h3> <!-- Example statistic -->
                     </div>
                     <!-- Status Pengaduan Card -->
                     <div
                         class="bg-white rounded-xl shadow-lg p-8 text-center transform hover:scale-105 hover:shadow-2xl transition duration-300 ease-in-out">
                         <h4 class="text-2xl font-semibold text-gray-800">Status Pengaduan</h4>
                         <p class="text-gray-500 mt-4">Proses pengaduan yang sudah dilakukan.</p>
-                        <h3 class="text-3xl font-bold text-gray-800 mt-4">80% Selesai</h3> <!-- Example statistic -->
                     </div>
                 </div>
             </div>
         </section>
+
+
 
 
 
@@ -184,7 +184,7 @@
         </script>
     </div>
     <!-- Mode Tabs: Pengaduan & Konsultasi -->
-    <div class="container mx-auto px-4 pb-[300px]" id="form" style="">
+    <div class="container mx-auto px-4 pb-[300px] mt-32" id="form">
 
         @csrf
         <div x-data="{ mode: 'pengaduan' }">
