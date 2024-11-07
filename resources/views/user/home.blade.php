@@ -37,29 +37,41 @@
     <title>Document</title>
 </head>
 
-<body class="bg-gray-50">
+<body class="bg-white">
     <x-user.navbar></x-user.navbar>
 
-    <div class="container mx-auto px-4 py-16">
+    <div class="mb-32" style="background-image: url('/storage/wave-haikei.svg'); background-size: cover;">
         <!-- Page Title -->
-        <section id="stat" class="text-center py-8 mb-32">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4">Statistik Pengaduan DPMPTSP</h2>
-            <p class="text-gray-600 mb-8">Lihat statistik pelapor dan status pengaduan yang diterima.</p>
+        <section id="stat" class="text-center py-16 mb-32 relative overflow-hidden">
+            <!-- Overlay -->
 
-            <!-- Cards Section -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Pelapor Card -->
-                <div class="bg-white rounded-lg shadow-md p-8 text-center">
-                    <h4 class="text-xl font-semibold text-gray-700">Pelapor</h4>
-                    <p class="text-gray-500 mt-4">Jumlah pengaduan yang diajukan oleh masyarakat.</p>
-                </div>
-                <!-- Status Pengaduan Card -->
-                <div class="bg-white rounded-lg shadow-md p-8 text-center">
-                    <h4 class="text-xl font-semibold text-gray-700">Status Pengaduan</h4>
-                    <p class="text-gray-500 mt-4">Proses pengaduan yang sudah dilakukan.</p>
+
+            <!-- Content -->
+            <div class="relative z-10 container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-white mb-4">Statistik Pengaduan DPMPTSP</h2>
+                <p class="text-gray-200 mb-8">Lihat statistik pelapor dan status pengaduan yang diterima.</p>
+
+                <!-- Cards Section -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
+                    <!-- Pelapor Card -->
+                    <div
+                        class="bg-white rounded-xl shadow-lg p-8 text-center transform hover:scale-105 hover:shadow-2xl transition duration-300 ease-in-out">
+                        <h4 class="text-2xl font-semibold text-gray-800">Pelapor</h4>
+                        <p class="text-gray-500 mt-4">Jumlah pengaduan yang diajukan oleh masyarakat.</p>
+                        <h3 class="text-3xl font-bold text-gray-800 mt-4">150</h3> <!-- Example statistic -->
+                    </div>
+                    <!-- Status Pengaduan Card -->
+                    <div
+                        class="bg-white rounded-xl shadow-lg p-8 text-center transform hover:scale-105 hover:shadow-2xl transition duration-300 ease-in-out">
+                        <h4 class="text-2xl font-semibold text-gray-800">Status Pengaduan</h4>
+                        <p class="text-gray-500 mt-4">Proses pengaduan yang sudah dilakukan.</p>
+                        <h3 class="text-3xl font-bold text-gray-800 mt-4">80% Selesai</h3> <!-- Example statistic -->
+                    </div>
                 </div>
             </div>
         </section>
+
+
 
         <!-- SOP Section -->
         <section id="sop">
@@ -172,21 +184,21 @@
         </script>
     </div>
     <!-- Mode Tabs: Pengaduan & Konsultasi -->
-    <div class="container mx-auto px-4 pb-[300px]" id="form">
+    <div class="container mx-auto px-4 pb-[300px]" id="form" style="">
 
         @csrf
         <div x-data="{ mode: 'pengaduan' }">
             <div class="flex justify-center mb-8">
                 <button @click="mode = 'pengaduan'" type="button"
-                    :class="mode === 'pengaduan' ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-700'"
-                    class="px-4 py-2 rounded-l-lg focus:outline-none hover:bg-red-600">Pengaduan</button>
+                    :class="mode === 'pengaduan' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'"
+                    class="px-4 py-2 rounded-l-lg focus:outline-none hover:bg-blue-600">Pengaduan</button>
                 <button @click="mode = 'History_Pengaduan'" type="button"
-                    :class="mode === 'History_Pengaduan' ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-700'"
-                    class="px-4 py-2  focus:outline-none hover:bg-red-600">History
+                    :class="mode === 'History_Pengaduan' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'"
+                    class="px-4 py-2  focus:outline-none hover:bg-blue-600">History
                     Pengaduan</button>
                 <button @click="mode = 'konsultasi'" type="button"
-                    :class="mode === 'konsultasi' ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-700'"
-                    class="px-4 py-2 rounded-r-lg focus:outline-none hover:bg-red-600">Konsultasi</button>
+                    :class="mode === 'konsultasi' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'"
+                    class="px-4 py-2 rounded-r-lg focus:outline-none hover:bg-blue-600">Konsultasi</button>
             </div>
 
             <!-- Pengaduan Form Section -->
@@ -475,17 +487,6 @@
                                 d="M16.5 3.75h-9A3.75 3.75 0 003.75 7.5v9a3.75 3.75 0 003.75 3.75h9a3.75 3.75 0 003.75-3.75v-9a3.75 3.75 0 00-3.75-3.75zM4.5 7.241L12 12.37l7.5-5.128M12 13.5l-7.5 5.25" />
                         </svg>
                         <span class="font-medium">Email</span>
-                    </a>
-                @elseif ($contact->type == 'phone')
-                    <a href="tel:{{ $contact->value }}"
-                        class="flex items-center space-x-3 bg-yellow-100 text-yellow-600 p-3 rounded-lg hover:bg-yellow-200 transition duration-200">
-                        <!-- Phone Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M2.25 6.75l4.125 2.062A2.25 2.25 0 018.25 10.73l1.125 2.25a2.25 2.25 0 002.25 1.125 2.25 2.25 0 002.25-2.25v-3.75l1.125-.562a2.25 2.25 0 002.25 1.125l4.125 2.062" />
-                        </svg>
-                        <span class="font-medium">Telepon</span>
                     </a>
                 @elseif ($contact->type == 'instagram')
                     <a href="https://www.instagram.com/{{ $contact->value }}"
