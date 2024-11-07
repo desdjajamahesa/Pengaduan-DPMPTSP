@@ -6,7 +6,7 @@ use App\Http\Controllers\PelaporanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SopController;
-
+use App\Http\Controllers\StatistikController;
 // -----------------------------
 // Auth Routes
 // -----------------------------
@@ -17,16 +17,16 @@ use App\Http\Controllers\SopController;
 Route::get('login', function () {
     return view('login');
 })->name('login');
-Route::post('login', [AuthController::class, 'login'])->name('login.submit')->middleware('auth');;
+Route::post('login', [AuthController::class, 'login'])->name('login.submit')->middleware('auth');
 
 // Halaman register dan proses register
-Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register')->middleware('auth');;
-Route::post('register', [RegisterController::class, 'register'])->middleware('auth');;
+Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register')->middleware('auth');
+Route::post('register', [RegisterController::class, 'register'])->middleware('auth');
 
 // Halaman reset password
 Route::get('password/reset', function () {
     return view('auth.passwords.email');
-})->name('password.request')->middleware('auth');;
+})->name('password.request')->middleware('auth');
 
 // -----------------------------
 // User Routes (Authenticated)
@@ -41,6 +41,7 @@ Route::get('/home', function () {
     return view('user.home');
 })->name('sop.index')->middleware('auth');
 
+Route::get('/home/sop', [SopController::class, 'show'])->name('sop.index')->middleware('auth');;
 
 Route::get('/detail', function () {
     return view('user.detail');
@@ -56,7 +57,7 @@ Route::patch('/home', [PengaduanController::class, 'create'])->name('pengaduan.i
 // -----------------------------
 // Superadmin Routes
 // -----------------------------
-
+Route::get('/home', [StatistikController::class, 'index'])->name('home')->middleware('auth');
 
 
 

@@ -13,11 +13,28 @@ class DashboardController extends Controller
 {
   public function index()
   {
-    $totalPengaduan = Pengaduan::count();
-    $pengaduanToday = Pengaduan::whereDate('tanggal_pengaduan', Carbon::today())->count();
-    $endUserCount = User::count(); // or use a condition for specific user roles if needed
-
-    return view('admin.dashboard', compact('totalPengaduan', 'pengaduanToday', 'endUserCount'));
-    $endUserCount = User::where('role', 'end_user')->count();
+      $totalPengaduan = Pengaduan::count();
+      $pengaduanToday = Pengaduan::whereDate('tanggal_pengaduan', Carbon::today())->count();
+      $endUserCount = User::count();
+      $pengaduanDiproses = Pengaduan::where('status', 'diproses')->count();
+      $pengaduanTertunda = Pengaduan::where('status', 'tertunda')->count();
+      $pengaduanSelesai = Pengaduan::where('status', 'selesai')->count();
+  
+      // Mengambil 5 pengguna terakhir yang baru saja melakukan pengaduan
+      $recentPengaduans = Pengaduan::with('user')
+          ->orderBy('tanggal_pengaduan', 'desc')
+          ->take(5)
+          ->get();
+  
+      return view('admin.dashboard', compact(
+          'totalPengaduan',
+          'pengaduanToday',
+          'endUserCount',
+          'pengaduanDiproses',
+          'pengaduanTertunda',
+          'pengaduanSelesai',
+          'recentPengaduans'
+      ));
   }
+  
 }

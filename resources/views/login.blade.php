@@ -9,7 +9,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <title>Masuk - S!Padu</title>
     <style>
-        body{
+        body {
             background-image: url('bg-textured.png');
             background-repeat: no-repeat;
         }
@@ -34,7 +34,8 @@
             <form class="space-y-6" action="{{ route('login') }}" method="POST">
                 @csrf
                 <div>
-                    <label for="email" class="block text-sm px-1 font-semibold leading-6 text-slate-700">Email</label>
+                    <label for="email"
+                        class="block text-sm px-1 font-semibold leading-6 text-slate-700">Email</label>
                     <div class="mt-2">
                         <input id="email" name="email" type="email" autocomplete="email" required
                             class="block w-full h-10 rounded-xl shadow-md border-0 px-3.5 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-orange-300 sm:text-md sm:leading-6">
@@ -43,7 +44,8 @@
 
                 <div>
                     <div class="flex items-center justify-between">
-                        <label for="password" class="block text-sm px-1 font-semibold leading-6 text-slate-700">Password</label>
+                        <label for="password"
+                            class="block text-sm px-1 font-semibold leading-6 text-slate-700">Password</label>
                         <div class="text-sm">
                             <a href="{{ route('password.request') }}"
                                 class="font-semibold text-cyan-600 hover:text-cyan-400">Lupa password?</a>

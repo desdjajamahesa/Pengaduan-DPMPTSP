@@ -20,12 +20,8 @@ class SopController extends Controller
 
         $sops = $query->paginate(10);
 
-        if (Auth::user()->role === 'super_admin') {
-            return view('superadmin.sop', compact('sops'));
-        } else if (Auth::user()->role === 'admin') {
-            return view('admin.sop', compact('sops'));
-        }
-
+    
+        return view('user.home', compact('sops'));
         return abort(403, 'Unauthorized action.');
     }
 

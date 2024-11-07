@@ -58,12 +58,16 @@
                         class="bg-white rounded-xl shadow-lg p-8 text-center transform hover:scale-105 hover:shadow-2xl transition duration-300 ease-in-out">
                         <h4 class="text-2xl font-semibold text-gray-800">Pelapor</h4>
                         <p class="text-gray-500 mt-4">Jumlah pengaduan yang diajukan oleh masyarakat.</p>
+                        <p class="text-xl font-bold text-gray-800 mt-4">{{ $totalPengaduan }}</p>
                     </div>
+
                     <!-- Status Pengaduan Card -->
                     <div
                         class="bg-white rounded-xl shadow-lg p-8 text-center transform hover:scale-105 hover:shadow-2xl transition duration-300 ease-in-out">
                         <h4 class="text-2xl font-semibold text-gray-800">Status Pengaduan</h4>
-                        <p class="text-gray-500 mt-4">Proses pengaduan yang sudah dilakukan.</p>
+                        <p class="text-gray-500 mt-4">Proses pengaduan yang sudah diproses.</p>
+                        <p class="text-xl font-bold text-gray-800 mt-4">
+                            {{ number_format($persentaseProses, 2) }}%</p>
                     </div>
                 </div>
             </div>
