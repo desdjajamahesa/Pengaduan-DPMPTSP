@@ -8,14 +8,21 @@ use Illuminate\Support\Facades\Redirect;
 use App\Mail\UserEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
-{
+{    
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
 
         if (Auth::attempt($credentials)) {
+            // Regenerate session untuk mencegah session fixation
+            $request->session()->regenerate();
+            
             $user = Auth::user();
 
             switch ($user->role) {
@@ -28,16 +35,20 @@ class AuthController extends Controller
             }
         }
 
-        return Redirect::back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
+        return Redirect::back()
+        ->withErrors(['email' => 'Email atau password yang Anda masukkan salah.',])
+        ->withInput($request->except('password'));
     }
 
     public function logout(Request $request)
     {
+        Session::flush();
+        
         Auth::logout();
+        
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        
         return Redirect::to('/');
     }
 

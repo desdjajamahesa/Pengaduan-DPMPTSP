@@ -2,31 +2,22 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PengaduanController;
-use App\Http\Controllers\PelaporanController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\SopController;
-use App\Http\Controllers\StatistikController;
-// -----------------------------
-// Auth Routes
-// -----------------------------
 
-// Halaman utama: Menampilkan halaman login sebagai default
-
-// Halaman login dan proses login
-Route::get('login', function () {
+// Halaman Awal Saat Website Diakses
+Route::get('/', function() {
     return view('login');
-})->name('login');
-Route::post('login', [AuthController::class, 'login'])->name('login.submit');
+});
 
-// Halaman register dan proses register
-Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-Route::post('register', [RegisterController::class, 'register']);
+Route::get('/home', function() {
+    return view('home');
+})->middleware(['auth', 'verified'])->name('home');
 
 // Halaman reset password
 Route::get('password/reset', function () {
     return view('auth.passwords.email');
 })->name('password.request')->middleware('auth');
+
+
 
 // -----------------------------
 // User Routes (Authenticated)
@@ -41,8 +32,6 @@ Route::get('/home', function () {
     return view('user.home');
 })->name('sop.index')->middleware('auth');
 
-Route::get('/home/sop', [SopController::class, 'show'])->name('sop.index')->middleware('auth');
-
 Route::get('/detail', function () {
     return view('user.detail');
 })->name('detail')->middleware('auth');
@@ -55,14 +44,7 @@ Route::patch('/home', [PengaduanController::class, 'create'])->name('pengaduan.f
 Route::put('/pengaduan/{id}', [PengaduanController::class, 'update'])->name('pengaduan.update')->middleware('auth');
 Route::patch('/home', [PengaduanController::class, 'create'])->name('pengaduan.index')->middleware('auth');
 
-
-// -----------------------------
-// Superadmin Routes
-// -----------------------------
-Route::get('/home', [StatistikController::class, 'index'])->name('home')->middleware('auth');
-
-// Route Pelaporan Admin dan Super Admin
-Route::get('/pelaporan', [PelaporanController::class, 'index'])->name('pelaporan');
-
+require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
+require __DIR__ . '/pengadu.php';
 require __DIR__ . '/superadmin.php';
