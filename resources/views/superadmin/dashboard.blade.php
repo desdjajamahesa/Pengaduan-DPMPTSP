@@ -135,7 +135,7 @@
                             <div
                                 class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow-lg sm:rounded-lg hover:shadow-2xl transition-shadow duration-300">
                                 <table class="min-w-full bg-white rounded-lg">
-                                    <thead class="bg-gradient-to-r from-indigo-300 to-indigo-400 text-white">
+                                    <thead class="bg-gradient-to-r from-indigo-300 to-cyan-400 text-white">
 
                                         <tr>
                                             <th

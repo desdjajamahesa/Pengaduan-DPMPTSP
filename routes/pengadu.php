@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\SopController;
 use App\Http\Controllers\User\PengaduanController;
 use App\Http\Controllers\User\StatistikController;
+use App\Http\Middleware\PengaduMiddleware;
 
 // Route Management Home Pada Pengadu
 Route::get('/home', function () {
@@ -13,7 +14,7 @@ Route::get('/home', function () {
 Route::get('/home', function () {
   return view('user.home');
 })->name('sop.index')->middleware('auth');
-
+Route::post('/home', [PengaduanController::class, 'home'])->name('pengaduan.home')->middleware('auth');
 // Route Management Statistik Pada Pengadu
 Route::get('/home', [StatistikController::class, 'index'])->name('home')->middleware('auth');
 

@@ -1,7 +1,8 @@
 <?php 
 
 namespace App\Http\Controllers\Admin;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PengaduanExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -30,4 +31,10 @@ class PelaporanController extends Controller
         ]);
         return redirect()->route('pelaporan.index')->with('success', 'Pelaporan berhasil disubmit!');
     }
+  
+
+public function downloadLaporan()
+{
+    return Excel::download(new PengaduanExport, 'laporan_pengaduan.xlsx');
+}
 }

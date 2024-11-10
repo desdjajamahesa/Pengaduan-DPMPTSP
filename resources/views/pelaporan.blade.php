@@ -21,7 +21,12 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 sm:p-8">
                     <h2 class="text-2xl font-bold text-gray-800 mb-6">Rekapitulasi Pengaduan</h2>
-
+                    <div class="mb-8 flex justify-end">
+                        <a href="{{ route('download.pengaduan') }}"
+                            class="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none">
+                            Download Laporan (Excel)
+                        </a>
+                    </div>
                     <!-- Search Bar -->
                     <div class="mb-8">
                         <!-- User Table -->
@@ -113,9 +118,11 @@
                                 </tbody>
 
                             </table>
+
                         </div>
                     </div>
                 </div>
+
 </body>
 
 </html>

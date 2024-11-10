@@ -51,7 +51,7 @@ class PengaduanController extends Controller
             'tanggal_pengaduan' => 'required|date',
             'lokasi_kejadian' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
-            'file_pendukung' => 'required|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048',
+            'file_pendukung' => 'nullable|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048',
             'file_balasan' => 'nullable|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048' // Mengubah menjadi nullable
         ]);
 

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Closure;
@@ -18,24 +17,21 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, $role)
     {
-        // Check if the user is logged in
         if (!Auth::check()) {
             return redirect('/login');
         }
 
-        // Check the user's role
         $user = Auth::user();
 
-        // Allow access if the user's role matches the required role
-        if ($role == 'admin' && !$user->is_superadmin) {
+        // Check if the user has the required role
+        if ($role == 'admin' && $user->role == 'admin') {
             return $next($request);
         }
 
-        if ($role == 'superadmin' && $user->is_superadmin) {
+        if ($role == 'superadmin' && $user->role == 'superadmin') {
             return $next($request);
         }
 
-        // Redirect the user if they don't have the required role
         return redirect('/')->with('error', 'You do not have access to this page.');
     }
 }

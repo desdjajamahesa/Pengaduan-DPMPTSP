@@ -10,27 +10,29 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script defer>
         function confirmSubmission(event) {
-            event.preventDefault(); // Prevent form from submitting
+            event.preventDefault(); // Mencegah form dikirim langsung
 
             const form = event.target;
 
-            // Collect form data
+            // Mengumpulkan data form
             const formData = new FormData(form);
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
+            const judulPengaduan = formData.get('judul_pengaduan') || "Tidak diisi";
+            const tanggalPengaduan = formData.get('tanggal_pengaduan') || "Tidak diisi";
+            const lokasiKejadian = formData.get('lokasi_kejadian') || "Tidak diisi";
+            const alamat = formData.get('alamat') || "Tidak diisi";
+            const isiPengaduan = formData.get('isi_pengaduan') || "Tidak diisi";
 
-            // Display confirmation message
-            if (confirm(
-                    `Apakah Anda yakin ingin mengirimkan pengaduan ini?\n\n` +
-                    `Judul Pengaduan: ${data.judul_pengaduan}\n` +
-                    `Tanggal Pengaduan: ${data.tanggal_pengaduan}\n` +
-                    `Lokasi Kejadian: ${data.lokasi_kejadian}\n` +
-                    `Alamat: ${data.alamat}\n` +
-                    `Isi Pengaduan: ${data.isi_pengaduan}`
-                )) {
-                form.submit(); // Submit the form if confirmed
+            // Menampilkan pesan konfirmasi
+            const confirmationMessage =
+                `Apakah Anda yakin ingin mengirimkan pengaduan ini?\n\n` +
+                `Judul Pengaduan: ${judulPengaduan}\n` +
+                `Tanggal Pengaduan: ${tanggalPengaduan}\n` +
+                `Lokasi Kejadian: ${lokasiKejadian}\n` +
+                `Alamat: ${alamat}\n` +
+                `Isi Pengaduan: ${isiPengaduan}`;
+
+            if (confirm(confirmationMessage)) {
+                form.submit(); // Mengirim form jika dikonfirmasi
             }
         }
     </script>
@@ -271,7 +273,7 @@
                             <label for="file_pendukung" class="block text-sm font-medium text-gray-700">Unggah
                                 File
                                 Pendukung</label>
-                            <input type="file" name="file_pendukung" id="file_pendukung" required
+                            <input type="file" name="file_pendukung" id="file_pendukung"
                                 accept=".pdf,.jpg,.jpeg,.png,.docx,.xlsx"
                                 class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
                         </div>
@@ -473,11 +475,11 @@
                     <a href="https://wa.me/{{ $contact->value }}"
                         class="flex items-center space-x-3 bg-green-100 text-green-600 p-3 rounded-lg hover:bg-green-200 transition duration-200">
                         <!-- WhatsApp Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24"
-                            fill="currentColor" stroke="none">
-                            <path fill-rule="evenodd"
-                                d="M12 1.5C6.216 1.5 1.5 6.216 1.5 12c0 2.071.574 4.016 1.565 5.652l-.822 3.077 3.146-.822A10.488 10.488 0 0012 22.5c5.784 0 10.5-4.716 10.5-10.5S17.784 1.5 12 1.5zm-2.36 7.2h.002c.29-.002.589.004.867.004.268 0 .487.04.694.38.174.293.667.936.746 1.012.077.074.146.136.177.174.09.109.184.227.285.285.136.078.355.225.418.322.14.215.67 1.047.756 1.247.088.199.07.332-.037.505-.109.174-.51.96-1.032 1.006-.143.015-.46-.005-.668-.074-.209-.067-.43-.211-.522-.261-.233-.133-.33-.296-.483-.423-.115-.095-.267-.21-.33-.285-.051-.061-.113-.12-.157-.18-.109-.131-.195-.156-.248-.21-.075-.078-.154-.17-.285-.28-.174-.148-.354-.307-.433-.417-.079-.111-.092-.135-.115-.185-.024-.05-.08-.104-.156-.222-.141-.209-.194-.31-.248-.417-.059-.118-.186-.335-.372-.456-.183-.117-.387-.199-.57-.25-.19-.053-.41-.08-.604-.08h-.055c-.245-.002-.466-.003-.653-.003-.091 0-.186-.003-.265-.003-.03 0-.093-.003-.197-.003z"
-                                clip-rule="evenodd" />
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                            </path>
                         </svg>
                         <span class="font-medium">WhatsApp</span>
                     </a>
@@ -496,10 +498,10 @@
                     <a href="https://www.instagram.com/{{ $contact->value }}"
                         class="flex items-center space-x-3 bg-purple-100 text-purple-600 p-3 rounded-lg hover:bg-purple-200 transition duration-200">
                         <!-- Meeting Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15.75 7.5H17.25A2.25 2.25 0 0119.5 9.75V12H16.5M7.5 16.5h9m0 0l-3-3m3 3l-3 3" />
+                                d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
                         </svg>
                         <span class="font-medium">Instagram</span>
                     </a>

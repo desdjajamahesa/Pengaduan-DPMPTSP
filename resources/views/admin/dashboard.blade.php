@@ -49,9 +49,9 @@
 <body class="bg-gray-100 font-sans">
 
     <!-- Sidebar -->
-    <x-admin.navadmin> </x-admin.navadmin>
+    <x-admin.navadmin class="fixed top-0 left-0 right-0 z-50"> </x-admin.navadmin>
     <!-- Main Content -->
-    <x-admin.headadmin> </x-admin.headadmin>
+    <x-admin.headadmin class="fixed top-0 left-0 right-0 z-50"> </x-admin.headadmin>
     <div class="flex-1 flex flex-col overflow-hidden">
 
         <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
@@ -134,7 +134,7 @@
                             <div
                                 class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow-lg sm:rounded-lg hover:shadow-2xl transition-shadow duration-300">
                                 <table class="min-w-full bg-white rounded-lg">
-                                    <thead class="bg-gradient-to-r from-indigo-300 to-indigo-400 text-white">
+                                    <thead class="bg-gradient-to-r from-indigo-300 to-cyan-400 text-white">
 
                                         <tr>
                                             <th

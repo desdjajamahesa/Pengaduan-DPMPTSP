@@ -1,11 +1,13 @@
 <div class="min-h-screen flex">
-    <aside class="w-64 bg-gray-800 text-white shadow-lg">
+
+    <aside class="w-64 bg-gray-800 text-white shadow-lg fixed lg:sticky top-0 lg:h-screen">
         <div
-            class="px-6 border-b border-gray-700 flex items-center justify-start bg-gradient-to-r from-slate-500 via-indigo-500 to-emerald-500 shadow-lg transform hover:scale-105 transition-transform duration-300">
+            class="px-6 border-b border-gray-700 flex items-center justify-start bg-gradient-to-r from-slate-500 via-indigo-500 to-cyan-500 shadow-lg transform hover:scale-105 transition-transform duration-300">
             <div class="grid grid-rows-1 sm:grid-rows-3 lg:grid-rows-3">
                 <span class="text-white font-semibold pt-6 text-xl tracking-wider">
                     Selamat Datang
                 </span>
+
                 <span class="text-white text-lg font-medium pt-6 capitalize">
                     Nama Admin
                 </span>

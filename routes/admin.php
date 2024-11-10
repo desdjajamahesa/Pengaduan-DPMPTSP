@@ -23,7 +23,7 @@ Route::get('/pengaduan', [PengaduanController::class, 'index'])->name('admin.pen
 Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store')->middleware('auth');
 Route::get('/pengaduan/{id}/tindak-lanjut', [PengaduanController::class, 'showTindakLanjut'])->name('admin.pengaduan.tindak-lanjut')->middleware('auth');
 Route::put('/pengaduan/{id}', [PengaduanController::class, 'update'])->name('admin.pengaduan.update')->middleware('auth');
-Route::post('/home', [PengaduanController::class, 'home'])->name('pengaduan.home')->middleware('auth');
+
 Route::patch('/pengaduan/{id}/batalkan', [PengaduanController::class, 'batalkan'])->name('pengaduan.batalkan')->middleware('auth');
 Route::get('/pengaduan/{id}/download', [PengaduanController::class, 'download'])->name('pengaduan.download')->middleware('auth');
 
@@ -42,6 +42,8 @@ Route::delete('/sop/{id}', [SopController::class, 'destroy'])->name('admin.sop.d
 
 
 // Route Management Kontak Pada Admin
-Route::get('/kontak', [ContactController::class, 'index'])->name('contacts.index')->middleware('auth');;
-Route::post('/kontak', [ContactController::class, 'update'])->name('contacts.update')->middleware('auth');;
-Route::get('/user.footer', [ContactController::class, 'index'])->name('contacts.index')->middleware('auth');;
+Route::get('/kontak', [ContactController::class, 'index'])->name('contacts.index')->middleware('auth');
+Route::post('/kontak', [ContactController::class, 'update'])->name('contacts.update')->middleware('auth');
+Route::get('/user.footer', [ContactController::class, 'index'])->name('contacts.index')->middleware('auth');
+
+Route::get('/download/pengaduan', [PengaduanController::class, 'downloadLaporan'])->name('download.pengaduan');
