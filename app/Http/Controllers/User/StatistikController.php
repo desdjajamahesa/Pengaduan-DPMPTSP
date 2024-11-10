@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use App\Models\Pengaduan;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class StatistikController extends Controller
 {
@@ -17,8 +18,4 @@ class StatistikController extends Controller
 
         return view('user.home', compact('totalPengaduan', 'pengaduanProses', 'persentaseProses'));
     }
-
-        // Passing data ke view
- 
-    
 }

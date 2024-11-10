@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\RedirectResponse;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,35 +17,58 @@ class RegisterController extends Controller
     // Tampilkan formulir pendaftaran
     public function showRegistrationForm()
     {
-        return view('register'); // Pastikan bahwa view 'auth.register' ada
+        return view('register');
     }
 
-    public function register(Request $request)
+    /**
+     *
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function register(Request $request): RedirectResponse
     {
         // Validasi data
-        $validator = Validator::make($request->all(), [
+        // $validator = Validator::make($request->all(), [
+        //     'name' => ['required', 'string', 'max:255'],
+        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
+        //     'telephone' => ['required', 'string', 'regex:/^[0-9]{10,13}$/'],
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator)->withInput();
+        // }
+
+        // // Buat pengguna baru
+        // $user = User::create([
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'password' => Hash::make($request->password),
+        //     'telephone' => $request->telephone,
+        // ]);
+
+        // // Login pengguna baru
+        // Auth::login($user);
+
+        // // Redirect ke halaman yang diinginkan
+        // return redirect()->intended('login');
+
+        $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'telephone' => ['required', 'string', 'regex:/^[0-9]{10,13}$/'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        // Buat pengguna baru
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'telephone' => $request->telephone,
         ]);
 
-        // Login pengguna baru
+        event(new Registered($user));
+
         Auth::login($user);
 
-        // Redirect ke halaman yang diinginkan
-        return redirect()->intended('login');
+        return redirect(route('login', absolute: false));
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PelaporanController;
 use App\Http\Controllers\Admin\PengaduanController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\UsersController;
@@ -25,6 +26,11 @@ Route::put('/pengaduan/{id}', [PengaduanController::class, 'update'])->name('adm
 Route::post('/home', [PengaduanController::class, 'home'])->name('pengaduan.home')->middleware('auth');
 Route::patch('/pengaduan/{id}/batalkan', [PengaduanController::class, 'batalkan'])->name('pengaduan.batalkan')->middleware('auth');
 Route::get('/pengaduan/{id}/download', [PengaduanController::class, 'download'])->name('pengaduan.download')->middleware('auth');
+
+// Route Management Pelaporan Pada Admin
+Route::get('/pelaporan', [PelaporanController::class, 'index'])->name('pelaporan');
+
+// Route Management Statistik Pengaduan Pada Admin
 
 
 // Route Management SOP Pada Admin
