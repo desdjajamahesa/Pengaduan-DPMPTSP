@@ -68,7 +68,7 @@
                 </svg>
                 Admin
             </a>
-            <a href="/profile"
+            <a href="/profile-super"
                 class="flex items-center font-semibold mt-56 py-3 px-8 rounded-md hover:bg-cyan-600 hover:text-white transition ease-in-out duration-200">
                 <img class="w-6 h-6 mr-5 rounded-full" src="path_to_profile_image.jpg" alt="Profile Image">
                 Profile

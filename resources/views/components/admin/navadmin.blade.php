@@ -67,7 +67,7 @@
                 </svg>
                 Kontak
             </a>
-            <a href="/login"
+            <a href="/profile"
                 class="flex items-center font-semibold mt-72 py-3 px-8 rounded-md hover:bg-cyan-600 hover:text-white transition ease-in-out duration-200">
                 <img class="w-6 h-6 mr-5 text-gray-200" src="" alt="Profile Image">
                 Profile

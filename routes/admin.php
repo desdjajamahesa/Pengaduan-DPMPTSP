@@ -4,12 +4,13 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PelaporanController;
 use App\Http\Controllers\Admin\PengaduanController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\SopController;
 use Illuminate\Support\Facades\Route;
 
 // Route Management Dashboard Pada Admin
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard')->middleware('auth')    ;
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard')->middleware('is_admin')    ;
 
 
 // Route Management Users Pada Admin
@@ -47,3 +48,7 @@ Route::post('/kontak', [ContactController::class, 'update'])->name('contacts.upd
 Route::get('/user.footer', [ContactController::class, 'index'])->name('contacts.index')->middleware('auth');
 
 Route::get('/download/pengaduan', [PengaduanController::class, 'downloadLaporan'])->name('download.pengaduan');
+
+
+Route::get('/profile', [AdminProfileController::class, 'index'])->name('admin.profile');
+Route::put('/profile/{id}', [AdminProfileController::class, 'update'])->name('admin.profile.update');

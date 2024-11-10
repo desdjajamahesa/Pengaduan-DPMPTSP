@@ -8,6 +8,7 @@ use App\Http\Controllers\SuperAdmin\ContactController;
 use App\Http\Controllers\SuperAdmin\PelaporanController;
 use App\Http\Controllers\SuperAdmin\DashboardController;
 use App\Http\Controllers\SuperAdmin\PengaduanController;
+use App\Http\Controllers\SuperAdmin\SuperAdminProfileController;
 use Illuminate\Support\Facades\Route;
 
 // Route Management Dashboard Super Admin
@@ -47,3 +48,7 @@ Route::delete('/sopsuper/{id}', [SopController::class, 'destroy'])->name('supera
 // Route Management Kontak Pada Super admin
 Route::get('/kontaksuper', [ContactController::class, 'index'])->name('contacts.index')->middleware('auth');
 Route::post('/kontaksuper', [ContactController::class, 'update'])->name('contacts.update')->middleware('auth');
+
+
+Route::get('/profile-super', [SuperAdminProfileController::class, 'index'])->name('superadmin.profile');
+Route::put('/profile-super/{id}', [SuperAdminProfileController::class, 'update'])->name('superadmin.profile.update');
