@@ -3,7 +3,7 @@
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsEndUser;
 use App\Http\Middleware\IsSuperAdmin;
-
+use App\Http\Middleware\PreventReLogin;
 ;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -20,7 +20,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'is_admin' => isAdmin::class,
             'is_Enduser' => isEndUser::class,
-            'is_superadmin' => isSuperAdmin::class
+            'is_superadmin' => isSuperAdmin::class,
+            'prevent.relogin' => \App\Http\Middleware\PreventReLogin::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
