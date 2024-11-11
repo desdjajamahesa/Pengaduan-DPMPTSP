@@ -1,17 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\PengaduMiddleware;
 use App\Http\Controllers\User\SopController;
 use App\Http\Controllers\User\PengaduanController;
 use App\Http\Controllers\User\StatistikController;
-use App\Http\Middleware\PengaduMiddleware;
+use App\Http\Controllers\User\PengaduProfileController;
 
 // Route Management Home Pada Pengadu
-Route::get('/home', function () {
+Route::get('/home/{id}', function () {
   return view('user.home');
 })->name('home')->middleware('auth');
 
-Route::get('/home', function () {
+Route::get('/home/{id}', function () {
   return view('user.home');
 })->name('sop.index')->middleware('auth');
 Route::post('/home', [PengaduanController::class, 'home'])->name('pengaduan.home')->middleware('auth');
@@ -30,3 +31,6 @@ Route::patch('/home', [PengaduanController::class, 'create'])->name('pengaduan.i
 Route::get('/detail', function () {
   return view('user.detail');
 })->name('detail')->middleware('auth');
+
+Route::get('/profile-pengadu', [PengaduProfileController::class, 'index'])->name('user.profile');
+Route::put('/profile-pengadu/{id}', [PengaduProfileController::class, 'update'])->name('user.profile.update');

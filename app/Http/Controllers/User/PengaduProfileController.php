@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -8,23 +8,23 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class AdminProfileController extends Controller
+class PengaduProfileController extends Controller
 {
     // Tampilkan profile admin yang sedang login
     public function index(Request $request)
     {
         // Mendapatkan ID admin yang sedang login
-        $admin = User::where('role', 'admin')
+        $user = User::where('role', 'end_user')
             ->where('id', Auth::id())
             ->firstOrFail();
 
-        return view('admin.profile', compact('admin'));
+        return view('User.profile', compact('user'));
     }
 
     // Perbarui profil admin yang ditentukan dengan data baru
     public function update(Request $request, $id)
     {
-        $admin = User::findOrFail($id);
+        $user = User::findOrFail($id);
 
         // Validasi data request
         $request->validate([
@@ -35,14 +35,14 @@ class AdminProfileController extends Controller
         ]);
 
         // Update profil admin
-        $admin->update([
+        $user->update([
             'name' => $request->name,
             'email' => $request->email,
             'telephone' => $request->telephone,
-            'password' => $request->password ? Hash::make($request->password) : $admin->password,
+            'password' => $request->password ? Hash::make($request->password) : $user->password,
         ]);
 
         // Redirect dengan pesan sukses
-        return redirect()->route('admin.profile')->with('success', 'Admin berhasil diperbarui.');
+        return redirect()->route('user.profile')->with('success', 'Pengadu berhasil diperbarui.');
     }
 }

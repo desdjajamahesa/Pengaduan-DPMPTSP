@@ -3,10 +3,13 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SuperAdmin Profile</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite('resources/css/app.css')
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     @vite('resources/css/app.css')
     <style>
@@ -16,20 +19,17 @@
     </style>
 </head>
 
-<body class="bg-gray-50">
+<body class="">
     <!-- Sidebar -->
-    <x-superadmin.navsuper></x-superadmin.navsuper>
 
-    <!-- Main Content -->
-    <x-superadmin.headsuper></x-superadmin.headsuper>
-
-
-    <div class="container mx-auto py-8 px-4 sm:px-8 lg:px-8">
+    <x-user.navbar></x-user.navbar>
+    <div class="container mx-auto py-8 px-4
+    sm:px-8 lg:px-8">
         <!-- Header Section -->
         <div class="mb-8">
             <div class="flex flex-col sm:flex-row items-center justify-between">
                 <div class="mb-4 sm:mb-0">
-                    <h1 class="text-3xl font-bold text-gray-900">SuperAdmin Dashboard</h1>
+                    <h1 class="text-3xl font-bold text-gray-900">Pengadu Profile</h1>
                     <p class="mt-1 text-sm text-gray-600">Manage your profile</p>
                 </div>
             </div>
@@ -58,6 +58,8 @@
         <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
             <div class="p-6">
                 <div class="flex flex-col md:flex-row gap-6">
+                    <!-- Back Button -->
+
                     <!-- Profile Image Section -->
                     <div class="flex flex-col items-center md:w-1/3 mt-12">
                         <div class="relative group">
@@ -67,24 +69,23 @@
                                     d="M12 14c4 0 6-4 6-6s-2-6-6-6-6 4-6 6 2 6 6 6zm0 0c-2 0-3.5.5-4.5 1.5C6.5 16.5 6 18 6 18h12s-.5-1.5-1.5-2.5C15.5 14.5 14 14 12 14z" />
                             </svg>
                         </div>
-                        <h2 class="mt-4 text-xl font-semibold text-gray-900">{{ $superadmin->name }}</h2>
+                        <h2 class="mt-4 text-xl font-semibold text-gray-900">{{ $user->name }}</h2>
                         <span
                             class="inline-flex items-center px-3 py-1 mt-2 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-                            {{ ucfirst($superadmin->role) }}
+                            {{ ucfirst($user->role) }}
                         </span>
                     </div>
 
 
                     <!-- Profile Form Section -->
                     <div class="md:w-2/3">
-                        <form action="{{ route('superadmin.profile.update', $superadmin->id) }}" method="POST"
-                            class="space-y-4">
+                        <form action="{{ route('user.profile.update', $user->id) }}" method="POST" class="space-y-4">
                             @csrf
                             @method('PUT')
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                                <input type="text" name="name" value="{{ old('name', $superadmin->name) }}"
+                                <input type="text" name="name" value="{{ old('name', $user->name) }}"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('name') border-red-500 @enderror">
                                 @error('name')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -94,7 +95,7 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                                    <input type="email" name="email" value="{{ old('email', $superadmin->email) }}"
+                                    <input type="email" name="email" value="{{ old('email', $user->email) }}"
                                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('email') border-red-500 @enderror">
                                     @error('email')
                                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -104,7 +105,7 @@
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-1">Phone No</label>
                                     <input type="text" name="telephone"
-                                        value="{{ old('telephone', $superadmin->telephone) }}"
+                                        value="{{ old('telephone', $user->telephone) }}"
                                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('telephone') border-red-500 @enderror">
                                     @error('telephone')
                                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>

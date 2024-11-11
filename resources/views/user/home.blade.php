@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
@@ -43,6 +44,7 @@
 
     <x-user.navbar></x-user.navbar>
     <div class="" style="background-image: url('/storage/wave.svg'); background-size: cover; ">
+
         <!-- Page Title -->
         <section id="stat" class="text-center py-16 mb-32 relative overflow-hidden">
             <!-- Overlay -->

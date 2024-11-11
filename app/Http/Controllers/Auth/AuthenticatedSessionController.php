@@ -18,11 +18,15 @@ class AuthenticatedSessionController extends Controller
 
     public function store(LoginRequest $request): RedirectResponse
     {
+        dd([
+            'Logged in user ID' => Auth::id(),
+            'User data' => Auth::user()
+        ]);
         $request->authenticate();
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('home', absolute: false));
+        return redirect()->intended(route('home', ['id' => Auth::id()], false));
     }
 
     public function destroy(Request $request): RedirectResponse

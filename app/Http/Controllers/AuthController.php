@@ -14,6 +14,7 @@ class AuthController extends Controller
 {    
     public function login(Request $request)
     {
+        
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required'
@@ -32,6 +33,7 @@ class AuthController extends Controller
                     return Redirect::intended('dashboard');
                 default:
                     return Redirect::intended('home');
+
             }
         }
 

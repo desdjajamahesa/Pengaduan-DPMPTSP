@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\SuperAdmin;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class SuperAdminProfileController extends Controller
@@ -12,16 +13,11 @@ class SuperAdminProfileController extends Controller
     // Tampilkan daftar profile superadmin dengan fitur pencarian
     public function index(Request $request)
     {
-        $search = $request->input('search');
-
-        // Mendapatkan semua pengguna dengan role 'superadmin' dan filter berdasarkan nama jika ada kata pencarian
-        $superadmins = User::where('role', 'super_admin')
-            ->when($search, function ($query, $search) {
-                return $query->where('name', 'LIKE', "%{$search}%");
-            })
-            ->get();
-
-        return view('superadmin.profile', compact('superadmins'));
+        $superadmin = User::where('role', 'super_admin')
+            ->where('id', Auth::id())
+            ->firstOrFail();  // Menggunakan `firstOrFail()` untuk mendapatkan satu entri
+    
+        return view('superadmin.profile', compact('superadmin'));  // Kirim data tunggal
     }
 
     // Perbarui profil superadmin yang ditentukan dengan data baru

@@ -26,11 +26,8 @@
             <div class="flex flex-col sm:flex-row items-center justify-between">
                 <div class="mb-4 sm:mb-0">
                     <h1 class="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-                    <p class="mt-1 text-sm text-gray-600">Manage your profile and view other admins</p>
+                    <p class="mt-1 text-sm text-gray-600">Manage your profile</p>
                 </div>
-
-                <!-- Search Bar -->
-
             </div>
         </div>
 
@@ -53,141 +50,93 @@
             </div>
         @endif
 
-        <!-- Admin Cards Grid -->
-        <div class="">
-            @foreach ($admins as $admin)
-                <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <div class="p-6">
-                        <div class="flex flex-col md:flex-row gap-6">
-                            <!-- Profile Image Section -->
-                            <div class="flex flex-col items-center md:w-1/3">
-                                <div class="relative group">
-                                    <img src="{{ $admin->profile_image_url ?? 'https://via.placeholder.com/150' }}"
-                                        alt="Profile Image"
-                                        class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-lg">
-                                    <div
-                                        class="absolute inset-0 rounded-full bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
-                                        <span class="text-white text-sm">Change Photo</span>
-                                    </div>
-                                </div>
-                                <h2 class="mt-4 text-xl font-semibold text-gray-900">{{ $admin->name }}</h2>
-                                <span
-                                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 mt-2">
-                                    {{ ucfirst($admin->role) }}
-                                </span>
-                            </div>
-
-                            <!-- Profile Form Section -->
-                            <div class="md:w-2/3">
-                                <form action="{{ route('admin.profile.update', $admin->id) }}" method="POST"
-                                    class="space-y-4">
-                                    @csrf
-                                    @method('PUT')
-
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                                        <input type="text" name="name" value="{{ old('name', $admin->name) }}"
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('name') border-red-500 @enderror">
-                                        @error('name')
-                                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-
-                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                                            <input type="email" name="email"
-                                                value="{{ old('email', $admin->email) }}"
-                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('email') border-red-500 @enderror">
-                                            @error('email')
-                                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-
-                                        <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-1">Phone No</label>
-                                            <input type="text" name="telephone"
-                                                value="{{ old('telephone', $admin->telephone) }}"
-                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('telephone') border-red-500 @enderror">
-                                            @error('telephone')
-                                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-1">New
-                                                Password</label>
-                                            <input type="password" name="password"
-                                                placeholder="Leave blank to keep current"
-                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('password') border-red-500 @enderror">
-                                            @error('password')
-                                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-
-                                        <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-1">Confirm
-                                                Password</label>
-                                            <input type="password" name="password_confirmation"
-                                                placeholder="Confirm new password"
-                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">
-                                        </div>
-                                    </div>
-
-                                    <div class="flex justify-end pt-4">
-                                        <button type="submit"
-                                            class="inline-flex items-center px-6 py-2.5 border border-transparent rounded-lg text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
-                                            <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
-                                            </svg>
-                                            Save Changes
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
+        <!-- Admin Profile Section -->
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+            <div class="p-6">
+                <div class="flex flex-col md:flex-row gap-6">
+                    <!-- Profile Image Section -->
+                    <div class="flex flex-col items-center md:w-1/3 mt-12">
+                        <div class="relative group">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" class="w-16 h-16 text-gray-600">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 14c4 0 6-4 6-6s-2-6-6-6-6 4-6 6 2 6 6 6zm0 0c-2 0-3.5.5-4.5 1.5C6.5 16.5 6 18 6 18h12s-.5-1.5-1.5-2.5C15.5 14.5 14 14 12 14z" />
+                            </svg>
                         </div>
+                        <h2 class="mt-4 text-xl font-semibold text-gray-900">{{ $admin->name }}</h2>
+                        <span
+                            class="inline-flex items-center px-3 py-1 mt-2 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                            {{ ucfirst($admin->role) }}
+                        </span>
                     </div>
 
-                    <!-- Admin Stats -->
-                    <div class="border-t border-gray-200 bg-gray-50 px-6 py-4 rounded-b-xl">
-                        <div class="grid grid-cols-2 gap-4 text-center">
+
+                    <!-- Profile Form Section -->
+                    <div class="md:w-2/3">
+                        <form action="{{ route('admin.profile.update', $admin->id) }}" method="POST" class="space-y-4">
+                            @csrf
+                            @method('PUT')
 
                             <div>
-                                <p class="text-sm font-medium text-gray-500">Created</p>
-                                <p class="mt-1 text-xl font-semibold text-gray-900">
-                                    {{ $admin->created_at->format('M d, Y') }}
-                                </p>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                                <input type="text" name="name" value="{{ old('name', $admin->name) }}"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('name') border-red-500 @enderror">
+                                @error('name')
+                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
                             </div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-500">Status</p>
-                                <span
-                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 mt-2">
-                                    Active
-                                </span>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                    <input type="email" name="email" value="{{ old('email', $admin->email) }}"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('email') border-red-500 @enderror">
+                                    @error('email')
+                                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Phone No</label>
+                                    <input type="text" name="telephone"
+                                        value="{{ old('telephone', $admin->telephone) }}"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('telephone') border-red-500 @enderror">
+                                    @error('telephone')
+                                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+                                    <input type="password" name="password" placeholder="Leave blank to keep current"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('password') border-red-500 @enderror">
+                                    @error('password')
+                                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+                                    <input type="password" name="password_confirmation"
+                                        placeholder="Confirm new password"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">
+                                </div>
+                            </div>
+
+                            <div class="flex justify-end pt-4">
+                                <button type="submit"
+                                    class="inline-flex items-center px-6 py-2.5 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                    Update Profile
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            @endforeach
+            </div>
         </div>
     </div>
-
-    <!-- Optional: Add some JavaScript for interactivity -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const successMessage = document.querySelector('[role="alert"]');
-            if (successMessage) {
-                successMessage.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    </script>
 </body>
 
 </html>
