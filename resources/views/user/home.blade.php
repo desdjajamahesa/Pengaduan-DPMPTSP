@@ -9,6 +9,14 @@
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-image: url('bg-textured.png');
+
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
     <script defer>
         function confirmSubmission(event) {
             event.preventDefault(); // Mencegah form dikirim langsung
@@ -43,7 +51,7 @@
 <body class="" style="background-color: rgb(255, 255, 255);">
 
     <x-user.navbar></x-user.navbar>
-    <div class="" style="background-image: url('/storage/wave.svg'); background-size: cover; ">
+    <div class="" style="background-image: url('wave5.svg'); background-repeat: no-repeat; background-size: 130%;">
 
         <!-- Page Title -->
         <section id="stat" class="text-center py-16 mb-32 relative overflow-hidden">

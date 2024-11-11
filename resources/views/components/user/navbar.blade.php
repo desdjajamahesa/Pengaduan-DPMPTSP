@@ -1,4 +1,4 @@
-<nav x-data="{ isOpen: false }" class="bg-blue-700 shadow-lg sticky top-0 z-50">
+<nav x-data="{ isOpen: false }" class="bg-blue-400 shadow-lg sticky top-0 z-50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-20 items-center justify-between">
             <div class="flex items-center flex-grow">
