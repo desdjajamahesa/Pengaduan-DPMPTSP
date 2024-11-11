@@ -5,6 +5,7 @@ use App\Http\Middleware\IsEndUser;
 use App\Http\Middleware\IsSuperAdmin;
 use App\Http\Middleware\RoleMiddleware;
 
+use App\Http\Middleware\PreventReLogin;
 ;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -23,6 +24,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'is_Enduser' => isEndUser::class,
             'is_superadmin' => isSuperAdmin::class,
             'role' => RoleMiddleware::class
+
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
