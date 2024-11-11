@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
-{    
+{
     public function login(Request $request)
     {
         
@@ -43,15 +43,13 @@ class AuthController extends Controller
     }
 
     public function logout(Request $request)
-    {
-        Session::flush();
-        
+    {        
         Auth::logout();
         
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         
-        return Redirect::to('/');
+        return Redirect::to('/login')->with('status', 'Anda telah berhasil logout.');
     }
 
     public function sendEmail()

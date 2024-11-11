@@ -15,23 +15,17 @@ class RoleMiddleware
      * @param  string  $role
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, $role)
+    public function handle(Request $request, Closure $next, ...$roles)
     {
         if (!Auth::check()) {
-            return redirect('/login');
+            return redirect()->route('login');
         }
 
         $user = Auth::user();
 
-        // Check if the user has the required role
-        if ($role == 'admin' && $user->role == 'admin') {
+        if(in_array($user->role, $roles)) {
             return $next($request);
         }
-
-        if ($role == 'superadmin' && $user->role == 'superadmin') {
-            return $next($request);
-        }
-
-        return redirect('/')->with('error', 'You do not have access to this page.');
+        return redirect()->route('home')->with('error', 'Anda tidak memiliki akses ke halaman tersebut');
     }
 }

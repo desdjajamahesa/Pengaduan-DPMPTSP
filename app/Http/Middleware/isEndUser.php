@@ -16,7 +16,7 @@ class IsEndUser
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role === 'end_user') {
+        if (Auth::check() && Auth::user()->role === 'pengadu') {
             return $next($request);
         }
 
