@@ -7,17 +7,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Pelaporan;
 use App\Models\Pengaduan;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PengaduanExport;
 class PelaporanController extends Controller
 {
-    public function showUser()
+    public function index()
     {
-      $endUserOnly = User::where('role', 'end_user')->count();
-      $filter = User::where('role', 'end_user');
-      $users = $filter->paginate(10);
-  
-      return view('admin.user', compact('endUserOnly', 'users'));
+        $pengaduans = Pengaduan::all();
+        return view('pelaporan', compact('pengaduans'));
     }
+    
     public function store(Request $request)
     {
         $request->validate([
@@ -32,5 +31,9 @@ class PelaporanController extends Controller
         ]);
         return redirect()->route('pelaporan.index')->with('success', 'Pelaporan berhasil disubmit!');
     }
+    public function exportPengaduan()
+{
+    return Excel::download(new PengaduanExport, 'pengaduan.xlsx');
+}
     
 }

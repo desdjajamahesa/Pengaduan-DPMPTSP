@@ -32,7 +32,7 @@ Route::get('/pengaduan/{id}/download', [PengaduanController::class, 'download'])
 Route::get('/pelaporan', [PelaporanController::class, 'index'])->name('pelaporan');
 
 // Route Management Statistik Pengaduan Pada Admin
-
+Route::get('/export/pengaduan', [PelaporanController::class, 'exportPengaduan'])->name('export.pengaduan');
 
 // Route Management SOP Pada Admin
 Route::get('/sop', [SopController::class, 'index'])->name('admin.sop.index')->middleware('is_admin');
