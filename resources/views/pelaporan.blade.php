@@ -21,10 +21,10 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 sm:p-8">
                     <h2 class="text-2xl font-bold text-gray-800 mb-6">Rekapitulasi Pengaduan</h2>
-                    <div class="mb-8 flex justify-end">
-                        <a href="{{ route('download.pengaduan') }}"
-                            class="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none">
-                            Download Laporan (Excel)
+                    <div class="flex justify-end mb-4">
+                        <a href="{{ route('export.pengaduan') }}"
+                            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-200">
+                            Download Pelaporan
                         </a>
                     </div>
                     <!-- Search Bar -->
