@@ -1,11 +1,19 @@
-<div class="min-h-screen flex">
-    <aside class="w-64 bg-gray-800 text-white shadow-lg fixed lg:sticky top-0 lg:h-screen">
+<div class="min-h-screen flex flex-col lg:flex-row">
+    <!-- Button untuk toggle sidebar -->
+    <button id="menu-toggle" class="lg:hidden p-4 bg-gray-800 text-white">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+    </button>
+
+    <aside id="sidebar"
+        class="w-64 bg-gray-800 text-white shadow-lg fixed lg:sticky top-0 lg:h-screen lg:block hidden transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
         <div
             class="px-6 border-b border-gray-700 flex flex-col items-start justify-start bg-gradient-to-r from-slate-500 via-indigo-500 to-cyan-500 shadow-lg transform hover:scale-105 transition-transform duration-300">
             <div class="text-white font-semibold pt-6 text-xl tracking-wider">
                 Selamat Datang
             </div>
-            <?php 
+            <?php
             $super = Auth::user();
             ?>
             <div class="text-white text-lg font-medium pt-6 capitalize">
@@ -53,6 +61,7 @@
                 </svg>
                 SOP
             </a>
+
             <a href="/kontaksuper"
                 class="flex items-center font-semibold mt-2 py-3 px-8 rounded-md hover:bg-cyan-600 hover:text-white transition ease-in-out duration-200">
                 <svg class="w-6 h-6 mr-5 text-gray-200" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
@@ -91,3 +100,9 @@
             </form>
         </nav>
     </aside>
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('-translate-x-full');
+        });
+    </script>
