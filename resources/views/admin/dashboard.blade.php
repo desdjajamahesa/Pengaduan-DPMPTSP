@@ -156,12 +156,13 @@
                                             <tr class="bg-white hover:bg-indigo-50 transition-all duration-200">
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                     <div class="text-sm font-medium text-gray-900">
-                                                        {{ $pengaduan->user->name }}
+                                                        {{ $pengaduan->user?->name ?? 'User tidak ditemukan' }}
+
                                                     </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                     <div class="text-sm text-gray-500">
-                                                        {{ $pengaduan->user->email }}
+                                                        {{ $pengaduan->user?->email ?? 'Email tidak tersedia' }}
                                                     </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">

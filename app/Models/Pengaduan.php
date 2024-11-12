@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,7 +10,6 @@ class Pengaduan extends Model
 
     protected $table = 'pengaduan';
 
-    // Kolom yang boleh diisi mass-assignment
     protected $fillable = [
         'user_id',
         'judul_pengaduan',
@@ -19,18 +17,27 @@ class Pengaduan extends Model
         'lokasi_kejadian',
         'alamat',
         'isi_pengaduan',
-        'status',  // Tambahkan status di sini
+        'status',
         'file_pendukung',
         'file_balasan',
         'tindaklanjut',
+        'pelaporan_id', // Kolom foreign key yang menghubungkan ke tabel pelaporan
     ];
 
     protected $casts = [
         'tanggal_pengaduan' => 'datetime',
     ];
-    // Relasi ke tabel users (relasi many-to-one)
+
+    // Relasi ke tabel users (many-to-one)
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    // Relasi ke tabel pelaporan (one-to-one)
+    public function pelaporan()
+    {
+        return $this->belongsTo(Pelaporan::class, 'pelaporan_id');
+    }
 }
+
