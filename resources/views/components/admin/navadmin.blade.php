@@ -8,8 +8,12 @@
                     Selamat Datang
                 </span>
 
+                <?php 
+                $admin = Auth::user();
+                ?>
+
                 <span class="text-white text-lg font-medium pt-6 capitalize">
-                    Nama Admin
+                    {{ $admin->name }}
                 </span>
                 <span class="text-base font-medium text-gray-300">
                     Admin
