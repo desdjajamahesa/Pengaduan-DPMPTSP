@@ -11,11 +11,14 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PengaduanExport;
 class PelaporanController extends Controller
 {
+ 
+
     public function index()
     {
-        $pengaduans = Pengaduan::all();
-        return view('pelaporan', compact('pengaduans'));
+        $pelaporans = Pelaporan::with(['user', 'pengaduan'])->get(); // Ambil data Pelaporan dengan User dan Pengaduan
+        return view('admin.sop', compact('pelaporans'));
     }
+    
     
     public function store(Request $request)
     {
