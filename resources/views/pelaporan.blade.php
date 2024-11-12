@@ -99,7 +99,7 @@
                                                     {{ $pengaduan->tindaklanjut ?? 'Belum Ditindaklanjuti' }}</td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {{ $pengaduan->admin->name ?? 'N/A' }}
+                                                    {{ $pengaduan->admin ?? 'N/A' }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                                     {{ $pengaduan->status }}</td>

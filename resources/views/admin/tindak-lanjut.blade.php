@@ -167,7 +167,12 @@
                         <textarea id="tindaklanjut" name="tindaklanjut" rows="4"
                             class="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">{{ old('tindaklanjut', $pengaduan->tindaklanjut ?? '') }}</textarea>
                     </div>
-
+                    <div class="mb-4">
+                        <label for="admin" class="block text-sm font-medium text-gray-700">Petugas Yang
+                            Melayani</label>
+                        <textarea id="admin" name="admin" rows="4"
+                            class="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">{{ old('admin', $pengaduan->admin ?? '') }}</textarea>
+                    </div>
                     <div class="mb-6">
                         <label for="file_balasan" class="block text-sm font-medium text-gray-700">
                             Upload File Balasan

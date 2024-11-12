@@ -131,7 +131,7 @@ class PengaduanController extends Controller
     public function showTindakLanjut($id)
     {
         $pengaduan = Pengaduan::findOrFail($id); // Ambil pengaduan berdasarkan id pengaduan
-        return view('admin.tindak-lanjut', compact('pengaduan'));
+        return view('superadmin.tindak-lanjut', compact('pengaduan'));
     }
 
     public function update(Request $request, $id)
@@ -142,7 +142,8 @@ class PengaduanController extends Controller
           'status' => 'required|in:belum_proses,proses,selesai,dilanjutkan',
           'tindaklanjut' => 'required|string|max:500',
           'file_balasan' => 'nullable|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048',
-          'kesesuaian_sop' => 'required|in:sesuai dengan sop,melebihi sop,lebih cepat dari sop' // Tambahkan validasi kesesuaian_sop
+          'kesesuaian_sop' => 'required|in:sesuai dengan sop,melebihi sop,lebih cepat dari sop',
+          'admin' => 'required|string|max:100' // Tambahkan validasi kesesuaian_sop
       ]);
 
       $fileBalasanPathForDB = $pengaduan->file_balasan;
@@ -164,10 +165,11 @@ class PengaduanController extends Controller
           'status' => $validated['status'],
           'tindaklanjut' => $validated['tindaklanjut'],
           'file_balasan' => $fileBalasanPathForDB,
-          'kesesuaian_sop' => $validated['kesesuaian_sop'] // Update kesesuaian_sop
+          'kesesuaian_sop' => $validated['kesesuaian_sop'],
+          'admin' => 'required|string|max:100' // Update kesesuaian_sop
       ]);
 
-      return redirect()->route('admin.pengaduan')->with('success', 'Pengaduan berhasil ditindak lanjuti!');
+      return redirect()->route('superadmin.pengaduan')->with('success', 'Pengaduan berhasil ditindak lanjuti!');
   }
 
 

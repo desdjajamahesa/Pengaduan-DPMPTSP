@@ -42,7 +42,8 @@ class PengaduanController extends Controller
           'alamat' => 'required|string|max:255',
           'file_pendukung' => 'required|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048',
           'file_balasan' => 'nullable|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048',
-          'kesesuaian_sop' => 'required|in:sesuai dengan sop,melebihi sop,lebih cepat dari sop' // Tambahkan validasi kesesuaian_sop
+          'kesesuaian_sop' => 'required|in:sesuai dengan sop,melebihi sop,lebih cepat dari sop',
+          'admin' => 'required|string|max:100' // Tambahkan validasi kesesuaian_sop
       ]);
 
       try {
@@ -73,7 +74,8 @@ class PengaduanController extends Controller
               'file_pendukung' => $filePathPendukungForDB ?? null,
               'file_balasan' => $filePathBalasanForDB ?? null,
               'status' => 'belum_proses',
-              'kesesuaian_sop' => $validated['kesesuaian_sop'] // Simpan kesesuaian_sop
+              'kesesuaian_sop' => $validated['kesesuaian_sop'],
+              'admin' => $validated['admin'] // Simpan kesesuaian_sop
           ]);
 
           return redirect()->route('pengaduan.index')
@@ -129,7 +131,8 @@ class PengaduanController extends Controller
           'status' => 'required|in:belum_proses,proses,selesai,dilanjutkan',
           'tindaklanjut' => 'required|string|max:500',
           'file_balasan' => 'nullable|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048',
-          'kesesuaian_sop' => 'required|in:sesuai dengan sop,melebihi sop,lebih cepat dari sop' // Tambahkan validasi kesesuaian_sop
+          'kesesuaian_sop' => 'required|in:sesuai dengan sop,melebihi sop,lebih cepat dari sop',
+          'admin' => 'required|string|max:100' // Tambahkan validasi kesesuaian_sop
       ]);
 
       $fileBalasanPathForDB = $pengaduan->file_balasan;
@@ -151,7 +154,8 @@ class PengaduanController extends Controller
           'status' => $validated['status'],
           'tindaklanjut' => $validated['tindaklanjut'],
           'file_balasan' => $fileBalasanPathForDB,
-          'kesesuaian_sop' => $validated['kesesuaian_sop'] // Update kesesuaian_sop
+          'kesesuaian_sop' => $validated['kesesuaian_sop'],
+          'admin' => $validated['admin'] // Update kesesuaian_sop
       ]);
 
       return redirect()->route('admin.pengaduan')->with('success', 'Pengaduan berhasil ditindak lanjuti!');
