@@ -1,4 +1,5 @@
 <?php
+// app/Exports/PengaduanExport.php
 namespace App\Exports;
 
 use App\Models\Pengaduan;
@@ -7,51 +8,42 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class PengaduanExport implements FromCollection, WithHeadings
 {
-    /**
-     * Mengambil data yang akan diekspor.
-     *
-     * @return \Illuminate\Support\Collection
-     */
     public function collection()
     {
-        return Pengaduan::select(
-            'id',
-            'user_id',
-            'judul_pengaduan',
-            'tanggal_pengaduan',
-            'lokasi_kejadian',
-            'alamat',
-            'isi_pengaduan',
-            'status',
-            'tindaklanjut',
-            'pelaporan_id',
-            'jenis',
-            'platform',
-            'kesesuaian_sop'
-        )->get();
+        // Mengambil data pengaduan beserta relasi user (pelapor) dan admin (petugas pelayanan)
+        return Pengaduan::with('user')->get()->map(function ($pengaduan) {
+            return [
+                'ID' => $pengaduan->id,
+                'Jenis' => $pengaduan->jenis,
+                'Platform' => $pengaduan->platform,
+                'Email Pelapor' => $pengaduan->user->email ?? 'N/A',
+                'Nama Pelapor' => $pengaduan->user->name ?? 'N/A',
+                'NIB/No Resi/Permohonan' => $pengaduan->id,
+                'Waktu Pengaduan' => $pengaduan->tanggal_pengaduan->format('d-m-Y H:i'),
+                'Isi Pengaduan' => $pengaduan->isi_pengaduan,
+                'Tindak Lanjut' => $pengaduan->tindaklanjut ?? 'Belum Ditindaklanjuti',
+                'Petugas Pelayanan' => $pengaduan->admin->name ?? 'N/A',
+                'Status' => $pengaduan->status,
+                'Kesesuaian SOP' => $pengaduan->kesesuaian_sop ?? 'Belum Diperiksa',
+            ];
+        });
     }
 
-    /**
-     * Menentukan header untuk file Excel.
-     *
-     * @return array
-     */
     public function headings(): array
     {
         return [
             'ID',
-            'User ID',
-            'Judul Pengaduan',
-            'Tanggal Pengaduan',
-            'Lokasi Kejadian',
-            'Alamat',
-            'Isi Pengaduan',
-            'Status',
-            'Tindak Lanjut',
-            'Pelaporan ID',
             'Jenis',
             'Platform',
-            'Kesesuaian SOP'
+            'Email Pelapor',
+            'Nama Pelapor',
+            'NIB/No Resi/Permohonan',
+            'Waktu Pengaduan',
+            'Isi Pengaduan',
+            'Tindak Lanjut',
+            'Petugas Pelayanan',
+            'Status',
+            'Kesesuaian SOP',
         ];
     }
 }
