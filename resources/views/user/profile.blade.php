@@ -66,7 +66,6 @@
         <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
             <div class="p-6">
                 <div class="flex flex-col md:flex-row gap-6">
-                    <!-- Back Button -->
 
                     <!-- Profile Image Section -->
                     <div class="flex flex-col items-center md:w-1/3 mt-12">

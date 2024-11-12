@@ -102,6 +102,24 @@ class PengaduanController extends Controller
         }
     }
 
+    public function batalkan($id)
+  {
+    // Temukan pengaduan berdasarkan ID
+    $pengaduan = Pengaduan::findOrFail($id);
+
+    // Pastikan hanya pengaduan yang belum selesai yang dapat dibatalkan
+    if ($pengaduan->status == 'selesai') {
+      return redirect()->back()->with('error', 'Pengaduan yang sudah selesai tidak dapat dibatalkan.');
+    }
+
+    // Update status pengaduan menjadi "dibatalkan"
+    $pengaduan->update([
+      'status' => 'dibatalkan',
+    ]);
+
+    return redirect()->back()->with('success', 'Pengaduan berhasil dibatalkan.');
+  }
+
     // Add new download method
     public function download($id)
     {

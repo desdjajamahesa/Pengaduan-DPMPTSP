@@ -54,6 +54,38 @@
     <x-user.navbar></x-user.navbar>
     <div class="" style="background-image: url('wave5.svg'); background-repeat: no-repeat; background-size: 130%;">
 
+        <!-- Hero Section Fullscreen dengan Transparansi -->
+        <section id="hero" class="relative bg-gray-900 text-white min-h-screen flex items-center justify-center"
+            style="background-image: url('logo-full.jpg'); background-size: contain; background-position: center;">
+            <!-- Overlay -->
+            <div class="absolute inset-0 bg-black opacity-60"></div>
+
+            <!-- Hero Content -->
+            <div class="container mx-auto relative z-10 text-center px-4">
+                <!-- Card Transparan -->
+                <div class="bg-white bg-opacity-20 backdrop-blur-md rounded-lg p-10 inline-block">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                        Selamat Datang di Layanan Pengaduan DPMPTSP
+                    </h1>
+                    <p class="text-lg md:text-xl lg:text-2xl mb-8">
+                        Kami siap membantu Anda dalam menyampaikan pengaduan dengan cepat dan mudah.
+                    </p>
+
+                    <!-- Call-to-Action Buttons -->
+                    <div class="flex flex-col md:flex-row justify-center gap-4">
+                        <a href="#stat"
+                            class="bg-blue-500 bg-opacity-80 hover:bg-opacity-100 text-white font-semibold py-3 px-8 rounded-lg transition duration-300">
+                            Lihat Statistik
+                        </a>
+                        <a href="#form"
+                            class="bg-gray-700 bg-opacity-80 hover:bg-opacity-100 text-white font-semibold py-3 px-8 rounded-lg transition duration-300">
+                            Buat Pengaduan
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Page Title -->
         <section id="stat" class="text-center py-16 mb-32 relative overflow-hidden">
             <!-- Overlay -->
@@ -61,8 +93,8 @@
 
             <!-- Content -->
             <div class="relative z-10 container mx-auto px-4">
-                <h2 class="text-4xl font-bold text-white mb-4">Statistik Pengaduan DPMPTSP</h2>
-                <p class="text-gray-200 mb-8">Lihat statistik pelapor dan status pengaduan yang diterima.</p>
+                <h2 class="text-4xl font-bold text-black mb-4">Statistik Pengaduan DPMPTSP</h2>
+                <p class="text-gray-600 mb-8">Lihat statistik pelapor dan status pengaduan yang diterima.</p>
 
                 <!-- Cards Section -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
@@ -174,7 +206,8 @@
                                         </path>
                                     </svg>
                                     <p class="text-xl text-gray-600 mb-2">Tidak ada SOP yang diunggah.</p>
-                                    <p class="text-gray-500">Silakan hubungi administrator untuk informasi lebih lanjut.
+                                    <p class="text-gray-500">Silakan hubungi administrator untuk informasi lebih
+                                        lanjut.
                                     </p>
                                 </div>
                             </div>

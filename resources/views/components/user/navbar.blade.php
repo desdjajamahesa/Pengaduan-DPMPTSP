@@ -21,22 +21,14 @@
             </div>
             <div class="hidden md:block">
                 <div class="ml-4 flex items-center md:ml-6">
-                    <button type="button"
-                        class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-300">
-                        <span class="sr-only">View notifications</span>
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                            aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-                        </svg>
-                    </button>
-
                     <!-- Profile dropdown -->
                     <div class="relative ml-3">
-                        <button type="button" @click="isOpen = !isOpen"
-                            class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-300"
-                            aria-expanded="false" aria-haspopup="true">
-                            <img class="h-7 w-7 rounded-full" src="{{ asset('storage/sipaduu.png') }}" alt="">
+                        <button type="button" @click="isOpen = !isOpen" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-300" aria-expanded="false" aria-haspopup="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" class="w-8 h-8 text-gray-600">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 14c4 0 6-4 6-6s-2-6-6-6-6 4-6 6 2 6 6 6zm0 0c-2 0-3.5.5-4.5 1.5C6.5 16.5 6 18 6 18h12s-.5-1.5-1.5-2.5C15.5 14.5 14 14 12 14z" />
+                            </svg>
                         </button>
 
                         <div x-show="isOpen" x-transition:enter="transition ease-out duration-150 transform"
@@ -45,8 +37,9 @@
                             x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
                             class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                             <a href="/profile-pengadu"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition">Your
-                                Profile</a>
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition">
+                                Your Profile
+                            </a>
 
                             <form method="POST" action="{{ route('logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition">
                                 @csrf
