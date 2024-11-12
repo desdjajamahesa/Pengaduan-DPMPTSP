@@ -126,7 +126,22 @@
                             </td>
                         </div>
                     </div>
-
+                    <div class="mb-4">
+                        <label for="kesesuaian_sop" class="block text-sm font-medium text-gray-700">Kesesuaian
+                            SOP</label>
+                        <select id="kesesuaian_sop" name="kesesuaian_sop"
+                            class="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+                            <option value="sesuai dengan sop"
+                                {{ $pengaduan->kesesuaian_sop == 'sesuai dengan sop' ? 'selected' : '' }}>
+                                Sesuai dengan SOP</option>
+                            <option value="melebihi sop"
+                                {{ $pengaduan->kesesuaian_sop == 'melebihi sop' ? 'selected' : '' }}>
+                                Melebihi SOP</option>
+                            <option value="lebih cepat dari sop"
+                                {{ $pengaduan->kesesuaian_sop == 'lebih cepat dari sop' ? 'selected' : '' }}>
+                                Lebih Cepat dari SOP</option>
+                        </select>
+                    </div>
                     <div class="mb-4">
                         <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
                         <select id="status" name="status"

@@ -21,7 +21,10 @@ class Pengaduan extends Model
         'file_pendukung',
         'file_balasan',
         'tindaklanjut',
-        'pelaporan_id', // Kolom foreign key yang menghubungkan ke tabel pelaporan
+        'pelaporan_id',
+        'jenis',
+        'platform',
+        'kesesuaian_sop' // Kolom foreign key yang menghubungkan ke tabel pelaporan
     ];
 
     protected $casts = [
