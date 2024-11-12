@@ -45,7 +45,8 @@
             }
         }
     </script>
-    <title>Document</title>
+    <?php $pengadu = Auth::user(); ?>
+    <title>Selamat Datang | {{ $pengadu->name }}</title>
 </head>
 
 <body class="" style="background-color: rgb(255, 255, 255);">

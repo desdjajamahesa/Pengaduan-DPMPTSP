@@ -5,8 +5,11 @@
             <div class="text-white font-semibold pt-6 text-xl tracking-wider">
                 Selamat Datang
             </div>
+            <?php 
+            $super = Auth::user();
+            ?>
             <div class="text-white text-lg font-medium pt-6 capitalize">
-                Nama SuperAdmin
+                {{ $super->name }}
             </div>
             <div class="text-base font-medium text-gray-300">
                 SuperAdmin

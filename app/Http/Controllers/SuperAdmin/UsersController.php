@@ -10,8 +10,8 @@ class UsersController extends Controller
 {
     public function showUsers()
     {
-        $endUsersOnly = User::where('role', 'end_user')->count();
-        $filter = User::where('role', 'end_user');
+        $endUsersOnly = User::where('role', 'pengadu')->count();
+        $filter = User::where('role', 'pengadu');
         $users = $filter->paginate(10);
 
         return view('superadmin.user', compact('endUsersOnly', 'users'));

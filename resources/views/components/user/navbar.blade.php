@@ -3,7 +3,7 @@
         <div class="flex h-20 items-center justify-between">
             <div class="flex items-center flex-grow">
                 <div class="flex-shrink-0">
-                    <img class="h-8 w-8" src="{{ asset('storage/sipaduu.png') }}" alt="Your Company">
+                    <img class="h-full w-16" src="{{ asset('sipadu.png') }}" alt="S!Padu">
                 </div>
 
                 <div class="hidden md:block">
