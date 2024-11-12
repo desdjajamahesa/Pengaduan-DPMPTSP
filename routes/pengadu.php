@@ -25,9 +25,10 @@ Route::get('/home/sop', [SopController::class, 'show'])->name('sop.index')->midd
 // Route Management Pengaduan Pada Pengadu
 Route::get('/pengaduan/{id}', [PengaduanController::class, 'show'])->name('pengaduan.show')->middleware('is_Enduser');
 Route::patch('/home', [PengaduanController::class, 'create'])->name('pengaduan.form')->middleware('is_Enduser');
-Route::put('/pengaduan/{id}', [PengaduanController::class, 'update'])->name('pengaduan.update')->middleware('is_Enduser');
+Route::put('/pengaduan/{id}/update', [PengaduanController::class, 'update'])->name('pengaduan.update')->middleware('is_Enduser');
 Route::patch('/home', [PengaduanController::class, 'create'])->name('pengaduan.index')->middleware('is_Enduser');
-
+Route::patch('/pengaduan/{id}/batalkan', [PengaduanController::class, 'batalkan'])->name('pengaduan.batalkan');
+Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
 Route::get('/detail', function () {
   return view('user.detail');
 })->name('detail')->middleware('is_Enduser');
