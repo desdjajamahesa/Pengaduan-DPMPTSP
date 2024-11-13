@@ -43,7 +43,7 @@ class PengaduanController extends Controller
           'file_pendukung' => 'required|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048',
           'file_balasan' => 'nullable|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048',
           'kesesuaian_sop' => 'required|in:sesuai dengan sop,melebihi sop,lebih cepat dari sop',
-          'admin' => 'required|string|max:100' // Tambahkan validasi kesesuaian_sop
+          'admin' => 'required|string|min:2|max:30' // Tambahkan validasi kesesuaian_sop
       ]);
 
       try {

@@ -87,7 +87,7 @@
         </section>
 
         <!-- Page Title -->
-        <section id="stat" class="text-center py-16 mb-32 relative overflow-hidden">
+        <section id="stat" class="text-center py-28 mb-32 relative overflow-hidden">
             <!-- Overlay -->
             <div class="absolute inset-0"></div> <!-- Add overlay here -->
 
@@ -123,7 +123,7 @@
 
 
         <!-- SOP Section -->
-        <section id="sop">
+        <section id="sop" class="py-28 ">
             <div class="container mx-auto px-4">
                 <div class="max-w-4xl mx-auto">
                     <div class="text-center mb-12">
@@ -234,7 +234,7 @@
         </script>
     </div>
     <!-- Mode Tabs: Pengaduan & Konsultasi -->
-    <div class="container mx-auto px-4 pb-[300px] mt-32" id="form">
+    <div class="container mx-auto px-4 pb-[300px] mt-32 py-28" id="form">
 
         @csrf
         <div x-data="{ mode: 'pengaduan' }">
@@ -561,7 +561,22 @@
 
         </x-user.footer>
     </div>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
 
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

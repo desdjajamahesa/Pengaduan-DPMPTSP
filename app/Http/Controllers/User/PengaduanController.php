@@ -46,7 +46,7 @@ class PengaduanController extends Controller
     {
         // Validasi data yang di-submit
         $validated = $request->validate([
-            'judul_pengaduan' => 'required|string|max:255',
+            'judul_pengaduan' => 'required|string|min:10|max:255',
             'isi_pengaduan' => 'required|string',
             'tanggal_pengaduan' => 'required|date',
             'lokasi_kejadian' => 'required|string|max:255',

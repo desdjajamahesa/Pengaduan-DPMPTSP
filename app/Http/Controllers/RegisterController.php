@@ -54,7 +54,7 @@ class RegisterController extends Controller
         // return redirect()->intended('login');
 
         $request->validate([
-            'name' => ['required', 'string','min:2', 'max:255'],
+            'name' => ['required', 'string','min:2', 'max:20'],
             'email' =>['required', 'string', 'lowercase', 'email', 'min:5', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'telephone' => ['required', 'string', 'regex:/^[0-9]{10,13}$/']
