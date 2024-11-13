@@ -78,7 +78,7 @@
                             @method('PUT')
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
                                 <input type="text" name="name" value="{{ old('name', $admin->name) }}"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('name') border-red-500 @enderror">
                                 @error('name')
@@ -97,7 +97,7 @@
                                 </div>
 
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Phone No</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Nomor Telepon</label>
                                     <input type="text" name="telephone"
                                         value="{{ old('telephone', $admin->telephone) }}"
                                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('telephone') border-red-500 @enderror">
@@ -109,7 +109,7 @@
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Password Baru</label>
                                     <input type="password" name="password" placeholder="Leave blank to keep current"
                                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('password') border-red-500 @enderror">
                                     @error('password')
@@ -118,7 +118,8 @@
                                 </div>
 
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Konfirmasi
+                                        Password</label>
                                     <input type="password" name="password_confirmation"
                                         placeholder="Confirm new password"
                                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">
