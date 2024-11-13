@@ -30,11 +30,13 @@ class UsersController extends Controller
     $request->validate([
       'name' => 'required|string|max:255',
       'email' => 'required|email|max:255|unique:users,email,' . $id,
+      'telephone' => 'required', 'string', 'regex:/^[0-9]{10,13}$/'
     ]);
 
     $user = User::findOrFail($id);
     $user->name = $request->input('name');
     $user->email = $request->input('email');
+    $user->telephone = $request->input('telephone');
     $user->save(); // Simpan perubahan
 
     return redirect()->route('admin.user')->with('success', 'User updated successfully.');

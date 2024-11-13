@@ -30,7 +30,7 @@ class UsersController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $id,
-            'telephone' => 'nullable|string|max:20', // Validate telephone if needed
+            'telephone' => 'required', 'string', 'regex:/^[0-9]{10,13}$/'// Validate telephone if needed
         ]);
 
         $user = User::findOrFail($id);
