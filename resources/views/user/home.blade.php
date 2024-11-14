@@ -52,7 +52,7 @@
 <body class="" style="background-color: rgb(255, 255, 255);">
 
     <x-user.navbar></x-user.navbar>
-    <div class="" style="background-image: url('wave5.svg'); background-repeat: no-repeat; background-size: 130%;">
+    <div class="" style="">
 
         <!-- Hero Section Fullscreen dengan Transparansi -->
         <section id="hero" class="relative bg-gray-900 text-white min-h-screen flex items-center justify-center"
@@ -91,8 +91,15 @@
             <!-- Overlay -->
             <div class="absolute inset-0"></div> <!-- Add overlay here -->
 
+
             <!-- Content -->
             <div class="relative z-10 container mx-auto px-4">
+                @php
+                    $totalPengaduan = $totalPengaduan ?? App\Models\Pengaduan::count(); // Set default jika belum ada
+                    $pengaduanProses = $pengaduanProses ?? App\Models\Pengaduan::where('status', 'selesai')->count();
+                    $persentaseProses =
+                        $persentaseProses ?? ($totalPengaduan > 0 ? ($pengaduanProses / $totalPengaduan) * 100 : 0);
+                @endphp
                 <h2 class="text-4xl font-bold text-black mb-4">Statistik Pengaduan DPMPTSP</h2>
                 <p class="text-gray-600 mb-8">Lihat statistik pelapor dan status pengaduan yang diterima.</p>
 
@@ -120,10 +127,7 @@
 
 
 
-
-
-        <!-- SOP Section -->
-        <section id="sop" class="py-28 ">
+        <section id="sop" class="py-28">
             <div class="container mx-auto px-4">
                 <div class="max-w-4xl mx-auto">
                     <div class="text-center mb-12">
@@ -133,91 +137,91 @@
 
                     @php
                         $sops = App\Models\Sop::all();
-                        $currentIndex = request()->query('sop_index', 0);
-                        $currentSop = $sops[$currentIndex] ?? null;
                     @endphp
 
-                    @if ($currentSop)
+                    @if ($sops->isNotEmpty())
                         <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
                             <div class="p-8">
-                                <div class="relative w-full" style="height: 70vh;">
-                                    <img src="{{ asset('storage/' . $currentSop->image_url) }}"
-                                        alt="Alur Pengaduan {{ $currentIndex + 1 }}"
-                                        class="absolute inset-0 w-full h-full object-contain rounded-lg cursor-pointer"
-                                        onclick="openFullscreen(this)">
-                                </div>
-                                <div class="mt-6 flex justify-between items-center">
-                                    <a href="{{ route('sop.index', ['sop_index' => max(0, $currentIndex - 1)]) }}"
-                                        class="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-800 font-semibold rounded-full hover:bg-gray-300 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 {{ $currentIndex == 0 ? 'opacity-50 cursor-not-allowed' : '' }}"
-                                        {{ $currentIndex == 0 ? 'disabled' : '' }}>
-                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M15 19l-7-7 7-7"></path>
-                                        </svg>
-                                        Sebelumnya
-                                    </a>
-                                    <span class="text-gray-600">{{ $currentIndex + 1 }} dari {{ $sops->count() }}</span>
-                                    <a href="{{ route('sop.index', ['sop_index' => min($sops->count() - 1, $currentIndex + 1)]) }}"
-                                        class="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-800 font-semibold rounded-full hover:bg-gray-300 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 {{ $currentIndex == $sops->count() - 1 ? 'opacity-50 cursor-not-allowed' : '' }}"
-                                        {{ $currentIndex == $sops->count() - 1 ? 'disabled' : '' }}>
-                                        Selanjutnya
-                                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M9 5l7 7-7 7"></path>
-                                        </svg>
-                                    </a>
-                                </div>
-                                <div class="mt-6 flex justify-center space-x-4">
-                                    <a href="{{ asset('storage/' . $currentSop->image_url) }}" target="_blank"
-                                        class="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                            </path>
-                                        </svg>
-                                        Lihat Gambar Penuh
-                                    </a>
-                                    <a href="{{ asset('storage/' . $currentSop->image_url) }}" download
-                                        class="inline-flex items-center px-6 py-3 bg-green-600 text-white font-semibold rounded-full hover:bg-green-700 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
-                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4">
-                                            </path>
-                                        </svg>
-                                        Unduh SOP
-                                    </a>
+                                <!-- Konten SOP, hanya satu yang akan ditampilkan pada satu waktu -->
+                                @foreach ($sops as $index => $sop)
+                                    <div id="step-{{ $index }}"
+                                        class="sop-step {{ $index == 0 ? '' : 'hidden' }}">
+                                        <div class="relative w-full" style="height: 70vh;">
+                                            <img src="{{ asset('storage/' . $sop->image_url) }}"
+                                                alt="Alur Pengaduan {{ $index + 1 }}"
+                                                class="absolute inset-0 w-full h-full object-contain rounded-lg cursor-pointer"
+                                                onclick="openFullscreen(this)">
+                                        </div>
+                                        <div class="mt-6 flex justify-center space-x-4">
+                                            <a href="{{ asset('storage/' . $sop->image_url) }}" target="_blank"
+                                                class="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                                                Lihat Gambar Penuh
+                                            </a>
+                                            <a href="{{ asset('storage/' . $sop->image_url) }}" download
+                                                class="inline-flex items-center px-6 py-3 bg-green-600 text-white font-semibold rounded-full hover:bg-green-700 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
+                                                Unduh SOP
+                                            </a>
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                                <!-- Tombol navigasi -->
+                                <div class="mt-6 flex justify-between">
+                                    <button onclick="prevStep()"
+                                        class="px-6 py-3 bg-gray-600 text-white rounded-full hover:bg-gray-700"
+                                        id="prevBtn" disabled>Sebelumnya</button>
+                                    <button onclick="nextStep()"
+                                        class="px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700"
+                                        id="nextBtn">Selanjutnya</button>
                                 </div>
                             </div>
                         </div>
                     @else
                         <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-                            <div class="p-8">
-                                <div class="text-center py-16">
-                                    <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none"
-                                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-                                        </path>
-                                    </svg>
-                                    <p class="text-xl text-gray-600 mb-2">Tidak ada SOP yang diunggah.</p>
-                                    <p class="text-gray-500">Silakan hubungi administrator untuk informasi lebih
-                                        lanjut.
-                                    </p>
-                                </div>
+                            <div class="p-8 text-center py-16">
+                                <p class="text-xl text-gray-600 mb-2">Tidak ada SOP yang diunggah.</p>
+                                <p class="text-gray-500">Silakan hubungi administrator untuk informasi lebih lanjut.</p>
                             </div>
                         </div>
                     @endif
-
-
                 </div>
             </div>
         </section>
+
+        <script>
+            let currentStep = 0;
+            const totalSteps = {{ count($sops) }};
+
+            function showStep(step) {
+                // Sembunyikan semua langkah
+                document.querySelectorAll('.sop-step').forEach((element, index) => {
+                    element.classList.toggle('hidden', index !== step);
+                });
+
+                // Perbarui tombol navigasi
+                document.getElementById('prevBtn').disabled = step === 0;
+                document.getElementById('nextBtn').disabled = step === totalSteps - 1;
+            }
+
+            function nextStep() {
+                if (currentStep < totalSteps - 1) {
+                    currentStep++;
+                    showStep(currentStep);
+                }
+            }
+
+            function prevStep() {
+                if (currentStep > 0) {
+                    currentStep--;
+                    showStep(currentStep);
+                }
+            }
+
+            // Tampilkan langkah pertama
+            showStep(currentStep);
+        </script>
+
+
 
         <script>
             function openFullscreen(img) {

@@ -2,28 +2,30 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\Sop;
+use App\Models\Pengaduan;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Controllers\Controller;
-use App\Models\Sop;
 
 class SopController extends Controller
 {
     public function index(Request $request)
     {
         $query = Sop::query();
-
+    
         if ($request->has('search') && $request->search != '') {
             $search = $request->search;
             $query->where('image_url', 'like', "%{$search}%");
         }
-
-        $sops = $query->paginate(10);
-
     
-        return view('user.home', compact('sops'));
-        return abort(403, 'Unauthorized action.');
+        $sops = $query->paginate(10);
+    
+        // Menghitung total pengaduan dari model yang relevan
+        $totalPengaduan = Pengaduan::count(); // atau sesuaikan dengan query Anda
+    
+        return view('user.home', compact('sops', 'totalPengaduan'));
     }
 
     public function store(Request $request)

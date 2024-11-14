@@ -21,7 +21,8 @@ Route::middleware('is_Enduser')->group(function () {
   
   // Route Management SOP Pada Pengadu
   Route::get('/home/sop', [SopController::class, 'show'])->name('sop.index');
-  
+  Route::get('/home/sop', [SopController::class, 'index'])->name('sop.index');
+
   // Route Management Pengaduan Pada Pengadu
   Route::get('/pengaduan/{id}', [PengaduanController::class, 'show'])->name('pengaduan.show');
   Route::patch('/home', [PengaduanController::class, 'create'])->name('pengaduan.form');

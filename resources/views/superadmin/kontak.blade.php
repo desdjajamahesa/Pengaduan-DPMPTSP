@@ -63,7 +63,7 @@
 
                     <!-- Edit Mode (form to edit) -->
                     <div id="contact-edit" class="hidden bg-white p-6 rounded-lg shadow-md">
-                        <form action="{{ route('contacts.update') }}" method="POST" class="space-y-6">
+                        <form action="{{ route('contacts.update.super') }}" method="POST" class="space-y-6">
                             @csrf
                             <div class="mb-5">
                                 <label for="whatsapp" class="block text-gray-700 font-medium mb-2">WhatsApp</label>

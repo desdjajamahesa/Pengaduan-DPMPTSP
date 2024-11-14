@@ -8,15 +8,24 @@ use App\Models\User;
 
 class UsersController extends Controller
 {
-  public function showUser()
+  public function showUser(Request $request)
   {
-    $endUserOnly = User::where('role', 'pengadu')->count();
-    $filter = User::where('role', 'pengadu');
-    $users = $filter->paginate(10);
+    $query = User::where('role', 'pengadu');
+    
+    // Filter berdasarkan input pencarian (nama atau email)
+    if ($request->has('search') && $request->search != '') {
+      $search = $request->input('search');
+      $query->where(function($q) use ($search) {
+        $q->where('name', 'like', '%' . $search . '%')
+          ->orWhere('email', 'like', '%' . $search . '%');
+      });
+    }
+
+    $endUserOnly = $query->count(); // Hitung total pengguna yang sesuai
+    $users = $query->paginate(10);  // Paginasi hasil pencarian
 
     return view('admin.user', compact('endUserOnly', 'users'));
   }
-
   // Fungsi untuk menampilkan form edit
   public function edit($id)
   {

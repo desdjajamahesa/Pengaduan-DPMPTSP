@@ -47,7 +47,7 @@ Route::delete('/sopsuper/{id}', [SopController::class, 'destroy'])->name('supera
 
 // Route Management Kontak Pada Super admin
 Route::get('/kontaksuper', [ContactController::class, 'index'])->name('contacts.index')->middleware('is_superadmin');
-Route::post('/kontaksuper', [ContactController::class, 'update'])->name('contacts.update')->middleware('is_superadmin');
+Route::post('/kontaksuper', [ContactController::class, 'update'])->name('contacts.update.super')->middleware('is_superadmin');
 
 
 Route::get('/profile-super', [SuperAdminProfileController::class, 'index'])->name('superadmin.profile')->middleware('is_superadmin');

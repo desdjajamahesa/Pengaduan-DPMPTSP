@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Manage Contact Options</title>
+    <title>Admin Manage Contact Options</title>
 
     <script>
         function enableEditMode() {
@@ -19,9 +19,7 @@
 <body class="bg-gray-100">
     <!-- Sidebar -->
     <x-admin.navadmin></x-admin.navadmin>
-
     <!-- Main Content -->
-
     <x-admin.headadmin></x-admin.headadmin>
     <div class="py-12 bg-gray-100">
         <div class="max-w-9xl mx-auto sm:px-6 lg:px-8">
@@ -44,9 +42,10 @@
                         </div>
                         <div class="mb-5">
                             <label class="block text-gray-700 font-medium mb-2">Email</label>
-                            <p class="text-gray-900">{{ optional($contacts->where('type', 'email')->first())->value }}
-                            </p>
+                            <p class="text-gray-900">
+                                {{ optional($contacts->where('type', 'email')->first())->value }}</p>
                         </div>
+
                         <div class="mb-5">
                             <label class="block text-gray-700 font-medium mb-2">Instagram</label>
                             <p class="text-gray-900">
@@ -83,6 +82,7 @@
                             </div>
 
 
+
                             <div class="mb-5">
                                 <label for="instagram" class="block text-gray-700 font-medium mb-2">Instagram</label>
                                 <input type="text" name="contacts[3][value]"
@@ -99,9 +99,6 @@
                         </form>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 
 </body>
 
