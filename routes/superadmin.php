@@ -17,7 +17,7 @@ Route::get('/adminsuper', [DashboardController::class, 'admin'])->name('superadm
 Route::get('/usersuper', [DashboardController::class, 'users'])->name('superadmin.user')->middleware('is_superadmin');
 
 // Route Management Data Pengadu Pada Super Admin
-Route::get('/usersuper', [UsersController::class, 'showUsers'])->name('superadmin.user')->middleware('is_superadmin');
+Route::get('/usersuper', [UsersController::class, 'showUser'])->name('superadmin.user')->middleware('is_superadmin');
 Route::get('/superadmin/users/{id}/edit', [UsersController::class, 'edit'])->name('superadmin.users.edit')->middleware('is_superadmin');
 Route::put('/superadmin/users/{id}', [UsersController::class, 'update'])->name('superadmin.users.update')->middleware('is_superadmin');
 Route::delete('/superadmin/users/{id}', [UsersController::class, 'destroy'])->name('superadmin.users.destroy')->middleware('is_superadmin');

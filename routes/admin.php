@@ -26,7 +26,7 @@ Route::get('/pengaduan/{id}/tindak-lanjut', [PengaduanController::class, 'showTi
 Route::put('/pengaduan/{id}', [PengaduanController::class, 'update'])->name('admin.pengaduan.update')->middleware('is_admin');
 Route::put('/pengaduan/{id}/tindak-lanjut/update', [PengaduanController::class, 'update'])->name('admin.pengaduan.update')->middleware('is_admin');
 Route::patch('/pengaduan/{id}/batalkan', [PengaduanController::class, 'batalkan'])->name('pengaduan.batalkan')->middleware('is_admin');
-Route::get('/pengaduan/{id}/download', [PengaduanController::class, 'download'])->name('pengaduan.download')->middleware('is_admin');
+Route::get('/pengaduan/{id}/download', [PengaduanController::class, 'download'])->name('pengaduan.download');
 
 // Route Management Pelaporan Pada Admin
 Route::get('/pelaporan', [PelaporanController::class, 'index'])->name('pelaporan');
@@ -47,7 +47,7 @@ Route::get('/kontak', [ContactController::class, 'index'])->name('contacts.index
 Route::post('/kontak', [ContactController::class, 'update'])->name('contacts.update')->middleware('is_admin');
 Route::get('/user.footer', [ContactController::class, 'index'])->name('contacts.index')->middleware('is_admin');
 
-Route::get('/download/pengaduan', [PengaduanController::class, 'downloadLaporan'])->name('download.pengaduan')->middleware('is_admin');
+Route::get('/download/pengaduan', [PengaduanController::class, 'downloadLaporan'])->name('download.pengaduan');
 
 
 Route::get('/profile', [AdminProfileController::class, 'index'])->name('admin.profile')->middleware('is_admin');

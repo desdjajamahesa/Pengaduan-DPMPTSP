@@ -29,7 +29,7 @@
         <div class="mb-8">
             <div class="flex flex-col sm:flex-row items-center justify-between">
                 <div class="mb-4 sm:mb-0">
-                    <h1 class="text-3xl font-bold text-gray-900">SuperAdmin Dashboard</h1>
+                    <h1 class="text-3xl font-bold text-gray-900">Super Admin Dashboard</h1>
                     <p class="mt-1 text-sm text-gray-600">Manage your profile</p>
                 </div>
             </div>

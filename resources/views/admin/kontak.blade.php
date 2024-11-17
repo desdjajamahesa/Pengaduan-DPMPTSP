@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Admin Manage Contact Options</title>
+    <title>Kelola Data Kontak</title>
 
     <script>
         function enableEditMode() {
@@ -25,7 +25,7 @@
         <div class="max-w-9xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Kontak Management</h2>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Kelola Data Kontak</h2>
 
                     @if (session('success'))
                         <div class="bg-green-100 text-green-800 p-4 rounded-md mb-6">

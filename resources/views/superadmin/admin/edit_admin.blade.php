@@ -19,7 +19,7 @@
         <div class="max-w-3xl mx-auto">
             <div class="bg-white shadow-2xl rounded-lg overflow-hidden">
                 <div class="px-8 py-10">
-                    <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Edit Admin</h2>
+                    <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Edit Data Admin</h2>
                     <form action="{{ route('superadmin.admin.update', $admin->id) }}" method="POST">
                         @csrf
                         @method('PUT')

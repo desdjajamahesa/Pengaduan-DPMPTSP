@@ -34,7 +34,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-xl rounded-lg">
                 <div class="p-6 sm:p-8">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Pengaduan Management</h2>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Kelola Data Pengaduan</h2>
 
                     <!-- Search Bar -->
                     <div class="mb-8">
@@ -138,7 +138,7 @@
                         {{ $pengaduans->links() }}
                     </div>
                     <a href="{{ route('pelaporan') }}"
-                    class="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">
+                        class="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">
                         Pelaporan
                     </a>
                 </div>
