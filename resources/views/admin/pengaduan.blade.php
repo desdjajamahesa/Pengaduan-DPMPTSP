@@ -37,7 +37,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 sm:p-8">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Pengaduan Management</h2>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Kelola Data Pengaduan</h2>
 
                     <!-- Search Bar -->
                     <div class="mb-8">

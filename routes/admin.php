@@ -47,7 +47,7 @@ Route::get('/kontak', [ContactController::class, 'index'])->name('contacts.index
 Route::post('/kontak', [ContactController::class, 'update'])->name('contacts.update')->middleware('is_admin');
 Route::get('/user.footer', [ContactController::class, 'index'])->name('contacts.index')->middleware('is_admin');
 
-Route::get('/download/pengaduan', [PengaduanController::class, 'downloadLaporan'])->name('download.pengaduan')->middleware('is_admin');
+Route::get('/download/pengaduan', [PengaduanController::class, 'downloadLaporan'])->name('download.pengaduan');
 
 
 Route::get('/profile', [AdminProfileController::class, 'index'])->name('admin.profile')->middleware('is_admin');

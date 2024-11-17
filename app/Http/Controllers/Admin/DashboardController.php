@@ -16,8 +16,8 @@ class DashboardController extends Controller
       $totalPengaduan = Pengaduan::count();
       $pengaduanToday = Pengaduan::whereDate('tanggal_pengaduan', Carbon::today())->count();
       $endUserCount = User::count();
-      $pengaduanDiproses = Pengaduan::where('status', 'diproses')->count();
-      $pengaduanTertunda = Pengaduan::where('status', 'tertunda')->count();
+      $pengaduanDiproses = Pengaduan::where('status', 'proses')->count();
+      $pengaduanTertunda = Pengaduan::where('status', 'belum_proses')->count();
       $pengaduanSelesai = Pengaduan::where('status', 'selesai')->count();
   
       // Mengambil 5 pengguna terakhir yang baru saja melakukan pengaduan

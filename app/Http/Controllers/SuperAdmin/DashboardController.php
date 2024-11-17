@@ -13,12 +13,12 @@ class DashboardController extends Controller
 {
   public function index()
   {
-      $totalPengaduan = Pengaduan::count();
-      $pengaduanToday = Pengaduan::whereDate('tanggal_pengaduan', Carbon::today())->count();
-      $endUserCount = User::count();
-      $pengaduanDiproses = Pengaduan::where('status', 'diproses')->count();
-      $pengaduanTertunda = Pengaduan::where('status', 'tertunda')->count();
-      $pengaduanSelesai = Pengaduan::where('status', 'selesai')->count();
+    $totalPengaduan = Pengaduan::count();
+    $pengaduanToday = Pengaduan::whereDate('tanggal_pengaduan', Carbon::today())->count();
+    $endUserCount = User::count();
+    $pengaduanDiproses = Pengaduan::where('status', 'proses')->count();
+    $pengaduanTertunda = Pengaduan::where('status', 'belum_proses')->count();
+    $pengaduanSelesai = Pengaduan::where('status', 'selesai')->count();
   
       // Mengambil 5 pengguna terakhir yang baru saja melakukan pengaduan
       $recentPengaduans = Pengaduan::with('user')

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit User</title>
+    <title>Edit Data Pelapor</title>
     <script src="https://cdn.tailwindcss.com"></script>
     @vite('resources/css/app.css')
 </head>
@@ -19,7 +19,7 @@
         <div class="max-w-3xl mx-auto">
             <div class="bg-white shadow-2xl rounded-lg overflow-hidden">
                 <div class="px-8 py-10">
-                    <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Edit Pengadu</h2>
+                    <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Edit Data Pelapor</h2>
                     <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
                         @csrf
                         @method('PUT')
@@ -110,7 +110,7 @@
                                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                         clip-rule="evenodd" />
                                 </svg>
-                                Update User
+                                Update Pelapor
                             </button>
                         </div>
                     </form>
