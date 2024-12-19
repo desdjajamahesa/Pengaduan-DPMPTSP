@@ -29,7 +29,7 @@ Route::patch('/pengaduan/{id}/batalkan', [PengaduanController::class, 'batalkan'
 Route::get('/pengaduan/{id}/download', [PengaduanController::class, 'download'])->name('pengaduan.download');
 
 // Route Management Pelaporan Pada Admin
-Route::get('/pelaporan', [PelaporanController::class, 'index'])->name('pelaporan');
+Route::get('/pelaporanadmin', [PelaporanController::class, 'index'])->name('admin.pelaporan');
 
 // Route Management Statistik Pengaduan Pada Admin
 Route::get('/export/pengaduan', [PelaporanController::class, 'exportPengaduan'])->name('export.pengaduan');

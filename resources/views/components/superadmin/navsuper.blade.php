@@ -1,10 +1,5 @@
 <div class="min-h-screen flex flex-col lg:flex-row">
     <!-- Button untuk toggle sidebar -->
-    <button id="menu-toggle" class="lg:hidden p-4 bg-gray-800 text-white">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-    </button>
 
     <aside id="sidebar"
         class="w-64 bg-gray-800 text-white shadow-lg fixed lg:sticky top-0 lg:h-screen lg:block hidden transform -translate-x-full lg:translate-x-0 transition-transform duration-300">

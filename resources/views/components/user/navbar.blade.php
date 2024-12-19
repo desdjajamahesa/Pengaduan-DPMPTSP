@@ -23,7 +23,9 @@
                 <div class="ml-4 flex items-center md:ml-6">
                     <!-- Profile dropdown -->
                     <div class="relative ml-3">
-                        <button type="button" @click="isOpen = !isOpen" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-300" aria-expanded="false" aria-haspopup="true">
+                        <button type="button" @click="isOpen = !isOpen"
+                            class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-300"
+                            aria-expanded="false" aria-haspopup="true">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor" class="w-8 h-8 text-gray-600">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -41,10 +43,11 @@
                                 Your Profile
                             </a>
 
-                            <form method="POST" action="{{ route('logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition">
+                            <form method="POST" action="{{ route('logout') }}"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition">
                                 @csrf
                                 <button type="submit">Sign out</button>
-                            </form>                                
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -78,6 +81,13 @@
                 class="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white transition">PENGADUAN</a>
             <a href="#kontak"
                 class="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white transition">KONTAK</a>
+            <a href="/profile-pengadu"
+                class="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white transition">PROFILE</a>
+            <form method="POST" action="{{ route('logout') }}"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition">
+                @csrf
+                <button type="submit">Sign out</button>
+            </form>
         </div>
     </div>
 </nav>

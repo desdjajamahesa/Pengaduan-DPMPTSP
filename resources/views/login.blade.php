@@ -46,10 +46,10 @@
                     <div class="flex items-center justify-between">
                         <label for="password"
                             class="block text-sm px-1 font-semibold leading-6 text-slate-700">Password</label>
-                        <div class="text-sm">
+                        {{-- <div class="text-sm">
                             <a href="{{ route('password.request') }}"
                                 class="font-semibold text-cyan-600 hover:text-cyan-400">Lupa password?</a>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="mt-2">
                         <input id="password" name="password" type="password" autocomplete="current-password" required

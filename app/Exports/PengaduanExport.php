@@ -22,7 +22,8 @@ class PengaduanExport implements FromCollection, WithHeadings
                 'Waktu Pengaduan' => $pengaduan->tanggal_pengaduan->format('d-m-Y H:i'),
                 'Isi Pengaduan' => $pengaduan->isi_pengaduan,
                 'Tindak Lanjut' => $pengaduan->tindaklanjut ?? 'Belum Ditindaklanjuti',
-                'Petugas Pelayanan' => $pengaduan->admin ?? 'N/A',
+                'Petugas Pelayanan' => $pengaduan->admin 
+                ?? 'N/A',
                 'Status' => $pengaduan->status,
                 'Kesesuaian SOP' => $pengaduan->kesesuaian_sop ?? 'Belum Diperiksa',
             ];

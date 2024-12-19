@@ -34,7 +34,7 @@
                         <h2 class="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">Informasi Pengaduan</h2>
                         <div class="space-y-2">
                             <p class="text-gray-600"><span class="font-medium w-1/3 inline-block">Tanggal:</span>
-                                {{ $pengaduan->tanggal_pengaduan }}</p>
+                                {{ $pengaduan->created_at }}</p>
                             <p class="text-gray-600"><span class="font-medium w-1/3 inline-block">Lokasi
                                     Kejadian:</span> {{ $pengaduan->lokasi_kejadian }}</p>
                             <p class="text-gray-600"><span class="font-medium w-1/3 inline-block">Alamat:</span>
@@ -106,7 +106,7 @@
                         <i class="fas fa-arrow-left mr-2"></i> Kembali
                     </a>
 
-                    @if ($pengaduan->status != 'dibatalkan')
+                    @if ($pengaduan->status != 'selesai' && $pengaduan->status != 'dilanjutkan' && $pengaduan->status != 'proses')
                         <form action="{{ route('pengaduan.batalkan', $pengaduan->id) }}" method="POST">
                             @csrf
                             @method('PATCH')

@@ -1,26 +1,21 @@
-<div x-data="sidebarToggle()" class="min-h-screen flex flex-col lg:flex-row">
+<div class="min-h-screen flex flex-col lg:flex-row">
+    <!-- Button untuk toggle sidebar -->
 
-    <!-- Sidebar -->
-    <aside
-        class="w-64 bg-gray-800 text-white shadow-lg lg:fixed lg:sticky top-0 h-screen lg:block hidden transition-transform duration-300"
-        :class="{ 'translate-x-0': isOpen, '-translate-x-full': !isOpen }" @click.away="isOpen = false">
+    <aside id="sidebar"
+        class="w-64 bg-gray-800 text-white shadow-lg fixed lg:sticky top-0 lg:h-screen lg:block hidden transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
         <div
-            class="px-6 border-b border-gray-700 flex items-center justify-start bg-gradient-to-r from-slate-500 via-indigo-500 to-cyan-500 shadow-lg transform hover:scale-105 transition-transform duration-300">
-            <div class="grid grid-rows-1 sm:grid-rows-3 lg:grid-rows-3">
-                <span class="text-white font-semibold pt-6 text-xl tracking-wider">
-                    Selamat Datang
-                </span>
-
-                <?php
-                $admin = Auth::user();
-                ?>
-
-                <span class="text-white text-lg font-medium pt-6 capitalize">
-                    {{ $admin->name }}
-                </span>
-                <span class="text-base font-medium text-gray-300">
-                    Admin
-                </span>
+            class="px-6 border-b border-gray-700 flex flex-col items-start justify-start bg-gradient-to-r from-slate-500 via-indigo-500 to-cyan-500 shadow-lg transform hover:scale-105 transition-transform duration-300">
+            <div class="text-white font-semibold pt-6 text-xl tracking-wider">
+                Selamat Datang
+            </div>
+            <?php
+            $admin = Auth::user();
+            ?>
+            <div class="text-white text-lg font-medium pt-6 capitalize">
+                {{ $admin->name }}
+            </div>
+            <div class="text-base font-medium text-gray-300">
+                Admin
             </div>
         </div>
         <nav class="mt-8">

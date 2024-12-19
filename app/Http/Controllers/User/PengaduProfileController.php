@@ -14,7 +14,7 @@ class PengaduProfileController extends Controller
     public function index(Request $request)
     {
         // Mendapatkan ID admin yang sedang login
-        $user = User::where('role', 'pengadu')
+        $user = User::where('role', 'pelapor')
             ->where('id', Auth::id())
             ->firstOrFail();
 

@@ -18,7 +18,7 @@ Route::middleware('is_Enduser')->group(function () {
   Route::post('/home', [PengaduanController::class, 'home'])->name('pengaduan.home');
   // Route Management Statistik Pada Pengadu
   Route::get('/home', [StatistikController::class, 'index'])->name('home');
-  
+ 
   // Route Management SOP Pada Pengadu
   Route::get('/home/sop', [SopController::class, 'show'])->name('sop.index');
   Route::get('/home/sop', [SopController::class, 'index'])->name('sop.index');

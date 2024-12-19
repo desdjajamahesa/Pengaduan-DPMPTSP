@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pengaduan;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -24,7 +25,11 @@ class PengaduanController extends Controller
 
         $query = Pengaduan::query();
 
-        if ($request->has('search') && $request->search != '') {
+        // Filter berdasarkan ID pengguna yang sedang login
+        $query->where('user_id', Auth::id());
+    
+        // Jika ada parameter pencarian
+        if ($request->filled('search')) {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->where('judul_pengaduan', 'like', "%{$search}%")
@@ -35,9 +40,10 @@ class PengaduanController extends Controller
                     });
             });
         }
-
+    
+        // Mengambil pengaduan terkait pengguna yang sedang login
         $pengaduans = $query->with('user')->paginate(5);
-
+    
         return view('user.home', compact('pengaduans'));
     }
 
@@ -139,7 +145,8 @@ class PengaduanController extends Controller
         $request->validate([
             'status' => 'required|in:belum_proses,proses,selesai,dilanjutkan',
             'tindaklanjut' => 'required|string|max:500',
-            'file_balasan' => 'nullable|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048'
+            'file_balasan' => 'nullable|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048',
+            'file_pendukung' => 'nullable|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048'
         ]);
 
         $fileBalasanPathForDB = $pengaduan->file_balasan;
@@ -167,34 +174,34 @@ class PengaduanController extends Controller
     }
 
     # SUPER ADMIN
-    public function superAdminIndex(Request $request)
-    {
-        $query = Pengaduan::query()->where('status', 'dilanjutkan');
+    // public function superAdminIndex(Request $request)
+    // {
+    //     $query = Pengaduan::query()->where('status', 'dilanjutkan');
 
-        if ($request->has('search') && $request->search != '') {
-            $search = $request->search;
-            $query->where(function ($q) use ($search) {
-                $q->where('judul_pengaduan', 'like', "%{$search}%")
-                    ->orWhere('isi_pengaduan', 'like', "%{$search}%")
-                    ->orWhereHas('user', function ($q) use ($search) {
-                        $q->where('name', 'like', "%{$search}%")
-                            ->orWhere('email', 'like', "%{$search}%");
-                    });
-            });
-        }
+    //     if ($request->has('search') && $request->search != '') {
+    //         $search = $request->search;
+    //         $query->where(function ($q) use ($search) {
+    //             $q->where('judul_pengaduan', 'like', "%{$search}%")
+    //                 ->orWhere('isi_pengaduan', 'like', "%{$search}%")
+    //                 ->orWhereHas('user', function ($q) use ($search) {
+    //                     $q->where('name', 'like', "%{$search}%")
+    //                         ->orWhere('email', 'like', "%{$search}%");
+    //                 });
+    //         });
+    //     }
 
-        $pengaduans = $query->with('user')->paginate(10);
+    //     $pengaduans = $query->with('user')->paginate(10);
 
-        return view('superadmin.pengaduan', compact('pengaduans'));
-    }
+    //     return view('superadmin.pengaduan', compact('pengaduans'));
+    // }
 
-    # SUPER ADMIN
-    public function showTindakLanjutsuper($id)
-    {
-        $pengaduan = Pengaduan::findOrFail($id);
+    // # SUPER ADMIN
+    // public function showTindakLanjutsuper($id)
+    // {
+    //     $pengaduan = Pengaduan::findOrFail($id);
 
-        return view('superadmin.tindak-lanjut', compact('pengaduan'));
-    }
+    //     return view('superadmin.tindak-lanjut', compact('pengaduan'));
+    // }
 
     # USER
     public function create()

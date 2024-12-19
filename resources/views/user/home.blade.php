@@ -318,13 +318,20 @@
                         </div>
 
                         <div>
-                            <label for="file_pendukung" class="block text-sm font-medium text-gray-700">Unggah
-                                File Pendukung</label>
+                            <label for="file_pendukung" class="block text-sm font-medium text-gray-700">
+                                Unggah File Pendukung
+                            </label>
                             <input type="file" name="file_pendukung" id="file_pendukung"
                                 accept=".pdf,.jpg,.jpeg,.png,.docx,.xlsx"
                                 class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-                            <p class="mt-2 text-xs text-gray-500">Anda dapat mengunggah file dengan format: PDF, JPG,
-                                JPEG, PNG, DOCX, atau XLSX.</p>
+                            <p class="mt-2 text-xs text-gray-500">
+                                Anda dapat mengunggah file dengan format: PDF, JPG, JPEG, PNG, DOCX, atau XLSX.
+                            </p>
+                            @if ($errors->has('file_pendukung'))
+                                <p class="mt-2 text-sm text-red-600">
+                                    {{ $errors->first('file_pendukung') }}
+                                </p>
+                            @endif
                         </div>
 
 
@@ -459,7 +466,7 @@
                                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                                         </path>
                                     </svg>
-                                    {{ $pengaduan->tanggal_pengaduan }}
+                                    {{ $pengaduan->created_at }}
                                 </p>
                             </div>
 
@@ -472,12 +479,17 @@
                                 </a>
 
                                 <!-- Button Batalkan -->
-                                @if ($pengaduan->status != 'dibatalkan')
+                                @if (
+                                    $pengaduan->status != 'dibatalkan' &&
+                                        $pengaduan->status != 'selesai' &&
+                                        $pengaduan->status != 'dilanjutkan' &&
+                                        $pengaduan->status != 'proses')
                                     <form method="POST" action="{{ route('pengaduan.batalkan', $pengaduan->id) }}">
                                         @csrf
                                         @method('PATCH')
                                         <button type="submit"
-                                            class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
+                                            class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
+                                            onclick="return confirm('Apakah Anda yakin ingin membatalkan pengaduan ini?')">
                                             Batalkan
                                         </button>
                                     </form>

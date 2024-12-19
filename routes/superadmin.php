@@ -36,7 +36,7 @@ Route::get('/pengaduansuper/{id}/tindak-lanjut', [PengaduanController::class, 's
 Route::put('/pengaduansuper/{id}', [PengaduanController::class, 'update'])->name('superadmin.pengaduan.update')->middleware('auth')->middleware('is_superadmin');;
 
 // Route Management Pelaporan Pada Super Admin
-Route::get('/pelaporan', [PelaporanController::class, 'index'])->name('pelaporan');
+Route::get('/pelaporan', [PelaporanController::class, 'index'])->name('superadmin.pelaporan');
 
 // Route Management SOP Pada Super Admin
 Route::get('/sopsuper', [SopController::class, 'index'])->name('superadmin.sop.index')->middleware('is_superadmin');
@@ -52,3 +52,6 @@ Route::post('/kontaksuper', [ContactController::class, 'update'])->name('contact
 
 Route::get('/profile-super', [SuperAdminProfileController::class, 'index'])->name('superadmin.profile')->middleware('is_superadmin');
 Route::put('/profile-super/{id}', [SuperAdminProfileController::class, 'update'])->name('superadmin.profile.update')->middleware('is_superadmin');
+
+
+Route::get('/export/pengaduan', [PelaporanController::class, 'exportPengaduan'])->name('export.pengaduan');

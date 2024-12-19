@@ -7,18 +7,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Pelaporan;
 use App\Models\Pengaduan;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PengaduanExport;
+use Maatwebsite\Excel\Facades\Excel;
 class PelaporanController extends Controller
 {
- 
-
     public function index()
     {
-        $pelaporans = Pelaporan::with(['user', 'pengaduan'])->get(); // Ambil data Pelaporan dengan User dan Pengaduan
-        return view('admin.sop', compact('pelaporans'));
+        $pengaduans = Pengaduan::all();
+        return view('pelaporan', compact('pengaduans'));
     }
-    
     
     public function store(Request $request)
     {
@@ -35,8 +32,7 @@ class PelaporanController extends Controller
         return redirect()->route('pelaporan.index')->with('success', 'Pelaporan berhasil disubmit!');
     }
     public function exportPengaduan()
-{
-    return Excel::download(new PengaduanExport, 'pengaduan.xlsx');
-}
-    
+    {
+        return Excel::download(new PengaduanExport, 'pengaduan.xlsx');
+    }
 }

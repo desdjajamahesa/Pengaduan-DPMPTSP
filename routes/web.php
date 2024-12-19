@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
 
 // Halaman Awal Saat Website Diakses
@@ -10,6 +10,9 @@ Route::get('/', function() {
 Route::get('/home', function() {
     return view('home');
 })->middleware(['auth', 'verified'])->name('home');
+
+
+
 
 // Halaman reset password
 Route::get('password/reset', function () {

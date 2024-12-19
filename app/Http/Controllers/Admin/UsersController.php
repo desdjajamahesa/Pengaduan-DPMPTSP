@@ -10,7 +10,7 @@ class UsersController extends Controller
 {
   public function showUser(Request $request)
   {
-    $query = User::where('role', 'pengadu');
+    $query = User::where('role', 'pelapor');
     
     // Filter berdasarkan input pencarian (nama atau email)
     if ($request->has('search') && $request->search != '') {
