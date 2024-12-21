@@ -260,6 +260,7 @@
                 class="max-w-4xl mx-auto bg-white shadow-2xl rounded-lg overflow-hidden">
                 <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-6 text-white">
                     <h2 class="text-3xl font-bold text-center">Sampaikan Laporan Anda</h2>
+                    <h4 class="text-center">(Format OMBUDSMAN Tahun 2024)</h4>
                     <p class="text-center mt-2 text-blue-100">Kami siap mendengar dan menindaklanjuti laporan
                         Anda
                     </p>

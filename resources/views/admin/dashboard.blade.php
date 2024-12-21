@@ -128,6 +128,19 @@
                     </div>
                 </div>
                 <div class="mt-8">
+                    <h3 class="text-gray-700 text-3xl font-medium">Statistik Pengaduan</h3>
+                    <div class="flex flex-shrink-0 gap-2 mt-3">
+                        <!-- Bar Chart -->
+                        <div class="w-full lg:w-1/2 bg-white rounded-lg shadow-xl p-4">
+                            <canvas id="pengaduanChart" class="w-full"></canvas>
+                        </div>
+                        <!-- Pie Chart -->
+                        <div id="pieChartContainer" class="w-full lg:w-1/2 bg-white rounded-lg shadow-xl p-4">
+                            <div id="pieChart" style="width: 100%; height: 400px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8">
                     <h3 class="text-gray-700 text-3xl font-medium">Pelapor Terkini</h3>
                     <div class="flex flex-col mt-8">
                         <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
@@ -180,7 +193,149 @@
             </div>
         </main>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Highcharts.chart('pieChart', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Komposisi Status Pengaduan'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Status',
+                    colorByPoint: true,
+                    data: [{
+                            name: 'Diproses',
+                            y: {{ $pengaduanDiproses }},
+                            sliced: true,
+                            selected: true
+                        },
+                        {
+                            name: 'Tertunda',
+                            y: {{ $pengaduanTertunda }}
+                        },
+                        {
+                            name: 'Selesai',
+                            y: {{ $pengaduanSelesai }}
+                        }
+                    ]
+                }]
+            });
+        });
+    </script>
 
+    <!-- Script untuk Chart -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('pengaduanChart').getContext('2d');
+
+            const gradientDiproses = ctx.createLinearGradient(0, 0, 0, 400);
+            gradientDiproses.addColorStop(0, 'rgba(75, 192, 192, 0.8)');
+            gradientDiproses.addColorStop(1, 'rgba(75, 192, 192, 0.2)');
+
+            const gradientTertunda = ctx.createLinearGradient(0, 0, 0, 400);
+            gradientTertunda.addColorStop(0, 'rgba(255, 99, 132, 0.8)');
+            gradientTertunda.addColorStop(1, 'rgba(255, 99, 132, 0.2)');
+
+            const gradientSelesai = ctx.createLinearGradient(0, 0, 0, 400);
+            gradientSelesai.addColorStop(0, 'rgba(54, 162, 235, 0.8)');
+            gradientSelesai.addColorStop(1, 'rgba(54, 162, 235, 0.2)');
+
+            const pengaduanChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Diproses', 'Tertunda', 'Selesai'],
+                    datasets: [{
+                        label: 'Jumlah Pengaduan',
+                        data: [{{ $pengaduanDiproses }}, {{ $pengaduanTertunda }},
+                            {{ $pengaduanSelesai }}
+                        ],
+                        backgroundColor: [gradientDiproses, gradientTertunda, gradientSelesai],
+                        borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 10, // Membuat sudut bar melengkung
+                        hoverBackgroundColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false // Hilangkan garis grid di sumbu X
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                drawBorder: false // Hilangkan garis grid di sumbu Y
+                            },
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false // Sembunyikan legenda untuk tampilan lebih minimalis
+                        },
+                        tooltip: {
+                            enabled: true,
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    const value = tooltipItem.raw;
+                                    return `${tooltipItem.label}: ${value} pengaduan`;
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Statistik Pengaduan',
+                            color: '#4A5568', // Warna teks
+                            font: {
+                                size: 18,
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    onClick: (event, elements) => {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            const label = pengaduanChart.data.labels[index];
+                            const value = pengaduanChart.data.datasets[0].data[index];
+                            alert(`Anda mengklik "${label}" dengan nilai ${value}`);
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
