@@ -139,7 +139,7 @@ class PengaduanController extends Controller
       $pengaduan = Pengaduan::findOrFail($id);
 
       $validated = $request->validate([
-          'status' => 'required|in:belum_proses,proses,selesai,dilanjutkan',
+          'status' => 'required|in:belum_proses,proses,selesai,dilanjutkan,dibatalkan,ditolak',
           'tindaklanjut' => 'required|string|max:500',
           'file_balasan' => 'nullable|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048',
           'kesesuaian_sop' => 'required|in:sesuai dengan sop,melebihi sop,lebih cepat dari sop',

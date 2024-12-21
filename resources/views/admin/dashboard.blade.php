@@ -64,40 +64,53 @@
                                 [
                                     'title' => 'Total Pengaduan',
                                     'value' => $totalPengaduan,
-                                    'icon' => 'M3 4a3 3 0 013-3h12a3 3 0 013 3v16a3 3 0 01-3 3H6a3 3 0 01-3-3V4z',
+                                    'icon' => 'M12 2a10 10 0 1110 10A10 10 0 0112 2z', // A circle icon representing total
                                     'color' => 'blue',
                                 ],
                                 [
                                     'title' => 'Pengaduan Hari Ini',
                                     'value' => $pengaduanToday,
-                                    'icon' => 'M5 3l14 14m0 0l-4 4m4-4H9l-4 4m0 0V3',
+                                    'icon' => 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z', // A clock icon for today
                                     'color' => 'green',
                                 ],
                                 [
                                     'title' => 'Jumlah Pengguna',
                                     'value' => $endUserCount,
-                                    'icon' => 'M20 12H4',
+                                    'icon' => 'M12 4C6.48 4 2 8.48 2 12s4.48 8 10 8 10-4.48 10-8S17.52 4 12 4z', // A user group icon for users
                                     'color' => 'yellow',
                                 ],
                                 [
                                     'title' => 'Pengaduan Diproses',
                                     'value' => $pengaduanDiproses,
-                                    'icon' => 'M3 12h18m-9 9V3',
+                                    'icon' => 'M12 2L2 12l10 10L22 12L12 2z', // A process icon like a progress triangle
                                     'color' => 'indigo',
                                 ],
                                 [
                                     'title' => 'Pengaduan Tertunda',
                                     'value' => $pengaduanTertunda,
-                                    'icon' => 'M17 12H7m0 0l5 5m-5-5l5-5',
+                                    'icon' => 'M10 3h4v14h-4z', // A paused icon or clock for pending
                                     'color' => 'red',
                                 ],
                                 [
                                     'title' => 'Pengaduan Selesai',
                                     'value' => $pengaduanSelesai,
-                                    'icon' => 'M5 13l4 4L19 7',
+                                    'icon' => 'M19 13l-7 7-7-7', // A check mark for completed
+                                    'color' => 'teal',
+                                ],
+                                [
+                                    'title' => 'Pengaduan Selesai Ditolak',
+                                    'value' => $pengaduanDitolak,
+                                    'icon' => 'M5 15l7 7 7-7', // A cross mark for rejected
+                                    'color' => 'teal',
+                                ],
+                                [
+                                    'title' => 'Pengaduan Batal',
+                                    'value' => $pengaduanDibatalkan,
+                                    'icon' => 'M5 5l14 14', // A cancel icon for cancelled
                                     'color' => 'teal',
                                 ],
                             ];
+
                         @endphp
                         @foreach ($cards as $card)
                             <div class="w-full sm:w-1/2 lg:w-1/3 px-6 py-3">

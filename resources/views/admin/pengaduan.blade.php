@@ -136,6 +136,12 @@
                                                     @case('dilanjutkan')
                                                         bg-purple-100 text-purple-800
                                                         @break
+                                                    @case('dibatalkan')
+                                                        bg-purple-100 text-purple-800
+                                                        @break
+                                                    @case('ditolak')
+                                                        bg-purple-100 text-purple-800
+                                                        @break
                                                     @default
                                                         bg-gray-100 text-gray-800
                                                 @endswitch
