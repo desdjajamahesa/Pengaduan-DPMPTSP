@@ -27,7 +27,7 @@ class DashboardController extends Controller
           ->take(5)
           ->get();
   
-      return view('admin.dashboard', compact(
+      return view('superadmin.dashboard', compact(
           'totalPengaduan',
           'pengaduanToday',
           'endUserCount',
