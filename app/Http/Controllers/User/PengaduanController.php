@@ -58,7 +58,8 @@ class PengaduanController extends Controller
             'lokasi_kejadian' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
             'file_pendukung' => 'nullable|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048',
-            'file_balasan' => 'nullable|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048' // Mengubah menjadi nullable
+            'file_balasan' => 'nullable|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048', // Mengubah menjadi nullable
+            'kategori_bidang' => 'nullable|in:Penanaman Modal, Pembangunan, Perizinan'
         ]);
 
         try {
@@ -88,7 +89,8 @@ class PengaduanController extends Controller
                 'alamat' => $validated['alamat'],
                 'file_pendukung' => $filePathPendukungForDB ?? null,
                 'file_balasan' => $filePathBalasanForDB ?? null,
-                'status' => 'belum_proses'
+                'status' => 'belum_proses',
+                'kategori_bidang' => $validated['kategori_bidang'] ?? null,
             ]);
 
             return redirect()->route('pengaduan.index')

@@ -270,6 +270,23 @@
                     <form action="{{ route('pengaduan.store') }}" method="POST" enctype="multipart/form-data"
                         onsubmit="return confirmSubmission(event)" class="space-y-6">
                         @csrf
+                        <div>
+                            <label for="kategori_bidang" class="block text-sm font-medium text-gray-700">Kategori
+                                Bidang</label>
+                            <select name="kategori_bidang" id="kategori_bidang" required
+                                class="mt-2 block w-full h-8 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 text-lg">
+                                <option value="" disabled selected>Pilih Kategori Bidang</option>
+                                <option value="Penanaman Modal">Penanaman Modal</option>
+                                <option value="Pembangunan">Pembangunan</option>
+                                <option value="Perizinan">Perizinan</option>
+
+                            </select>
+                            @if ($errors->has('kategori_bidang'))
+                                <p class="mt-2 text-sm text-red-600">
+                                    {{ $errors->first('kategori_bidang') }}
+                                </p>
+                            @endif
+                        </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="bg-gray-50 p-4 rounded-lg">
                                 <label class="block text-sm font-medium text-gray-700">Nama Pengguna</label>

@@ -53,7 +53,8 @@ class PengaduanController extends Controller
             'alamat' => 'required|string|max:255',
             'file_pendukung' => 'required|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048',
             'file_balasan' => 'nullable|file|mimes:pdf,jpg,jpeg,png,docx,xlsx|max:2048',
-            'kesesuaian_sop' => 'required|in:sesuai dengan sop,melebihi sop,lebih cepat dari sop' // Tambahkan validasi kesesuaian_sop
+            'kesesuaian_sop' => 'required|in:sesuai dengan sop,melebihi sop,lebih cepat dari sop',
+            'admin' => 'required|string|min:2|max:30' 
         ]);
   
         try {
@@ -84,7 +85,8 @@ class PengaduanController extends Controller
                 'file_pendukung' => $filePathPendukungForDB ?? null,
                 'file_balasan' => $filePathBalasanForDB ?? null,
                 'status' => 'belum_proses',
-                'kesesuaian_sop' => $validated['kesesuaian_sop'] // Simpan kesesuaian_sop
+                'kesesuaian_sop' => $validated['kesesuaian_sop'], // Simpan kesesuaian_sop
+                'admin' => $validated['admin']
             ]);
   
             return redirect()->route('pengaduan.index')

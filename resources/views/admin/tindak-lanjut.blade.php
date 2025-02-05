@@ -131,6 +131,32 @@
                             </td>
                         </div>
                     </div>
+                    <div class="mb-6">
+                        <h3 class="text-lg font-medium text-gray-700">Kategori Bidang</h3>
+                        <div class="mt-2">
+                            @php
+                                $kategoriClasses = [
+                                    'Penanaman Modal' => 'bg-teal-100 text-teal-700',
+                                    'Pembangunan' => 'bg-orange-100 text-orange-700',
+                                    'Perizinan' => 'bg-yellow-100 text-yellow-700',
+                                ];
+
+                                $kategoriLabels = [
+                                    'Penanaman Modal' => 'Penanaman Modal',
+                                    'Pembangunan' => 'Pembangunan',
+                                    'Perizinan' => 'Perizinan',
+                                ];
+
+                                $kategori = $pengaduan->kategori_bidang;
+                            @endphp
+
+                            <span
+                                class="px-2 py-1 rounded-full {{ $kategoriClasses[$kategori] ?? 'bg-gray-100 text-gray-700' }}">
+                                {{ $kategoriLabels[$kategori] ?? 'Tidak Diketahui' }}
+                            </span>
+                        </div>
+                    </div>
+
                     <div class="mb-4">
                         <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
                         <select id="status" name="status"

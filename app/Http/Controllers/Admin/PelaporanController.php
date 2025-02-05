@@ -15,6 +15,19 @@ class PelaporanController extends Controller
     {
         $pengaduans = Pengaduan::all();
         return view('pelaporan', compact('pengaduans'));
+
+        $query = Pengaduan::query();
+        if ($request->has('status') && $request->status != '') {
+            $query->where('status', $request->status);
+        }
+    
+        // Filter Tanggal
+        if ($request->has('tanggal_awal') && $request->has('tanggal_akhir')) {
+            $query->whereBetween('tanggal_pengaduan', [
+                $request->tanggal_awal,
+                $request->tanggal_akhir
+            ]);
+        }
     }
     
     public function store(Request $request)

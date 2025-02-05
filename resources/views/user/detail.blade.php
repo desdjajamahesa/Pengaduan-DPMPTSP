@@ -106,7 +106,11 @@
                         <i class="fas fa-arrow-left mr-2"></i> Kembali
                     </a>
 
-                    @if ($pengaduan->status != 'selesai' && $pengaduan->status != 'dilanjutkan' && $pengaduan->status != 'proses')
+                    @if (
+                        $pengaduan->status != 'selesai' &&
+                            $pengaduan->status != 'dibatalkan' &&
+                            $pengaduan->status != 'dilanjutkan' &&
+                            $pengaduan->status != 'proses')
                         <form action="{{ route('pengaduan.batalkan', $pengaduan->id) }}" method="POST">
                             @csrf
                             @method('PATCH')

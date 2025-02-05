@@ -25,7 +25,8 @@ class Pengaduan extends Model
         'jenis',
         'platform',
         'kesesuaian_sop',
-        'admin' // Kolom foreign key yang menghubungkan ke tabel pelaporan
+        'admin', 
+        'kategori_bidang'
     ];
 
     protected $casts = [

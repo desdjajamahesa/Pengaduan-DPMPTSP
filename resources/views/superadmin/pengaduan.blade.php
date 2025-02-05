@@ -31,7 +31,7 @@
     <x-superadmin.headsuper></x-superadmin.headsuper>
 
     <div class="py-12 bg-gray-100">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-8xl mx-auto sm:px-8 lg:px-8">
             <div class="bg-white shadow-xl rounded-lg">
                 <div class="p-6 sm:p-8">
                     <h2 class="text-2xl font-bold text-gray-800 mb-6">Kelola Data Pengaduan</h2>
@@ -77,6 +77,8 @@
                                         Pengaduan</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Lokasi
                                         Pengaduan</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Kategori
+                                        Bidang</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status
                                     </th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Aksi
@@ -96,6 +98,21 @@
                                         <td class="px-6 py-4 text-sm text-gray-500">{{ $pengaduan->tanggal_pengaduan }}
                                         </td>
                                         <td class="px-6 py-4 text-sm text-gray-500">{{ $pengaduan->lokasi_kejadian }}
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">
+                                            @if ($pengaduan->kategori_bidang == 'Penanaman Modal')
+                                                <span class="px-2 py-1 bg-teal-100 text-teal-700 rounded-full">Penanaman
+                                                    Modal</span>
+                                            @elseif ($pengaduan->kategori_bidang == 'Pembangunan')
+                                                <span
+                                                    class="px-2 py-1 bg-orange-100 text-orange-700 rounded-full">Pembangunan</span>
+                                            @elseif ($pengaduan->kategori_bidang == 'Perizinan')
+                                                <span
+                                                    class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full">Perizinan</span>
+                                            @else
+                                                <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded-full">Tidak
+                                                    Diketahui</span>
+                                            @endif
                                         </td>
                                         <td class="px-6 py-4 text-sm text-gray-500">
                                             @if ($pengaduan->status == 'proses')
